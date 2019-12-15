@@ -1,5 +1,5 @@
 product
-	product_id(primary key) model quantity image manufacturer_id price weight height  length width status viewed date_added date_modified
+	product_id(primary key) language_id product_name model quantity  image manufacturer_id shipping price weight height  length width status viewed date_added date_modified
 
 manufacturer
 	manufacturer_id(primary key) name image
@@ -8,17 +8,29 @@ customer
 	customer_id(primary key) language_id firstname lastname email telephone password cart wishlist newsletter status date_added
 
 order
-	order_id(primary key) order_status_id payment_firstname payment_lastname payment_company payment_address1 payment_address2 payment_city 
+	order_id(primary key) customer_id order_status_id payment_firstname payment_lastname payment_company payment_address1 payment_address2 payment_city 
         payment_postcode payment_country payment_method shipping_*(voi nhung cot tuong tu bang payment_) comment total language_id currency_id
         date_added date_modified
+
+order_product
+	order_product_id(primary key) order_id product_id quantity
 
 order_status
 
 	order_status_id(primary key) language_id name
 
-language_id
-	language_id(primary key) name code image
+language
+	language_id(primary key) name code image status
 	
 
 currency
 	currency_id(primary key) title code symbol decimal_place value status date_modified
+
+description
+	description_id(PK) language_id(PK) description
+
+admin
+	
+review
+
+task
