@@ -8,6 +8,17 @@ abstract class language
 
 }
 
+abstract class privilege
+{
+	const no_actived = 0; // no action
+	const demonstration = 1; // can not edit and delete
+    const administrator = 2; // Full action and allow to access database
+}
+
+// Server 
+define(SERVER_MAIL, "dung1111061@gmail.com");
+define(SERVER_LOCATION, "http://localhost/Project/admin_MVCmodel");
+  
 // authencation of database
 define(servername, "localhost");
 define(username, "root");
@@ -18,21 +29,31 @@ define(dbname, "quanlibanhang_offical");
 define(supported_file_type_array, array("image/png","image/jpeg"));
 
 // Link define 
-define(page_array,["Home" => "dashboard.php","Products" => "product.php"]);
+define(page_link,["Home" => "index.php","Products" => "product.php"]);
 
 //  Optional of error mode
 define(ERRMODE, ["debug" => 1,"release" => 0]);
 
 // Message of successfull login
 define(LOGIN_SUCCESS_MESSAGE, "Login successful");
+define(LOGIN_FAILED_MESSAGE, "Login failed");
 define(DELETE_CONFIRM_MESSAGE, "Are you sure to delete product?");
 define(DELETE_TOOLTIP_MESSAGE, "Delete product");
 define(EDIT_TOOLTIP_MESSAGE, "Edit product");
 define(SAVE_TOOLTIP_MESSAGE, "Save Change");
 define(DETAILS_TOOLTIP_MESSAGE, "Show Product Details ");
 define(INSERT_TOOLTIP_MESSAGE, "Insert New Product");
+
 // Path of product image directory
 define(PRODUCT_IMAGE_PATH,".\assets\catalog\product");
+define(AVATAR_IMAGE_PATH,".\assets\catalog\avatar");
+
+// field in admin table in database
+define(db_admin_email, "email");
+define(db_admin_username, "username");
+define(db_admin_firstname, "first name");
+define(db_admin_password, "password");
+define(db_admin_privilege, "privilege");
 
 // field in product table in database
 define(db_product_model, "model");
@@ -46,6 +67,10 @@ define(db_product_manufacturer_id,"manufacturer_id");
 define(db_product_description,"description");
 define(db_manufacturer_name,"name");
 
+// field in conversation table in database
+define(db_conversation_user, "user");
+define(db_conversation_bodymsg, "bodymsg");
+define(db_conversation_time, "time");
 
 //  product widget viewed for use (support for english and vietnamese)
 define(wg_product_title, [language::english => "Insert Product", language::vietnamese => "Them San Pham"]);

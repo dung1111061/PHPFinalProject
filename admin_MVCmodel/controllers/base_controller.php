@@ -4,8 +4,9 @@
 class BaseController
 {
   // layouts Option
-  public $page_path ; // Path of page
-  public $search_bar ; // Search bar option
+  public $page_name  = "Home"; // Path of page
+  public $search_bar = False ; // Search bar option
+  public $setting    = False ; // Setting option
 
   // Indicate folder to seach view page
   public $folder; 
@@ -18,11 +19,13 @@ class BaseController
   // $file: content page
   // $data: data used for $file page
   function script($script_file) {
-    $this->script_file= 'assets/page_js/'. $script_file . '.js';;
+    $this->script_file= 'assets/page_js/'. $script_file . '.js';
   }
 
   function render($data = array())
   {
+
+    //
     // Kiểm tra file gọi đến có tồn tại hay không?
     $this->view_file = 'views/' . $this->folder . '/' . $this->view_file . '.php';
 
@@ -31,19 +34,24 @@ class BaseController
       extract($data);
       // Sau đó lưu giá trị trả về khi chạy file view template với các dữ liệu đó vào 1 biến chứ chưa hiển thị luôn ra trình duyệt
       
-
-      ob_start();
-      require_once($this->view_file);
-      $content = ob_get_clean();
-
       // top menu of layout
-      $page_path  = $this->page_path;
+      $page_path  = $this->page_name;
       $search_bar = $this->search_bar;
       ob_start();
       include_once "views/layouts/breadcrump.php"; 
       if ($search_bar) include_once "views/layouts/searching_nav.php";
       $top_menu = ob_get_clean();
 
+      // Setting
+      ob_start();
+      if ($this->setting) include_once "views/layouts/setting.php";
+      $setting = ob_get_clean();
+
+      ob_start();
+      require_once($this->view_file);
+      $content = ob_get_clean();
+
+      // Script
       if(is_file($this->script_file)) {
         ob_start();
         require_once($this->script_file);
@@ -51,6 +59,7 @@ class BaseController
       }
 
       // Sau khi có kết quả đã được lưu vào biến $content, gọi ra template chung của hệ thống đế hiển thị ra cho người dùng
+      $name = $_SESSION['name'];
       require_once('views/layouts/layout_main.php');
     } else {
       // Nếu file muốn gọi ra không tồn tại thì chuyển hướng đến trang báo lỗi.

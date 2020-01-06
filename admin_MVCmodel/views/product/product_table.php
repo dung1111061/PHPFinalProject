@@ -1,8 +1,30 @@
 <!-- PAGE CONTENT BEGINS -->
 <div class="row">
+	<div class="col-xs-10"> 
+		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
+			<!--  -->
+			<?= $top_menu ?>
+
+		</div>
+		<div class="ace-settings-container" id="ace-settings-container"> 
+			
+			<?= $setting ?> 
+		</div><!-- /.ace-settings-container -->
+	</div>
+	<div class="col-xs-2"> 
+		<a href="product.php?route=insert" data-toggle="tooltip" title="<?= INSERT_TOOLTIP_MESSAGE?>"/>
+		<div class="btn btn-app btn-primary no-radius" > 
+			<i class="ace-icon fa fa-plus-square-o bigger-230"></i>
+		</div>
+		</a>
+	</div>
+</div>
+<div class="row">
 	<div class="col-xs-10">
 
-
+		<div class="clearfix">
+			<div class="pull-right tableTools-container"></div>
+		</div>
 		<!-- Product Table Content-->
 		<div class="table-header">
 			Results for "Lastest Products"
@@ -50,11 +72,11 @@ foreach ($data as $key=> $row) {
 
 	<td>
 		<div class="hidden-sm hidden-xs action-buttons">
-			<a class="green" href="index.php?route=details/edit&name=<?php echo $product_name ?>" data-toggle="tooltip" title="<?= DETAILS_TOOLTIP_MESSAGE?>">
+			<a class="green" href="product.php?route=edit&name=<?php echo $product_name ?>" data-toggle="tooltip" title="<?= DETAILS_TOOLTIP_MESSAGE?>">
 				<i class="ace-icon fa fa-pencil bigger-130" ></i>
 			</a>
 
-			<a class="red" href="index.php?route=details&action=delete&name=<?php echo $product_name ?>" onclick="return confirm('<?= DELETE_CONFIRM_MESSAGE ?>');" data-toggle="tooltip" title="<?= DELETE_TOOLTIP_MESSAGE?>">
+			<a class="red" href="product.php?route=details&action=delete&name=<?php echo $product_name ?>" onclick="return confirm('<?= DELETE_CONFIRM_MESSAGE ?>');" data-toggle="tooltip" title="<?= DELETE_TOOLTIP_MESSAGE?>">
 				<i class="ace-icon fa fa-trash-o bigger-130"></i>
 			</a>
 		</div>
@@ -68,7 +90,7 @@ foreach ($data as $key=> $row) {
 				<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
 					<li>
-						<a href="index.php?route=details/edit&name=<?php echo $product_name ?>" class="tooltip-success" data-rel="tooltip" title="Edit">
+						<a href="product.php?route=edit&name=<?php echo $product_name ?>" class="tooltip-success" data-rel="tooltip" title="Edit">
 							<span class="green">
 								<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 							</span>
@@ -76,7 +98,7 @@ foreach ($data as $key=> $row) {
 					</li>
 
 					<li>
-						<a href="index.php?route=details&action=delete&name=<?php echo $product_name ?>" class="tooltip-error" data-rel="tooltip" title="Delete" onclick="return confirm('<=? DELETE_CONFIRM_MESSAGE?>');">
+						<a href="product.php?route=details&action=delete&name=<?php echo $product_name ?>" class="tooltip-error" data-rel="tooltip" title="Delete" onclick="return confirm('<=? DELETE_CONFIRM_MESSAGE?>');">
 							<span class="red">
 								<i class="ace-icon fa fa-trash-o bigger-120"></i>
 							</span>
@@ -96,12 +118,5 @@ foreach ($data as $key=> $row) {
 		</div>
 
 
-	</div>
-	<div class="col-xs-2"> 
-		<a href="index.php?route=details/insert" data-toggle="tooltip" title="<?= INSERT_TOOLTIP_MESSAGE?>"/>
-		<div class="btn btn-app btn-primary no-radius" > 
-			<i class="ace-icon fa fa-plus-square-o bigger-230"></i>
-		</div>
-		</a>
 	</div>
 </div> <!-- PAGE CONTENT END -->

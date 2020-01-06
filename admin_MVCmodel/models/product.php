@@ -3,11 +3,6 @@
 class product
 {
 
-  function __construct($id, $title, $content)
-  {
-
-  }
-
   static function getAll()
   {
     $conn = DB::getInstance();   
@@ -18,6 +13,7 @@ class product
     $p_data = $p_stm->fetchAll(PDO::FETCH_ASSOC);
     return $p_data;
   }
+  
   static function find($name)
   {
     $conn = DB::getInstance(); 
@@ -37,9 +33,21 @@ class product
     $arr[db_product_name] = $_POST['name'];
     $arr[db_product_available_date] = $_POST['available_date'];
     $arr[db_product_description] = $_POST['description'];
-    $arr[db_product_image] = $_FILES['img']['name'];
 
-    // move_uploaded_file($_FILES['img']['tmp_name'], PRODUCT_IMAGE_PATH.'/'.$arr[db_product_image]);
+    if ( !($_FILES['img']['error'] == 0 or  $_FILES['img']['error'] == 4) ) die($_FILES['img']['error']);
+
+    if (! in_array($_FILES['img']['type'], supported_file_type_array)) 
+    {
+    ?>
+      <script>
+        alert('File hinh sai... ');
+        // window.history.back();
+      </script>
+    <?php
+        
+    }
+    $arr[db_product_image] = time().'_'.$_FILES['img']['name'];
+    move_uploaded_file($_FILES['img']['tmp_name'], PRODUCT_IMAGE_PATH.'/'.$arr[db_product_image]);
 
     // Build SQL command
     $parameter_arr = implode(array_map(function($a, $b) { return $a . ' = ' . $b; }, array_keys($arr), array_fill(0, count($arr), '?')),',');
@@ -67,20 +75,19 @@ class product
     $arr[db_product_available_date] = $_POST['available_date'];
     $arr[db_product_description] = $_POST['description'];
 
-    if ($_FILES['img']['error'] != 0) die($_FILES['img']['error']);
+    if ($_FILES['img']['tmp_name']) {
+      if ( !($_FILES['img']['error'] == 0 or  $_FILES['img']['error'] == 4) ) die($_FILES['img']['error']);
 
-    if (! in_array($_FILES['img']['type'], supported_file_type_array)) 
-    {
-    ?>
-      <script>
-        alert('File hinh sai... ');
-        // window.history.back();
-      </script>
-    <?php
-        
+      if (in_array($_FILES['img']['type'], supported_file_type_array)) 
+      {
+        $arr[db_product_image] = time().'_'.$_FILES['img']['name'];
+        move_uploaded_file($_FILES['img']['tmp_name'], PRODUCT_IMAGE_PATH.'/'.$arr[db_product_image]); 
+      } else {
+        exit();
+      }
+
     }
-    $arr[db_product_image] = time().'_'.$_FILES['img']['name'];
-    move_uploaded_file($_FILES['img']['tmp_name'], PRODUCT_IMAGE_PATH.'/'.$arr[db_product_image]);
+    
 
     // Build SQL command
     $sql = "INSERT INTO `product` (".implode(array_keys($arr),',').") VALUES (".implode(',', array_fill(0, count($arr), '?')).");";

@@ -13,7 +13,6 @@
 <div class="row">
 	<div class="space-6"></div>
 
-	<?php include_once "data_infobox.php" ?>
 	<div class="col-sm-7 infobox-container">
 
 		<div class="infobox infobox-green">
@@ -294,7 +293,7 @@
 						<div id="task-tab" class="tab-pane active">
 							<h4 class="smaller lighter green">
 								<i class="ace-icon fa fa-list"></i>
-								Sortable Lists
+								Task Lists
 							</h4>
 
 							<ul id="tasks" class="item-list">
@@ -870,21 +869,29 @@
 			<div class="widget-body">
 				<div class="widget-main no-padding">
 					<div class="dialogs">
+					<?php
+					foreach ($conversations as $key => $value) {
+						$user = $value["user"];
+						$bodymsg = $value["bodymsg"];
+						$over_time = $value["time"];
+						// $avatar_url = AVATAR_IMAGE_PATH."/".$value["avatar"];
+						$avatar_url = AVATAR_IMAGE_PATH."/"."default.png";
+					?>
 						<div class="itemdiv dialogdiv">
 							<div class="user">
-								<img alt="Alexa's Avatar" src="assets/images/avatars/avatar1.png" />
+								<img alt="<?=$user?>'s Avatar" src="<?=$avatar_url?>" />
 							</div>
 
 							<div class="body">
 								<div class="time">
 									<i class="ace-icon fa fa-clock-o"></i>
-									<span class="green">4 sec</span>
+									<span class="green"><?=$over_time?></span>
 								</div>
 
 								<div class="name">
-									<a href="#">Alexa</a>
+									<a href="#"><?=$user?></a>
 								</div>
-								<div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.</div>
+								<div class="text"><?=$bodymsg?></div>
 
 								<div class="tools">
 									<a href="#" class="btn btn-minier btn-info">
@@ -893,8 +900,8 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="itemdiv dialogdiv">
+					<?php } ?>
+						<!-- <div class="itemdiv dialogdiv">
 							<div class="user">
 								<img alt="John's Avatar" src="assets/images/avatars/avatar.png" />
 							</div>
@@ -965,9 +972,9 @@
 									</a>
 								</div>
 							</div>
-						</div>
+						</div> -->
 
-						<div class="itemdiv dialogdiv">
+						<!-- <div class="itemdiv dialogdiv">
 							<div class="user">
 								<img alt="Alexa's Avatar" src="assets/images/avatars/avatar1.png" />
 							</div>
@@ -989,15 +996,15 @@
 									</a>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 
-					<form>
+					<form id="sendmsg_form" action="index.php" method="post">
 						<div class="form-actions">
 							<div class="input-group">
-								<input placeholder="Type your message here ..." type="text" class="form-control" name="message" />
+								<input placeholder="Type your message here ..." type="text" class="form-control message" />
 								<span class="input-group-btn">
-									<button class="btn btn-sm btn-info no-radius" type="button">
+									<button class="btn btn-sm btn-info no-radius" type="submit" onclick="sendmsg()">
 										<i class="ace-icon fa fa-share"></i>
 										Send
 									</button>
@@ -1005,6 +1012,7 @@
 							</div>
 						</div>
 					</form>
+
 				</div><!-- /.widget-main -->
 			</div><!-- /.widget-body -->
 		</div><!-- /.widget-box -->

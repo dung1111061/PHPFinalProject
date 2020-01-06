@@ -14,7 +14,7 @@
 					<a href="index.php" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							Ace Admin
+							Administrator
 						</small>
 					</a>
 				</div>
@@ -278,10 +278,10 @@
 
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="<?=$name?>'s Photo" />
 								<span class="user-info">
 									<small>Welcome,</small>
-									Jason
+									<?=$name?>
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
@@ -305,7 +305,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="logout.php">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>

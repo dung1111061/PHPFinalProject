@@ -1,7 +1,7 @@
 
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 						<!-- logo instead icon -->
-<!-- 						<button class="btn btn-success">
+						<button class="btn btn-success">
 							<i class="ace-icon fa fa-signal"></i>
 						</button>
 
@@ -15,7 +15,7 @@
 
 						<button class="btn btn-danger">
 							<i class="ace-icon fa fa-cogs"></i>
-						</button> -->
+						</button>
 					</div>
 
 					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">

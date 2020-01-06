@@ -27,7 +27,7 @@
 								<b class="arrow"></b>
 							</li>
 							<li class="">
-								<a href="product.php">
+								<a href="manufacturer.php">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Manufacturers
 								</a>
@@ -35,7 +35,7 @@
 								<b class="arrow"></b>
 							</li>	
 							<li class="">
-								<a href="product.php">
+								<a href="review.php">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Reviews
 								</a>

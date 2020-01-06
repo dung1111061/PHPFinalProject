@@ -10,7 +10,6 @@
 		<div id="navbar" class="navbar navbar-default          ace-save-state"> 
 			<?php include_once "navigation_bar.php" ?> 
 		</div>
-
 		
 		<div class="main-container ace-save-state" id="main-container">
 			<!--  -->
@@ -38,18 +37,8 @@
 
 			<div class="main-content">
 				<div class="main-content-inner">
-					<div class="breadcrumbs ace-save-state" id="breadcrumbs"> 
-
-						<!--  -->
-						<?= $top_menu ?> 
-
-					</div>
 
 					<div class="page-content">
-						<div class="ace-settings-container" id="ace-settings-container"> 
-							<?php include_once "setting.php" ?> 
-						</div><!-- /.ace-settings-container -->
-
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
@@ -66,8 +55,6 @@
 			
 		</div><!-- /.main-container -->
 			<?= @$script ?>
-
-		
 
 	</body>
 </html>

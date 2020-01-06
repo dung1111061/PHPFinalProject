@@ -4,11 +4,14 @@
 class ProductController extends BaseController
 {
   function __construct() {
-    $this->page_path = "Home\ Product";
+    $this->page_name = $this->page_name."/"."Products";
     $this->folder = "product";
     $this->search_bar = FALSE; 
+    $this->setting = FALSE; 
     $this->script("product");    
   }
+
+  
 
   function display_product_table(){
     // Query product from database  
@@ -29,7 +32,7 @@ class ProductController extends BaseController
   }
 
   function edit_display_details_product(){
-
+    
     //
     $m_data = manufacturer::getAll();
     $p_record = product::find($_GET["name"]);
@@ -43,21 +46,21 @@ class ProductController extends BaseController
 
     // Query product from database  
     product::edit($_GET["origin_name"]);
-    header("Location: index.php");
+    header("Location: product.php");
   }
 
   function insert(){
 
     // Query product from database  
     product::insert();
-    header("Location: index.php");
+    header("Location: product.php");
   }
 
   function delete(){
-
+    
     // Query product from database  
     product::delete($_GET["name"]);
-    header("Location: index.php");
+    header("Location: product.php");
   }
 
 }
