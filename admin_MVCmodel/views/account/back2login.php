@@ -1,1 +1,0 @@
-<a href="index.php">back to login</a>
