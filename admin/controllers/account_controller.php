@@ -11,11 +11,11 @@ class AccountController
   static function login($action) {
     //
 
-    if(isset($_COOKIE["privilege_user"])) { // cookie of login info has been found
+    // if(isset($_COOKIE["privilege_user"])) { // cookie of login info has been found
       
-      $_SESSION['privilege_user'] = $_COOKIE["privilege_user"];
+    //   $_SESSION['privilege_user'] = $_COOKIE["privilege_user"];
 
-    } 
+    // } 
 
     //
     if(!isset($_SESSION['privilege_user'])) { // session has been login before
@@ -65,7 +65,7 @@ class AccountController
     $email_destination = $_POST["restore_email"];
 
     // link to form to restore password
-    $data = array("link" => HTTP_SERVER."/function/restore_form.php?email=$email_destination");
+    $data = array("link" => HTTP_SERVER."/function/email/restore_form.php?email=$email_destination");
 
     // content html
     $file = "views/account/restore_password_email.php"; 
@@ -99,7 +99,7 @@ class AccountController
     $email_destination = $_POST['email'];
 
     // link to form active email
-    $data = array("link" => HTTP_SERVER."/function/active_email_form.php?email=$email_destination");
+    $data = array("link" => HTTP_SERVER."/function/email/active_email_form.php?email=$email_destination");
 
     // content html
     $file = "views/account/active_email.php"; 

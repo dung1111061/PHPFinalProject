@@ -32,10 +32,10 @@ if ($action === "insert") {
 
 } else {
 	if($route === "insert"){
-		$product_page->insert_display_details_product();
+		$product_page->display_details_product_insert_widget();
 
 	} elseif($route === "edit"){
-		$product_page->edit_display_details_product();
+		$product_page->display_details_product_edit_widget();
 
 	} else {
 		$product_page->display_product_table();

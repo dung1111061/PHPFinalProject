@@ -11,17 +11,33 @@ class DashboardController extends BaseController
   }
   function show() {
   	$this->view_file = "dashboard";
+
+    //
+    ob_start();
+    include_once 'views/' . $this->folder . '/' . 'statistical_info.php';
+    $statistical_info = ob_get_clean();
+
+    //
     $conversations   = conversation::conversations();
 
-    $avatar_url = AVATAR_IMAGE_PATH."default.png";
-    $username = "Bob Doe";
-    $time = "6 min";
-    $text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis &hellip; dynamic page";
+    //
+    $tasks           = admin::getAll();
+    ob_start();
+    include_once 'views/' . $this->folder . '/' . 'tasks_widget_tab.php';
+    $tasks = ob_get_clean();
+
+    //
+    $users           = admin::getAll();
+    ob_start();
+    include_once 'views/' . $this->folder . '/' . 'members_widget_tab.php';
+    $members = ob_get_clean();
+
+    //
     ob_start();
     include_once 'views/' . $this->folder . '/' . 'reviews_widget_tab.php';
     $reviews = ob_get_clean();
   	
-    $this->render(array("num_comments" => 1,"num_reviews" => 2,"per_commentreviews" => 3,"conversations" => $conversations, 'reviews' => $reviews  ));
+    $this->render(array("statistical_info" => $statistical_info,"conversations" => $conversations, 'tasks' => $tasks, 'reviews' => $reviews, 'members' => $members  ));
   }
 
   /**

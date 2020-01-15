@@ -24,6 +24,7 @@ define('db_admin_privilege', "privilege");
 define('db_admin_avatar', "avatar");
 
 // field in "product" table in database
+define('db_product_discount', "percentage_discount");
 define('db_product_new', "new_flag");
 define('db_product_id', "product_id");
 define('db_product_model', "model");
@@ -35,10 +36,13 @@ define('db_product_available_date', "date_available");
 define('db_product_image', "image");
 define('db_product_manufacturer_id',"manufacturer_id");
 define('db_product_description',"description");
+define('db_product_category',"category_id");
+define('db_product_rank',"rank");
 
 // field in "manufacturer" table in database
 define('db_manufacturer_name',"name");
 define('db_manufacturer_id',"manufacturer_id");
+define('db_manufacturer_image',"image");
 
 // field in "conversation" table in database
 define('db_conversation_id', "id");
@@ -49,6 +53,14 @@ define('db_conversation_time', "time");
 // field in "description" table in database
 define('db_description_id', "id");
 
+// field in "category" table in database
+define('db_category_name', "name");
+define('db_category_id', "id");
+
+// field in "relatedproduct" table in database
+define('db_relatedproduct_product_id', "product_id");
+define('db_relatedproduct_related_id', "related_id");
+
 // File type supported as image
 define('supported_file_type_array', array("image/png","image/jpeg"));
 
@@ -58,4 +70,5 @@ define('PROJECT_PATH','../');
 define('SYSTEM_PATH',PROJECT_PATH."system/");
 define('IMAGE_PATH',PROJECT_PATH."images/");
 define('PRODUCT_IMAGE_PATH',IMAGE_PATH."product/");
+define('MANUFACTURER_IMAGE_PATH',IMAGE_PATH."manufacturer/");
 define('AVATAR_IMAGE_PATH',IMAGE_PATH."avatar/");

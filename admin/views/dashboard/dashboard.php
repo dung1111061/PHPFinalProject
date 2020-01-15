@@ -3,111 +3,26 @@
 <div class="page-header">
 	<h1>
 		Dashboard
-		<small>
-			<i class="ace-icon fa fa-angle-double-right"></i>
-			overview &amp; stats
-		</small>
+
 	</h1>
 </div><!-- /.page-header -->
-
+<h3 class="header smaller lighter blue"> Statistics</h3>
 <div class="row">
 	<div class="space-6"></div>
 
 	<div class="col-sm-7 infobox-container">
-
-		<div class="infobox infobox-green">
-			<div class="infobox-icon">
-				<i class="ace-icon fa fa-comments"></i>
-			</div>
-
-			<div class="infobox-data">
-				<span class="infobox-data-number"><?php echo $num_reviews ?></span>
-				<div class="infobox-content"> reviews
-				</div>
-			</div>
-
-			<div class="stat stat-success"><?php echo $per_commentreviews ?>%</div>
-		</div>
-
-		<div class="infobox infobox-blue">
-			<div class="infobox-icon">
-				<i class="ace-icon fa fa-user"></i>
-			</div>
-
-			<div class="infobox-data">
-				<span class="infobox-data-number">11</span>
-				<div class="infobox-content">Customers</div>
-			</div>
-
-			<div class="badge badge-success">
-				+32%
-				<i class="ace-icon fa fa-arrow-up"></i>
-			</div>
-		</div>
-
-		<div class="infobox infobox-pink">
-			<div class="infobox-icon">
-				<i class="ace-icon fa fa-shopping-cart"></i>
-			</div>
-
-			<div class="infobox-data">
-				<span class="infobox-data-number">8</span>
-				<div class="infobox-content">new orders</div>
-			</div>
-			<div class="stat stat-important">4%</div>
-		</div>
-
-		<div class="infobox infobox-orange2">
-			<div class="infobox-chart">
-				<span class="sparkline" data-values="196,128,202,177,154,94,100,170,224"></span>
-			</div>
-
-			<div class="infobox-data">
-				<span class="infobox-data-number">6,251</span>
-				<div class="infobox-content">pageviews</div>
-			</div>
-
-			<div class="badge badge-success">
-				7.2%
-				<i class="ace-icon fa fa-arrow-up"></i>
-			</div>
-		</div>
-
-		<div class="infobox infobox-green infobox infobox-dark">
-			<div class="infobox-progress">
-				<div class="easy-pie-chart percentage" data-percent="61" data-size="39">
-					<span class="percent">61</span>%
-				</div>
-			</div>
-
-			<div class="infobox-data">
-				<div class="infobox-content">Task</div>
-				<div class="infobox-content">Completion</div>
-			</div>
-		</div>
-
-		<div class="infobox infobox-blue infobox infobox-dark">
-			<div class="infobox-chart">
-				<span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
-			</div>
-
-			<div class="infobox-data">
-				<div class="infobox-content">Earnings</div>
-				<div class="infobox-content">$32,000</div>
-			</div>
-		</div>
-
-
+		<?= @$statistical_info ?>
 	</div>
 
 	<div class="vspace-12-sm"></div>
 
 	<div class="col-sm-5">
+
 		<div class="widget-box">
 			<div class="widget-header widget-header-flat widget-header-small">
 				<h5 class="widget-title">
 					<i class="ace-icon fa fa-signal"></i>
-					Traffic Sources
+					Sale
 				</h5>
 
 				<div class="widget-toolbar no-border">
@@ -267,7 +182,7 @@
 		<div class="widget-box transparent" id="recent-box">
 			<div class="widget-header">
 				<h4 class="widget-title lighter smaller">
-					<i class="ace-icon fa fa-rss orange"></i>RECENT
+					<i class="ace-icon fa fa-rss orange"></i> MANAGERS
 				</h4>
 
 				<div class="widget-toolbar no-border">
@@ -290,390 +205,13 @@
 			<div class="widget-body">
 				<div class="widget-main padding-4">
 					<div class="tab-content padding-8">
+
 						<div id="task-tab" class="tab-pane active">
-							<h4 class="smaller lighter green">
-								<i class="ace-icon fa fa-list"></i>
-								Task Lists
-							</h4>
-
-							<ul id="tasks" class="item-list">
-								<li class="item-orange clearfix">
-									<label class="inline">
-										<input type="checkbox" class="ace" />
-										<span class="lbl"> Answering customer questions</span>
-									</label>
-
-									<div class="pull-right easy-pie-chart percentage" data-size="30" data-color="#ECCB71" data-percent="42">
-										<span class="percent">42</span>%
-									</div>
-								</li>
-
-								<li class="item-red clearfix">
-									<label class="inline">
-										<input type="checkbox" class="ace" />
-										<span class="lbl"> Fixing bugs</span>
-									</label>
-
-									<div class="pull-right action-buttons">
-										<a href="#" class="blue">
-											<i class="ace-icon fa fa-pencil bigger-130"></i>
-										</a>
-
-										<span class="vbar"></span>
-
-										<a href="#" class="red">
-											<i class="ace-icon fa fa-trash-o bigger-130"></i>
-										</a>
-
-										<span class="vbar"></span>
-
-										<a href="#" class="green">
-											<i class="ace-icon fa fa-flag bigger-130"></i>
-										</a>
-									</div>
-								</li>
-
-								<li class="item-default clearfix">
-									<label class="inline">
-										<input type="checkbox" class="ace" />
-										<span class="lbl"> Adding new features</span>
-									</label>
-
-									<div class="pull-right pos-rel dropdown-hover">
-										<button class="btn btn-minier bigger btn-primary">
-											<i class="ace-icon fa fa-cog icon-only bigger-120"></i>
-										</button>
-
-										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-caret dropdown-close dropdown-menu-right">
-											<li>
-												<a href="#" class="tooltip-success" data-rel="tooltip" title="Mark&nbsp;as&nbsp;done">
-													<span class="green">
-														<i class="ace-icon fa fa-check bigger-110"></i>
-													</span>
-												</a>
-											</li>
-
-											<li>
-												<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-													<span class="red">
-														<i class="ace-icon fa fa-trash-o bigger-110"></i>
-													</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</li>
-
-								<li class="item-blue clearfix">
-									<label class="inline">
-										<input type="checkbox" class="ace" />
-										<span class="lbl"> Upgrading scripts used in template</span>
-									</label>
-								</li>
-
-								<li class="item-grey clearfix">
-									<label class="inline">
-										<input type="checkbox" class="ace" />
-										<span class="lbl"> Adding new skins</span>
-									</label>
-								</li>
-
-								<li class="item-green clearfix">
-									<label class="inline">
-										<input type="checkbox" class="ace" />
-										<span class="lbl"> Updating server software up</span>
-									</label>
-								</li>
-
-								<li class="item-pink clearfix">
-									<label class="inline">
-										<input type="checkbox" class="ace" />
-										<span class="lbl"> Cleaning up</span>
-									</label>
-								</li>
-							</ul>
+							<?= @$tasks ?>
 						</div>
 
 						<div id="member-tab" class="tab-pane">
-							<div class="clearfix">
-								<div class="itemdiv memberdiv">
-									<div class="user">
-										<img alt="Bob Doe's avatar" src="<?=AVATAR_IMAGE_PATH."default.png"?>" />
-									</div>
-
-									<div class="body">
-										<div class="name">
-											<a href="#">Bob Doe</a>
-										</div>
-
-										<div class="time">
-											<i class="ace-icon fa fa-clock-o"></i>
-											<span class="green">20 min</span>
-										</div>
-
-										<div>
-											<span class="label label-warning label-sm">pending</span>
-
-											<div class="inline position-relative">
-												<button class="btn btn-minier btn-yellow btn-no-border dropdown-toggle" data-toggle="dropdown" data-position="auto">
-													<i class="ace-icon fa fa-angle-down icon-only bigger-120"></i>
-												</button>
-
-												<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-													<li>
-														<a href="#" class="tooltip-success" data-rel="tooltip" title="Approve">
-															<span class="green">
-																<i class="ace-icon fa fa-check bigger-110"></i>
-															</span>
-														</a>
-													</li>
-
-													<li>
-														<a href="#" class="tooltip-warning" data-rel="tooltip" title="Reject">
-															<span class="orange">
-																<i class="ace-icon fa fa-times bigger-110"></i>
-															</span>
-														</a>
-													</li>
-
-													<li>
-														<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-															<span class="red">
-																<i class="ace-icon fa fa-trash-o bigger-110"></i>
-															</span>
-														</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="itemdiv memberdiv">
-									<div class="user">
-										<img alt="Joe Doe's avatar" src="<?=AVATAR_IMAGE_PATH."default.png"?>" />
-									</div>
-
-									<div class="body">
-										<div class="name">
-											<a href="#">Joe Doe</a>
-										</div>
-
-										<div class="time">
-											<i class="ace-icon fa fa-clock-o"></i>
-											<span class="green">1 hour</span>
-										</div>
-
-										<div>
-											<span class="label label-warning label-sm">pending</span>
-
-											<div class="inline position-relative">
-												<button class="btn btn-minier btn-yellow btn-no-border dropdown-toggle" data-toggle="dropdown" data-position="auto">
-													<i class="ace-icon fa fa-angle-down icon-only bigger-120"></i>
-												</button>
-
-												<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-													<li>
-														<a href="#" class="tooltip-success" data-rel="tooltip" title="Approve">
-															<span class="green">
-																<i class="ace-icon fa fa-check bigger-110"></i>
-															</span>
-														</a>
-													</li>
-
-													<li>
-														<a href="#" class="tooltip-warning" data-rel="tooltip" title="Reject">
-															<span class="orange">
-																<i class="ace-icon fa fa-times bigger-110"></i>
-															</span>
-														</a>
-													</li>
-
-													<li>
-														<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-															<span class="red">
-																<i class="ace-icon fa fa-trash-o bigger-110"></i>
-															</span>
-														</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="itemdiv memberdiv">
-									<div class="user">
-										<img alt="Jim Doe's avatar" src="<?=AVATAR_IMAGE_PATH."default.png"?>" />
-									</div>
-
-									<div class="body">
-										<div class="name">
-											<a href="#">Jim Doe</a>
-										</div>
-
-										<div class="time">
-											<i class="ace-icon fa fa-clock-o"></i>
-											<span class="green">2 hour</span>
-										</div>
-
-										<div>
-											<span class="label label-warning label-sm">pending</span>
-
-											<div class="inline position-relative">
-												<button class="btn btn-minier btn-yellow btn-no-border dropdown-toggle" data-toggle="dropdown" data-position="auto">
-													<i class="ace-icon fa fa-angle-down icon-only bigger-120"></i>
-												</button>
-
-												<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-													<li>
-														<a href="#" class="tooltip-success" data-rel="tooltip" title="Approve">
-															<span class="green">
-																<i class="ace-icon fa fa-check bigger-110"></i>
-															</span>
-														</a>
-													</li>
-
-													<li>
-														<a href="#" class="tooltip-warning" data-rel="tooltip" title="Reject">
-															<span class="orange">
-																<i class="ace-icon fa fa-times bigger-110"></i>
-															</span>
-														</a>
-													</li>
-
-													<li>
-														<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-															<span class="red">
-																<i class="ace-icon fa fa-trash-o bigger-110"></i>
-															</span>
-														</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="itemdiv memberdiv">
-									<div class="user">
-										<img alt="Alex Doe's avatar" src="<?=AVATAR_IMAGE_PATH."default.png"?>" />
-									</div>
-
-									<div class="body">
-										<div class="name">
-											<a href="#">Alex Doe</a>
-										</div>
-
-										<div class="time">
-											<i class="ace-icon fa fa-clock-o"></i>
-											<span class="green">3 hour</span>
-										</div>
-
-										<div>
-											<span class="label label-danger label-sm">blocked</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="itemdiv memberdiv">
-									<div class="user">
-										<img alt="Bob Doe's avatar" src="<?=AVATAR_IMAGE_PATH."default.png"?>" />
-									</div>
-
-									<div class="body">
-										<div class="name">
-											<a href="#">Bob Doe</a>
-										</div>
-
-										<div class="time">
-											<i class="ace-icon fa fa-clock-o"></i>
-											<span class="green">6 hour</span>
-										</div>
-
-										<div>
-											<span class="label label-success label-sm arrowed-in">approved</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="itemdiv memberdiv">
-									<div class="user">
-										<img alt="Susan's avatar" src="<?=AVATAR_IMAGE_PATH."default.png"?>" />
-									</div>
-
-									<div class="body">
-										<div class="name">
-											<a href="#">Susan</a>
-										</div>
-
-										<div class="time">
-											<i class="ace-icon fa fa-clock-o"></i>
-											<span class="green">yesterday</span>
-										</div>
-
-										<div>
-											<span class="label label-success label-sm arrowed-in">approved</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="itemdiv memberdiv">
-									<div class="user">
-										<img alt="Phil Doe's avatar" src="<?=AVATAR_IMAGE_PATH."default.png"?>" />
-									</div>
-
-									<div class="body">
-										<div class="name">
-											<a href="#">Phil Doe</a>
-										</div>
-
-										<div class="time">
-											<i class="ace-icon fa fa-clock-o"></i>
-											<span class="green">2 days ago</span>
-										</div>
-
-										<div>
-											<span class="label label-info label-sm arrowed-in arrowed-in-right">online</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="itemdiv memberdiv">
-									<div class="user">
-										<img alt="Alexa Doe's avatar" src="<?=AVATAR_IMAGE_PATH."default.png"?>" />
-									</div>
-
-									<div class="body">
-										<div class="name">
-											<a href="#">Alexa Doe</a>
-										</div>
-
-										<div class="time">
-											<i class="ace-icon fa fa-clock-o"></i>
-											<span class="green">3 days ago</span>
-										</div>
-
-										<div>
-											<span class="label label-success label-sm arrowed-in">approved</span>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="space-4"></div>
-
-							<div class="center">
-								<i class="ace-icon fa fa-users fa-2x green middle"></i>
-
-								&nbsp;
-								<a href="#" class="btn btn-sm btn-white btn-info">
-									See all members &nbsp;
-									<i class="ace-icon fa fa-arrow-right"></i>
-								</a>
-							</div>
-
-							<div class="hr hr-double hr8"></div>
+							<?= @$members ?>
 						</div><!-- /.#member-tab -->
 
 						<div id="comment-tab" class="tab-pane">
@@ -745,7 +283,7 @@
 					<form id="sendmsg_form" >
 						<div class="form-actions">
 							<div class="input-group">
-								<input placeholder="Type your message here ..." type="text" class="form-control message" />
+								<input id="chat-field" placeholder="Type your message here ..." type="text" class="form-control message" />
 								<span class="input-group-btn">
 									<button class="btn btn-sm btn-info no-radius" type="button" onclick="sendmsg()">
 										<i class="ace-icon fa fa-share"></i>

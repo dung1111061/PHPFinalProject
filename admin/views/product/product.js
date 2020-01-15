@@ -29,6 +29,8 @@
 		<script src="assets/js/jquery.inputlimiter.min.js"></script>
 		<script src="assets/js/dataTables.select.min.js"></script>
 		<script src="assets/js/chosen.jquery.min.js"></script>
+		<script src="assets/js/jquery-ui.custom.min.js"></script>
+		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
 
 		<!-- ace scripts -->
 		<script src="assets/js/ace-elements.min.js"></script>
@@ -109,7 +111,12 @@ if(!ace.vars['touch']) {
 		})
 	});
 
-
+	$('#chosen-multiple-style .btn').on('click', function(e){
+		var target = $(this).find('input[type=radio]');
+		var which = parseInt(target.val());
+		if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
+		 else $('#form-field-select-4').removeClass('tag-input-style');
+	});
 
 }
 
@@ -135,28 +142,31 @@ $( "#save-button" ).click(function() {
   $( "#form_product" ).submit();
 });
 
+$( "#edit-button" ).click(function() {
+  $( "#form_product" ).submit();
+});
 
 // Edit Button
-$('#id-disable-check').on('click', function() {;
-	if($('#save-button').attr('disabled') === undefined) {
-		$('#form_product input[type="text"],textarea').each(function( key,value ) {
-		  value.setAttribute('readonly','true');
-		});
-		$('#save-button,#form_product select').each(function( key,value ) {
-		  value.setAttribute('disabled','true');
-		});
+// $('#id-disable-check').on('click', function() {;
+// 	if($('#save-button').attr('disabled') === undefined) {
+// 		$('#form_product input[type="text"],textarea').each(function( key,value ) {
+// 		  value.setAttribute('readonly','true');
+// 		});
+// 		$('#save-button,#form_product select').each(function( key,value ) {
+// 		  value.setAttribute('disabled','true');
+// 		});
 
 
-	} else {
-		$('#form_edit input[type="text"],textarea').each(function( key,value ) {
-		  value.removeAttribute('readonly');
-		});
-		$('#save-button,#form_edit select').each(function( key,value ) {
-		  value.removeAttribute('disabled');
-		});
+// 	} else {
+// 		$('#form_edit input[type="text"],textarea').each(function( key,value ) {
+// 		  value.removeAttribute('readonly');
+// 		});
+// 		$('#save-button,#form_edit select').each(function( key,value ) {
+// 		  value.removeAttribute('disabled');
+// 		});
 
-	}
-});
+// 	}
+// });
 
 // Drop file button
 $('#id-input-file-3').ace_file_input({
@@ -205,6 +215,44 @@ $(document).ready(function(){
 });
 // $('.tooltip-inner').css("max-width":"150px","width":"150px");
 
+// validate product form
+function validate_form(){
+	return validate_related_product_selection();
+}
+
+function validate_related_product_selection(){
+	if (jQuery.isEmptyObject( $('#form-field-select-4') ) ) {
+		var values = $('#form-field-select-4').val();
+		if (values.length > parseInt(<?=  relatedProduct::$maximum_number?>)){
+			alert("maximum related product allowed is <?=  relatedProduct::$maximum_number?>");
+			return false;
+		} 		
+	}
+
+	return true;
+}
+// rating product
+/**var setRatingColors = function() {
+					$(this).find('.star-on-png,.star-half-png').addClass('orange2').removeClass('grey');
+					$(this).find('.star-off-png').removeClass('orange2').addClass('grey');
+				}*/
+				$('.rating').raty({
+					'cancel' : true,
+					'half': false,
+					'starType' : 'i'
+					/**,
+					
+					'click': function() {
+						setRatingColors.call(this);
+					},
+					'mouseover': function() {
+						setRatingColors.call(this);
+					},
+					'mouseout': function() {
+						setRatingColors.call(this);
+					}*/
+				})//.find('i:not(.star-raty)').addClass('grey');
+
 </script>
 <style>
 
@@ -213,4 +261,7 @@ $(document).ready(function(){
     /* If max-width does not work, try using width instead */
     width: 150px; 
 }
+	#form_field_select_4_chosen{
+		width: 250px !important; 
+	}
 </style>

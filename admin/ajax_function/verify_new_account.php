@@ -1,9 +1,11 @@
 <?php
-	include_once "../config.php";
-    spl_autoload_register(function ($class_controller_name) {
-        $name = strtolower(str_replace("Controller", "", $class_controller_name));
-        include_once "../models/$name.php";
-    });
+include_once "../../config.php";
+include_once "../config.php";
+spl_autoload_register(function ($class_controller_name) {
+    $name = strtolower(str_replace("Controller", "", $class_controller_name));
+    include_once "../".ADMIN_PATH."models/$name.php";
+});
+
 
 	$result = 0;
     $message = "";

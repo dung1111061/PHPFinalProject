@@ -16,11 +16,12 @@ class product extends Table
       $arr[db_product_model] = $_POST['model'];
       // 1/7/2020 Fix bug: insert product without select manufacturer.
       $arr[db_product_manufacturer_id] = $_POST['manufacturer'] ? $_POST['manufacturer'] : NULL;
+      $arr[db_product_category] = $_POST['category'] ? $_POST['category'] : NULL;
       // $arr[db_product_manufacturer_id] = $_POST['manufacturer'];
       $arr[db_product_name] = $_POST['name'];
       $arr[db_product_available_date] = $_POST['available_date'];
       $arr[db_product_description] = $_POST['description'];
-
+      $arr[db_product_rank] = $_POST['score'];
       // 
       if (verify_image("img") === 1){ // Image not reupload.
         $arr[db_product_image] = self::find($id)[db_product_image]; //reupdate old data
@@ -53,11 +54,13 @@ class product extends Table
 
       // 1/7/2020 Fix bug: insert product without select manufacturer.
       $arr[db_product_manufacturer_id] = $_POST['manufacturer'] ? $_POST['manufacturer'] : NULL;
+      $arr[db_product_category] = $_POST['category'] ? $_POST['category'] : NULL;
       // $arr[db_product_manufacturer_id] = $_POST['manufacturer'];
 
       $arr[db_product_name] = $_POST['name'];
       $arr[db_product_available_date] = $_POST['available_date'];
       $arr[db_product_description] = $_POST['description'];
+      $arr[db_product_rank] = $_POST['score'];
 
       // 
       if (verify_image("img") === 1){ // Image not choosen.
@@ -69,7 +72,7 @@ class product extends Table
       }
 
     // Build SQL command
-    parent::insert($arr);
+    return parent::insert($arr);
 
   }
 
@@ -88,6 +91,47 @@ class product extends Table
     //
     delete_image($filename);
 
+  }
+
+  /**
+   * Get all product available  to sale
+   * @return [type]              [description]
+   */
+  function getAllAvailable(){
+
+      $product = self::getAll();
+
+      // check available condition;
+      return $product;
+  }
+
+  /**
+   * Get all available product same category
+   * @param  [type] $category_id [description]
+   * @return [type]              [description]
+   */
+  function filterCategory($category_id){
+
+      // return self::findtablerecord(array( db_product_category => $category_id));
+      $product_table = self::getAvaiNewProduct();
+
+      // filter category
+      $filterBy = $category_id;
+      $new_table = array_filter($product_table, function ($record) use ($filterBy){
+          return ($record[db_product_category] == $filterBy);
+      });
+      return $new_table;
+  }
+
+  function getAvaiNewProduct(){
+      $product_table = self::getAllAvailable();
+
+      // filter new
+      $filterBy = 0;
+      $new_table = array_filter($product_table, function ($record) use ($filterBy){
+          return ($record[db_product_new] == $filterBy);
+      });
+      return $new_table;
   }
 
 }

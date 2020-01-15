@@ -2,6 +2,7 @@
 <div class="row">
 	<div class="col-xs-10"> 
 		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
+
 			<!--  -->
 			<?= $top_menu ?>
 
@@ -10,13 +11,6 @@
 			
 			<?= $setting ?> 
 		</div><!-- /.ace-settings-container -->
-	</div>
-	<div class="col-xs-2"> 
-		<a href="product.php?route=insert" data-toggle="tooltip" title="<?= INSERT_TOOLTIP_MESSAGE?>"/>
-		<div class="btn btn-app btn-primary no-radius" > 
-			<i class="ace-icon fa fa-plus-square-o bigger-230"></i>
-		</div>
-		</a>
 	</div>
 </div>
 <div class="row">
@@ -27,7 +21,7 @@
 		</div>
 		<!-- Product Table Content-->
 		<div class="table-header">
-			Results for "Lastest Products"
+			Results for " Products"
 		</div>
 		<div>
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -119,5 +113,12 @@ foreach ($data as $key=> $row) {
 		</div>
 
 
+	</div>
+	<div class="col-xs-2"> 
+		<a href="product.php?route=insert" data-toggle="tooltip" title="<?= INSERT_TOOLTIP_MESSAGE?>"/>
+		<div class="btn btn-app btn-primary no-radius" > 
+			<i class="ace-icon fa fa-plus-square-o bigger-230"></i>
+		</div>
+		</a>
 	</div>
 </div> <!-- PAGE CONTENT END -->

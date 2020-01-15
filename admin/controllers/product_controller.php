@@ -22,33 +22,42 @@ class ProductController extends BaseController
     $this->render(array("data" => $p_data,"m_data" => $m_data));
   }
 
-  function insert_display_details_product(){
+  function display_details_product_insert_widget(){
 
     // 
-    $m_data = manufacturer::getAll();
+
     $this->view_file = "details_product_widget";
-    $this->render(array("m_data" => $m_data,"route" => $_GET["route"]));
+    $this->render(array("route" => $_GET["route"]));
 
   }
 
-  function edit_display_details_product(){
+  function display_details_product_edit_widget(){
     
     //
-    $m_data = manufacturer::getAll();
     $p_record = product::find($_GET["id"]);
 
     //
     $this->view_file = "details_product_widget"; 
-    $this->render(array("m_data" => $m_data,"route" => $_GET["route"],"p_record" => $p_record,"id"=>$_GET["id"]));
+    $this->render(array("route" => $_GET["route"],"p_record" => $p_record,"id"=>$_GET["id"]));
 
   }
   function edit(){
+    // Update product
     product::edit($_GET["id"]);
+
+    // Update relation
+    relatedProduct::edit($_GET["id"]);
+
     header("Location: product.php");
   }
 
   function insert(){
-    product::insert();
+    $stm = product::insert();
+
+    // Update relation
+    $id = DB::getInstance()->lastInsertId();
+    relatedProduct::insert($id);
+    
     header("Location: product.php");
   }
 
@@ -57,6 +66,11 @@ class ProductController extends BaseController
     // Query product from database  
     product::delete($_GET["id"]);
     header("Location: product.php");
+  }
+
+  function test() {
+    $this->view_file = "test-multiple-selection"; 
+    $this->render();
   }
 
 }

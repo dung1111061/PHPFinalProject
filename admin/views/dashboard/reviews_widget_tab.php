@@ -1,3 +1,9 @@
+<?php
+$avatar_url = AVATAR_IMAGE_PATH."default.png";
+$username = "Bob Doe";
+$time = "6 min";
+$text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis &hellip; dynamic page";
+?>
 <div class="comments">
 	<div class="itemdiv commentdiv">
 		<div class="user">
