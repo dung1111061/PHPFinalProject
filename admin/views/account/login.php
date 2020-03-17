@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<?php
 
-setcookie('username2', 'thehalfheart2', time() + 3600); ?>
 <html lang="en">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />

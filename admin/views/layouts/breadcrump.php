@@ -1,17 +1,18 @@
-<?php 
-include_once "../../config.php";
-include_once "../config.php";
+<?php
+// 2020/03/02 comment as request is boostraped 
+// include_once "../../config.php";
+// include_once "../config.php";
 
 ?>
 
 		<ul class="breadcrumb" style="margin-left: 0px">
 			<i class="ace-icon fa fa-home home-icon"></i>
 	<?php
-	$page_path_tree = explode("/",$page_path);
-	foreach ($page_path_tree as $name) {
+	$page_location_hierarchy = explode("/",$this->page_location);
+	foreach ($page_location_hierarchy as $name) {
 		// Style last node is active
 		$class_name = "";
-		if ($name === $page_path_tree[count($page_path_tree)-1]) { 
+		if ($name === $page_location_hierarchy[count($page_location_hierarchy)-1]) { 
 			$class_name = "active";
 		} 
 	?>

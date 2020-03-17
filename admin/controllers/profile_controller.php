@@ -4,11 +4,11 @@
 class ProfileController extends BaseController
 {
   function __construct() {
-    $this->page_name = $this->page_name."/"."Profile";
+    $this->page_location = $this->page_location."/"."Profile";
     $this->folder = "profile";
-    $this->search_bar = FALSE; 
-    $this->setting = FALSE; 
-    $this->script("profile");    
+
+    
+    $this->setScript("profile");    
   }
 
   function show() {

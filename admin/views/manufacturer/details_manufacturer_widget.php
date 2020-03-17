@@ -16,13 +16,10 @@ if ($route === "edit") { // edit
 		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
 
 			<!--  -->
-			<?= $top_menu ?>
+			<?php include_once "views/layouts/breadcrump.php"; ?>
 
 		</div>
-		<div class="ace-settings-container" id="ace-settings-container"> 
-			
-			<?= $setting ?> 
-		</div><!-- /.ace-settings-container -->
+		
 	</div>
 		
 </div>
@@ -92,7 +89,7 @@ if ($route === "edit") {
 <div class="col-sm-5" >
 	<img id="upload_new_image" style="width:100px; max-height: 150px;display : <?= $image ?>" src="<?= $src?>" alt="<?= $alt?>" >
 	<div class="form-group"  style="display : <?= $upload_image ?>" >
-	<input multiple="" type="file" id="id-input-file-3" name="img"  />
+	<input multiple="" type="file" id="area-drop-image" name="img"  />
 	</div>
 </div>
 						</div>	

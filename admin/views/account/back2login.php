@@ -1,1 +1,1 @@
-<a href="index.php">back to login</a>
+<a href="trang-chu.html">back to login</a>

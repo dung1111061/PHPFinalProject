@@ -6,7 +6,7 @@
 class conversation extends Table
 {
 
-  public static $tablename = "conversation";
+  protected static $tablename = "conversation";
 
   function insert($message){
     $arr=array(); 

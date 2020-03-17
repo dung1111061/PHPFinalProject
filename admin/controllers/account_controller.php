@@ -1,6 +1,9 @@
 
 <?php
-// Entity Class == View product pages
+/**
+ *  AccountController is a controller at bootstraping which always called in any request, used for authenticate user.
+ *  
+ */
 class AccountController 
 {
 
@@ -8,17 +11,32 @@ class AccountController
 
   }
 
-  static function login($action) {
-    //
+  /**
+   * Note: Migrate from login module 29/2/2020 
+   * [authenticate: routing for account controller]
+   * @param  [type] $action [Note: naming is not duplicate to another actions of any controller]
+   * @return [type]         [whether user is authenticated or not]
+   */
+  public function authenticate($action) {
+    
+    // Whether authenticate data of user has been save or not
+      // Start session on server
+      if (!isset($_SESSION)) session_start();
 
-    // if(isset($_COOKIE["privilege_user"])) { // cookie of login info has been found
-      
-    //   $_SESSION['privilege_user'] = $_COOKIE["privilege_user"];
+      // get data of lasted time login from strored cookies.
+      // This feature is on demo pharse.
+      // if(isset($_COOKIE["privilege_user"])) { // cookie of login info has been found
+        
+      //   $_SESSION['privilege_user'] = $_COOKIE["privilege_user"];
 
-    // } 
+      // } 
 
-    //
-    if(!isset($_SESSION['privilege_user'])) { // session has been login before
+      if(isset($_SESSION['privilege_user'])) { // Query session data to confirm user has been login yet.
+        return TRUE; // User is authenticated.
+      }
+
+      // If no authenticate, routing to login modules
+      // Routes for login page
       if ($action === "verify_login") {
         self::verify_login();
 
@@ -27,16 +45,17 @@ class AccountController
 
       } elseif ($action === "register") {
         self::register();
-      } else {
-        self::display_login();
+
+      } else { // defaul action is render login page
+        $this->display_login();
 
       }
-      exit();
-    }
+      return FALSE; // User is not authenticated.
   }
   
   function display_login(){
-    // Query product from database  
+    // action default always be called
+    // Login page contains 3 view partitions: Login, Restore, Register
     require_once('views/account/login.php');
 
   }
@@ -49,13 +68,12 @@ class AccountController
         $_SESSION['privilege_user'] = $record[db_admin_privilege];
         $_SESSION['name'] = $record[db_admin_firstname];
         $_SESSION['username'] = $record[db_admin_username];
-        if($_POST["login_remember"]) setcookie('privilege_user', $record[db_admin_privilege], time() + 3600,"/"); // save authenticate user for 1 hour
+        // if($_POST["login_remember"]) setcookie('privilege_user', $record[db_admin_privilege], time() + 3600,"/"); // save authenticate user for 1 hour
       } else {
         echo LOGIN_FAILED_MESSAGE;
       }
-      // echo "<pre>";
-      // print_r($record);
-      header('Location: index.php');
+
+      redirect("trang-chu.html");
     }
 
   }
@@ -71,7 +89,9 @@ class AccountController
     $file = "views/account/restore_password_email.php"; 
 
     // Sending mail
-    if (send_html_mail($email_source, $email_destination, $data, $file)) {echo "Sending mail successfully";}
+    if (send_html_mail($email_source, $email_destination, $data, $file)) {
+      echo "Sending mail successfully";
+    }
     else echo "Sending mail failed";
 
     //
@@ -79,7 +99,11 @@ class AccountController
   }
 
   function restore () {
+    
+    //
     admin::update(array(db_admin_email => $_GET["email"]),array(db_admin_password => sha1($_POST["passwd"])));
+
+    //
     require_once('views/account/back2login.php');
 
   }
@@ -107,7 +131,8 @@ class AccountController
     if (send_html_mail($email_source, $email_destination, $data, $file)) {echo "Sending mail successfully";}
     else echo "Sending mail failed";
 
-    header('Location: index.php');
+    redirect("trang-chu.html");
+
 
   }
 

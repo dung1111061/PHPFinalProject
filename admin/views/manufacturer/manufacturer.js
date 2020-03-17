@@ -44,7 +44,7 @@
 		bAutoWidth: false,
 		"aoColumns": [
 		  { "bSortable": false },
-		  null, null,null, null, null,
+		   null,
 		  { "bSortable": false }
 		],
 		"aaSorting": [],
@@ -94,7 +94,7 @@ $( "#edit-button" ).click(function() {
   $( "#form_product" ).submit();
 });
 
-	$('#id-input-file-3').ace_file_input({
+	$('#area-drop-image').ace_file_input({
 					style: 'well',
 					btn_choose: 'Drop files here or click to choose',
 					btn_change: null,

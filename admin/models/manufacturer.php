@@ -1,36 +1,33 @@
 <?php
 class manufacturer extends Table
 {
-  public static $tablename = "manufacturer";
+  protected static $tablename = "manufacturer";
 
   function find($id)
   {
     return self::find1record(array(db_manufacturer_id => $id));
   }
 
-  function insert(){
-    $arr=array(); 
+  function insert($arr=array()){
+     
       $arr[db_manufacturer_name] = $_POST['name'];
       // 
-      if (verify_image("img") === 1){ // Image not choosen.
+      if (verify_uploadFile("img") === 1){ // Image not choosen.
         $arr[db_manufacturer_image] = NULL;
 
       } else {
         $arr[db_manufacturer_image] = time().'_'.$_FILES['img']['name']; // generate image for database
-        move_uploaded_file($_FILES['img']['tmp_name'], AVATAR_IMAGE_PATH.'/'.$arr[db_manufacturer_image]);  // move file from temperary forder to project       
+        move_uploaded_file($_FILES['img']['tmp_name'], MANUFACTURER_IMAGE_PATH.'/'.$arr[db_manufacturer_image]);  // move file from temperary forder to project       
       }
 
     // Build SQL command
     parent::insert($arr);
   }
+  
   function delete($id){
-    $filename = MANUFACTURER_IMAGE_PATH.'/'.self::find($id)[db_manufacturer_image];
-
     //
     parent::delete(array(db_manufacturer_id => $id));
-
-    //
-    delete_image($filename);
+    
   }
 
   function edit($id) {
@@ -41,12 +38,12 @@ class manufacturer extends Table
       $arr[db_manufacturer_name] = $_POST['name'];
 
       // 
-      if (verify_image("img") === 1){ // Image not reupload.
+      if (verify_uploadFile("img") === 1){ // Image not reupload.
         $arr[db_manufacturer_image] = self::find($id)[db_manufacturer_image]; //reupdate old data
 
       } else {
         // delete old image on server
-        $filename = MANUFACTURER_IMAGE_PATH.'/'.self::find($id)[db_manufacturer_image];
+        $filename = MANUFACTURER_IMAGE_PATH.self::find($id)[db_manufacturer_image];
         delete_image($filename);
 
         // generate image for database

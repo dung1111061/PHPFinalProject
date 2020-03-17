@@ -4,13 +4,10 @@
 		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
 
 			<!--  -->
-			<?= $top_menu ?>
+			<?php include_once "views/layouts/breadcrump.php"; ?>
 
 		</div>
-		<div class="ace-settings-container" id="ace-settings-container"> 
-			
-			<?= $setting ?> 
-		</div><!-- /.ace-settings-container -->
+		
 	</div>
 </div>
 <div class="row">
@@ -43,10 +40,11 @@ foreach ($data as $key=> $row) {
 	$alt = $row[db_manufacturer_image];
 ?>
 <tr> 	
-	<td> <?= $manufacturer_name ?> </td>								
 	<td>
 		<img style="width:100px; max-height: 150px;" src="<?=$img?>" alt="<?=$alt?>">	
 	</td>
+	<td> <?= $manufacturer_name ?> </td>								
+
 	
 
 	<td>

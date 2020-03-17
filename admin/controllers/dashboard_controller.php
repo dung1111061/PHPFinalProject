@@ -3,11 +3,12 @@
 class DashboardController extends BaseController
 {
   function __construct() {
-    $this->page_name = $this->page_name."/"."Dashboard";
+    $this->page_location = $this->page_location."/"."Dashboard";
     $this->folder = "dashboard";
-    $this->search_bar = FALSE; 
-    $this->setting = FALSE; 
-    $this->script("dashboard");    
+     
+    
+
+    $this->setScript("dashboard");    
   }
   function show() {
   	$this->view_file = "dashboard";
@@ -18,7 +19,8 @@ class DashboardController extends BaseController
     $statistical_info = ob_get_clean();
 
     //
-    $conversations   = conversation::conversations();
+    // $conversations   = conversation::conversations();
+    $conversations = array();
 
     //
     $tasks           = admin::getAll();
@@ -45,7 +47,7 @@ class DashboardController extends BaseController
    * @return [type] [description]
    */
   function sendmsg(){
-    conversation::insert();
+    // conversation::insert();
     $this->show();
   }
   

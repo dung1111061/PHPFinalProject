@@ -11,7 +11,7 @@
 				</button>
 
 				<div class="navbar-header pull-left">
-					<a href="index.php" class="navbar-brand">
+					<a href="trang-chu.html" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
 							Administrator

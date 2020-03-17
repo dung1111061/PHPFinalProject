@@ -32,7 +32,13 @@
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/slick.min.js"></script>
 		<script src="assets/js/nouislider.min.js"></script>
+		<script src="assets/js/wnumb-1.2.0/wNumb.min.js"></script>
 		<script src="assets/js/jquery.zoom.min.js"></script>
-		<script src="assets/js/main.js"></script>
+		<script src="assets/js/main.js?n=1"></script>  
+		<!-- Add query string may be help to clear caching browser  -->
+		<!-- Should move to inline-page script  -->
+		<?= $script ?>
+
+
 	</body>
 </html>

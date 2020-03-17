@@ -4,11 +4,11 @@
 class ManufacturerController extends BaseController
 {
   function __construct() {
-    $this->page_name = $this->page_name."/"."manufacturers";
+    $this->page_location = $this->page_location."/"."Manufacturers";
     $this->folder = "manufacturer";
-    $this->search_bar = FALSE; 
-    $this->setting = FALSE; 
-    $this->script("manufacturer");    
+     
+    
+    $this->setScript("manufacturer");    
   }
 
   function display_manufacturer_table(){
@@ -41,20 +41,49 @@ class ManufacturerController extends BaseController
 
   }
   function edit(){
+    //
     manufacturer::edit($_GET["id"]);
-    header("Location: manufacturer.php");
+    //
+    $stm = manufacturer::getStoredStatement();
+    if($stm->errorInfo()[2]) {
+      echo "<b style='color:red'>SQL Error: ";print_r($stm->errorInfo()[2]);echo "</b >"; echo "<br>";
+      exit();
+    }
+    //
+    header("Location: nha-san-xuat.html");
   }
 
   function insert(){
+    //
     manufacturer::insert();
-    header("Location: manufacturer.php");
+    //
+    $stm = manufacturer::getStoredStatement();
+    if($stm->errorInfo()[2]) {
+      echo "<b style='color:red'>SQL Error: ";print_r($stm->errorInfo()[2]);echo "</b >"; echo "<br>";
+      exit();
+    }
+    //
+    header("Location: nha-san-xuat.html");
   }
 
   function delete(){
-    
+    // delete image
+    $filename = MANUFACTURER_IMAGE_PATH.'/'.manufacturer::find($_GET["id"])[db_manufacturer_image];
+
     // Query manufacturer from database  
     manufacturer::delete($_GET["id"]);
-    header("Location: manufacturer.php");
+    //
+    $stm = manufacturer::getStoredStatement();
+    if($stm->errorInfo()[2]) {
+      echo "<b style='color:red'>SQL Error: ";print_r($stm->errorInfo()[2]);echo "</b >"; echo "<br>";
+      exit();
+    }
+    
+    //
+    delete_image($filename);
+
+    //
+    header("Location: nha-san-xuat.html");
   }
 
 }

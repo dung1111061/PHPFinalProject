@@ -4,13 +4,10 @@
 		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
 
 			<!--  -->
-			<?= $top_menu ?>
-
-		</div>
-		<div class="ace-settings-container" id="ace-settings-container"> 
+			<?php include_once "views/layouts/breadcrump.php"; ?>
 			
-			<?= $setting ?> 
-		</div><!-- /.ace-settings-container -->
+		</div>
+		
 	</div>
 </div>
 <div class="row">
@@ -29,7 +26,7 @@
 					<tr>
 						<th><?= tb_product_image_column ?></th>
 						<th><?= tb_product_name_column ?></th>
-						<th><?= tb_product_model_column ?></th>
+						<th><?= "Category" ?></th>
 						<th><?= tb_product_price_column ?></th>
 						<th><?= tb_product_manufacturer_column ?></th>
 						<th><?= tb_product_quantity_column ?></th>
@@ -44,20 +41,22 @@ foreach ($data as $key=> $row) {
 	$product_id = $row[db_product_id];
 	$img = $row[db_product_image];
 	$price = $row[db_product_price];
-	$model = $row[db_product_model];
+	$old_price = $row["old_price"];
+		
+	$category = category::find($row[db_product_category])[db_category_name];
 	$quantity = $row[db_product_quantity];
 	$product_name = $row[db_product_name];
-	$manufacturer_id = $row[db_product_manufacturer_id];
+	$manufacturer_id = $row[db_product_manufacturer];
 	$m_record = array_search($manufacturer_id, array_column($m_data, 'manufacturer_id'));
 	$manufacturer = ($m_record !== false) ? $m_data[$m_record][db_manufacturer_name]: NULL;
 ?>
 <tr> 									
 	<td>
-		<img style="width:100px; max-height: 150px;" src="<?=PRODUCT_IMAGE_PATH."/$img"?>" alt="<?=$img?>">	
+		<img style="width:100px; max-height: 150px;" src="<?=$img?>" ">	
 	</td>
 	<td> <?= $product_name ?> </td>
-	<td > <?= $model ?> </td>
-	<td> <?= $price ?> </td>
+	<td > <?= $category ?> </td>
+	<td class="product-price"> <?= $price ?> <del class="product-old-price"> <?= $old_price ?> </del> </td>
 	
 	<td><?= $manufacturer ?></td>
 
@@ -67,11 +66,11 @@ foreach ($data as $key=> $row) {
 
 	<td>
 		<div class="hidden-sm hidden-xs action-buttons">
-			<a class="green" href="product.php?route=edit&id=<?php echo $product_id ?>" data-toggle="tooltip" title="<?= DETAILS_TOOLTIP_MESSAGE?>">
+			<a class="green" href="chi-tiet-san-pham-<?=formatString2URL($product_name) ?>_id=<?=$product_id?>.html" data-toggle="tooltip" title="<?= DETAILS_TOOLTIP_MESSAGE?>">
 				<i class="ace-icon fa fa-pencil bigger-130" ></i>
 			</a>
 
-			<a class="red" href="product.php?route=details&action=delete&id=<?php echo $product_id ?>" onclick="return confirm('<?= DELETE_CONFIRM_MESSAGE ?>');" data-toggle="tooltip" title="<?= DELETE_TOOLTIP_MESSAGE?>">
+			<a class="red" href="product.php?action=delete&id=<?php echo $product_id ?>" onclick="return confirm('<?= DELETE_CONFIRM_MESSAGE ?>');" data-toggle="tooltip" title="<?= DELETE_TOOLTIP_MESSAGE?>">
 				<i class="ace-icon fa fa-trash-o bigger-130"></i>
 			</a>
 		</div>
@@ -85,7 +84,7 @@ foreach ($data as $key=> $row) {
 				<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
 					<li>
-						<a href="product.php?route=edit&id=<?php echo $product_id ?>" class="tooltip-success" data-rel="tooltip" title="Edit">
+						<a href="chi-tiet-san-pham-<?php echo $product_name ?>_id=<?php echo $product_id ?>.html" class="tooltip-success" data-rel="tooltip" title="Edit">
 							<span class="green">
 								<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 							</span>
@@ -93,7 +92,7 @@ foreach ($data as $key=> $row) {
 					</li>
 
 					<li>
-						<a href="product.php?route=details&action=delete&id=<?php echo $product_id ?>" class="tooltip-error" data-rel="tooltip" title="Delete" onclick="return confirm('<=? DELETE_CONFIRM_MESSAGE?>');">
+						<a href="product.php?action=delete&id=<?php echo $product_id ?>" class="tooltip-error" data-rel="tooltip" title="Delete" onclick="return confirm('<=? DELETE_CONFIRM_MESSAGE?>');">
 							<span class="red">
 								<i class="ace-icon fa fa-trash-o bigger-120"></i>
 							</span>
@@ -115,7 +114,7 @@ foreach ($data as $key=> $row) {
 
 	</div>
 	<div class="col-xs-2"> 
-		<a href="product.php?route=insert" data-toggle="tooltip" title="<?= INSERT_TOOLTIP_MESSAGE?>"/>
+		<a href="them-san-pham-moi.html" data-toggle="tooltip" title="<?= INSERT_TOOLTIP_MESSAGE?>"/>
 		<div class="btn btn-app btn-primary no-radius" > 
 			<i class="ace-icon fa fa-plus-square-o bigger-230"></i>
 		</div>

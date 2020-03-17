@@ -1,14 +1,17 @@
 <?php
+
 /**
  * Admin Configuration
  */
+//
+
 
 // Path of Directory
 define('VERSION',"1.0.0.0_a");
 define('ADMIN_PATH',PROJECT_PATH."admin/");
 define('HTTP_SERVER',"http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 
-// Define language of text 
+// Language of web 
 abstract class language
 {
     const vietnamese = 0;
@@ -16,6 +19,7 @@ abstract class language
 
 }
 
+// privilege level
 abstract class privilege
 {
 	const no_actived = 0; // no action
@@ -23,8 +27,19 @@ abstract class privilege
     const administrator = 2; // Full action and allow to access database
 }
 
+/**
+ * Upload file status code for itself application
+ */
+abstract class UploadFileCode
+{
+	const FileNotFound = 0; //no image attached to parameter "file" on request
+	const FileUploadFailed = 1;
+	const InValidImage   = 2;
+	const ValidImage   = 3;
+}
+
 // Link define 
-define('page_link',["Home" => "index.php","Products" => "product.php"]);
+define('page_link',["Home" => "trang-chu.html","Products" => "san-pham.html"]);
 
 //  Optional of error mode
 define('ERRMODE', ["debug" => 1,"release" => 0]);

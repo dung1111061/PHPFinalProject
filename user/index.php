@@ -1,11 +1,44 @@
 <?php
-// Version
-define('VERSION', '3.1.0.0_b');
 
-// Configuration
-require_once "../config.php"; // common configuration
-require_once "config.php"; //  configuration specific for admin application
+require_once "bootstraping.php";
 
-// // Startup
-echo "<pre>";
-print_r(get_defined_constants(true)["user"]);
+// Catch exception 
+try {
+	//  Map controller
+	switch ($controller) {
+	    case NULL:
+	    $controller = "home";
+
+	    case "home":
+	    
+	    case "product":
+	    	
+	    case "store":
+	    
+	    case "checkout":
+
+	    case "account":
+
+	    case "available controller": // all available controller will execute this block
+	    	
+	    	// $controller = "\\controller\\".$controller; // use controller namespace 
+	    	
+	    	$page = new $controller($action); //  Map action in constructor
+	    	$content = $page->loadPage(); // load page to cache memory
+	    	break;
+
+	    default:
+	    	$message = "$controller controller not found";
+			throw new MySQLQueryException($message);
+	    	break;
+	}	
+	
+	// Load script to cache memory
+	$script = $page->loadScript();
+	
+	// import content and script to layout and generate application on client side
+	$page->generateApplication($content,$script);
+
+} catch (Exception $e) {
+	echo 'Caught ',  $e, "\n";
+}

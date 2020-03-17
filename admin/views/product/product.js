@@ -1,99 +1,38 @@
-		<!-- basic scripts -->
+ <!-- page specific plugin scripts  -->
+ 	<script src="assets/js/jquery.bootstrap-duallistbox.min.js"></script>
+	<script src="assets/js/jquery.raty.min.js"></script>
+	<script src="assets/js/bootstrap-multiselect.min.js"></script>
+	<script src="assets/js/select2.min.js"></script>
+	<script src="assets/js/jquery-typeahead.js"></script>
+	<script src="assets/js/bootstrap-datepicker.min.js"></script>
+	<script src="assets/js/bootstrap-timepicker.min.js"></script>
+	<script src="assets/js/moment.min.js"></script>
+	<script src="assets/js/daterangepicker.min.js"></script>
+	<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="assets/js/jquery.inputlimiter.min.js"></script>
+	<script src="assets/js/chosen.jquery.min.js"></script>
+	<script src="assets/js/jquery-ui.custom.min.js"></script>
+	<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="assets/js/spinbox.min.js"></script>
+	<script src="assets/js/jquery.maskMoney.js"></script>
+	// <script src="assets/js/jquery.maskedinput.min.js"></script>
+	<script src="assets/js/jquery.mask.min.js"></script>
 
-		<!--[if !IE]> -->
-		<script src="assets/js/jquery-2.1.4.min.js"></script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script src="assets/js/jquery-1.11.3.min.js"></script>
-<![endif]-->
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-		<script src="assets/js/bootstrap.min.js"></script>
-
-		<!-- page specific plugin scripts -->
-		<script src="assets/js/jquery.dataTables.min.js"></script>
-		<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
-		<script src="assets/js/jquery.bootstrap-duallistbox.min.js"></script>
-		<script src="assets/js/jquery.raty.min.js"></script>
-		<script src="assets/js/bootstrap-multiselect.min.js"></script>
-		<script src="assets/js/select2.min.js"></script>
-		<script src="assets/js/jquery-typeahead.js"></script>
-		<script src="assets/js/bootstrap-datepicker.min.js"></script>
-		<script src="assets/js/bootstrap-timepicker.min.js"></script>
-		<script src="assets/js/moment.min.js"></script>
-		<script src="assets/js/daterangepicker.min.js"></script>
-		<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-		<script src="assets/js/jquery.inputlimiter.min.js"></script>
-		<script src="assets/js/dataTables.select.min.js"></script>
-		<script src="assets/js/chosen.jquery.min.js"></script>
-		<script src="assets/js/jquery-ui.custom.min.js"></script>
-		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
-
-		<!-- ace scripts -->
-		<script src="assets/js/ace-elements.min.js"></script>
-		<script src="assets/js/ace.min.js"></script>
-
-		<!-- inline scripts related to this page -->
-<script> 
-
-//initiate dataTables plugin
-var myTable = 
-$('#dynamic-table')
-//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
-.DataTable( {
-	bAutoWidth: false,
-	"aoColumns": [
-	  { "bSortable": false },
-	  null, null,null, null, null,
-	  { "bSortable": false }
-	],
-	"aaSorting": [],
-	
-	
-	//"bProcessing": true,
-    //"bServerSide": true,
-    //"sAjaxSource": "http://127.0.0.1/table.php"	,
-
-	//,
-	//"sScrollY": "200px",
-	//"bPaginate": false,
-
-	//"sScrollX": "100%",
-	//"sScrollXInner": "120%",
-	//"bScrollCollapse": true,
-	//Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
-	//you may want to wrap the table inside a "div.dataTables_borderWrap" element
-
-	//"iDisplayLength": 50
-
-
-	select: {
-		style: 'multi'
-	}
-} );
-
-// multiselect plugin intergration for manufacturer
-// $('.multiselect').multiselect({
-//  enableFiltering: true,
-//  enableHTML: true,
-//  buttonClass: 'btn btn-white btn-primary',
-//  templates: {
-// 	button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span> &nbsp;<b class="fa fa-caret-down"></b></button>',
-// 	ul: '<ul class="multiselect-container dropdown-menu"></ul>',
-// 	filter: '<li class="multiselect-item filter"><div class="input-group"><span class="input-group-addon"><i class="fa fa-search"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
-// 	filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default btn-white btn-grey multiselect-clear-filter" type="button"><i class="fa fa-times-circle red2"></i></button></span>',
-// 	li: '<li><a tabindex="0"><label></label></a></li>',
-//     divider: '<li class="multiselect-item divider"></li>',
-//     liGroup: '<li class="multiselect-item multiselect-group"><label></label></li>'
-//  }
-// });
+<!-- inline scripts related to this page  --> 
+<script>  // Jquery plugins dependencies
 if(!ace.vars['touch']) {
-	$('.chosen-select').chosen({allow_single_deselect:true}); 
+/**
+ * [Single select and multiple select plugin ]
+ * @param  {[type]} !ace.vars['touch'] [description]
+ * @return {[type]}                    [description]
+ */
+ 	// Add plugin chosen for class elements chosen-select
+	// $('.chosen-select').chosen({allow_single_deselect:true}); 
+	$('#select-manufacturer').chosen({allow_single_deselect:true}); 
+	$('#select-related').chosen({allow_single_deselect:true}); 
+	$('#select-category').chosen({allow_single_deselect:true}); 
+	
 	//resize the chosen on window resize
-
 	$(window)
 	.off('resize.chosen')
 	.on('resize.chosen', function() {
@@ -102,166 +41,265 @@ if(!ace.vars['touch']) {
 			 $this.next().css({'width': $this.parent().width()});
 		})
 	}).trigger('resize.chosen');
-	//resize chosen on sidebar collapse/expand
-	$(document).on('settings.ace.chosen', function(e, event_name, event_val) {
-		if(event_name != 'sidebar_collapsed') return;
-		$('.chosen-select').each(function() {
-			 var $this = $(this);
-			 $this.next().css({'width': $this.parent().width()});
-		})
-	});
-
-	$('#chosen-multiple-style .btn').on('click', function(e){
-		var target = $(this).find('input[type=radio]');
-		var which = parseInt(target.val());
-		if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
-		 else $('#form-field-select-4').removeClass('tag-input-style');
-	});
-
 }
 
 
-// date picker plugin intergration
-	//datepicker plugin
-	//link
-$('.date-picker').datepicker({
-	autoclose: true,
-	todayHighlight: true
-})
-//show datepicker when clicking on the icon
-.next().on(ace.click_event, function(){
-	$(this).prev().focus();
-});
+/**
+ * Product date picker
+ */
+// 
+	$('.date-picker').datepicker({
+		autoclose: true,
+		todayHighlight: true
+	})
+	//show datepicker when clicking on the icon
+	.next().on(ace.click_event, function(){
+		$(this).prev().focus();
+	});
+
+/**
+ * Description
+ */
 
 $('textarea.limited').inputlimiter({
 	remText: '%n character%s remaining...',
 	limitText: 'min allowed : %n.'
 });
-// Trigger submit form
-$( "#save-button" ).click(function() {
-  $( "#form_product" ).submit();
-});
 
-$( "#edit-button" ).click(function() {
-  $( "#form_product" ).submit();
-});
+/**
+ * Trigger submit form
+ */
+	
+	$( "#save-button" ).click(function() {
+	  $( "#form_product" ).submit();
+	});
 
-// Edit Button
-// $('#id-disable-check').on('click', function() {;
-// 	if($('#save-button').attr('disabled') === undefined) {
-// 		$('#form_product input[type="text"],textarea').each(function( key,value ) {
-// 		  value.setAttribute('readonly','true');
-// 		});
-// 		$('#save-button,#form_product select').each(function( key,value ) {
-// 		  value.setAttribute('disabled','true');
-// 		});
+	$( "#edit-button" ).click(function() {
+	  $( "#form_product" ).submit();
+	});
 
 
-// 	} else {
-// 		$('#form_edit input[type="text"],textarea').each(function( key,value ) {
-// 		  value.removeAttribute('readonly');
-// 		});
-// 		$('#save-button,#form_edit select').each(function( key,value ) {
-// 		  value.removeAttribute('disabled');
-// 		});
+/**
+ * Drop product image area
+ */
 
-// 	}
+	$('#image-input').ace_file_input({
+		style: 'well',
+		btn_choose: 'Drop files here or click to choose',
+		btn_change: null,
+		no_icon: 'ace-icon fa fa-cloud-upload',
+		droppable: true,
+		thumbnail: 'small'//large | fit
+		//,icon_remove:null//set null, to hide remove/reset button
+		/**,before_change:function(files, dropped) {
+			//Check an example below
+			//or examples/file-upload.html
+			return true;
+		}*/
+		/**,before_remove : function() {
+			return true;
+		}*/
+		,
+		preview_error : function(filename, error_code) {
+			//name of the file that failed
+			//error_code values
+			//1 = 'FILE_LOAD_FAILED',
+			//2 = 'IMAGE_LOAD_FAILED',
+			//3 = 'THUMBNAIL_FAILED'
+			// alert(error_code);
+		}
+
+	}).on('change', function(){
+		//console.log($(this).data('ace_input_files'));
+		//console.log($(this).data('ace_input_method'));
+	});
+
+/**
+ * Alert to confirm delete product
+ */
+
+/*
+	Dynamic view of upload image area.
+	View image if not has image in src attribute, view upload area
+ */
+	$('#image-product').css('display','none');
+	dropArea = $('#image-product').next();
+	dropArea.css('display','inline');
+ 	if ( $('#image-product').attr('src') ) {
+ 		$('#image-product').css('display','inline');
+ 		dropArea.css('display','none');
+ 	}
+ 	
+ 	// Click to image to use upload area
+	$('#image-product').on('click', function(event) {
+		$("#image-product").css( "display", "none" );
+		dropArea.css( "display", "inline" );
+	});
+	// if user don't want to audit image, back to show image again
+	// No implement yet
+
+/**
+ * price discount
+ */
+
+	$('#discount').ace_spinner({value:0,min:0,max:100,step:5, on_sides: true, icon_up:'ace-icon fa fa-plus bigger-110', icon_down:'ace-icon fa fa-minus bigger-110', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+
+/**
+ * quantity product strored in warehouse
+ */
+
+	$('#quantity').ace_spinner({value:0,min:0,max:100,step:1, on_sides: true, icon_up:'ace-icon fa fa-plus bigger-110', icon_down:'ace-icon fa fa-minus bigger-110', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+
+/**
+ * price
+ */
+ 
+	$('.input-mask-money').maskMoney({decimal:'.', precision: 3,suffix: ' VNĐ',
+	                              thousands: ' ',affixesStay :true,selectAllOnFocus:false
+	                              });
+
+// Bad UX when input price directly after focus price field  
+// $(document).ready(function() {
+//   $( '#price' ).trigger('focus');
+
 // });
 
-// Drop file button
-$('#id-input-file-3').ace_file_input({
-					style: 'well',
-					btn_choose: 'Drop files here or click to choose',
-					btn_change: null,
-					no_icon: 'ace-icon fa fa-cloud-upload',
-					droppable: true,
-					thumbnail: 'small'//large | fit
-					//,icon_remove:null//set null, to hide remove/reset button
-					/**,before_change:function(files, dropped) {
-						//Check an example below
-						//or examples/file-upload.html
-						return true;
-					}*/
-					/**,before_remove : function() {
-						return true;
-					}*/
-					,
-					preview_error : function(filename, error_code) {
-						//name of the file that failed
-						//error_code values
-						//1 = 'FILE_LOAD_FAILED',
-						//2 = 'IMAGE_LOAD_FAILED',
-						//3 = 'THUMBNAIL_FAILED'
-						// alert(error_code);
-					}
-			
-				}).on('change', function(){
-					//console.log($(this).data('ace_input_files'));
-					//console.log($(this).data('ace_input_method'));
-				});
+/**
+	Size
+ */
+	var options =  {
+	 //  	onKeyPress: function(cep, e, field, options) {
+	 //    var masks = ['YY x YY x YY', '9 x 9 x 9.9'];
+	 //    var mask = (cep.length>6) ? masks[1] : masks[0];
+	 //    $('.input-mask-size').mask(mask, options);
+		// },
+		onKeyPress : function(e){
+			// Note: capture space to done an properties and continue input another one. 
+			// 
+			// console.log('A key was pressed!:', e.keyCode);
+			// 
+			// if(e.keyCode == "%20"){
+			// 	console.log('space inputed');
+			// }
+		},
+		clearIfNotMatch: false,
+		'translation': {
+	    	Y: {pattern: /[0-9]/}
+	  	},
+	  	//
+	  	placeholder: "length x width x height (cm)"
+	 // reverse: true
+	};
 
-// Alert to confirm delete product
-$('#upload_new_image').on('click', function(event) {
-	event.preventDefault();
-	$("#upload_new_image").prev().css( "display", "none" );
-	$("#upload_new_image").css( "display", "none" );
-	$( "#upload_new_image").next().css( "display", "inline" );
-	/* Act on the event */
-});
+ $('.input-mask-size').mask('YY.Y x YY.Y x YY.Y',options);
 
-// Tooltip to show summary text box
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();   
-});
-// $('.tooltip-inner').css("max-width":"150px","width":"150px");
+/**
+ * Tooltip to show summary text box
+ * @param  {String} ){	               $('[data-toggle [description]
+ * @return {[type]}      [description]
+ */
+	$(document).ready(function(){
+	  $('[data-toggle="tooltip"]').tooltip();   
+	});
+	// $('.tooltip-inner').css("max-width":"150px","width":"150px");
 
-// validate product form
-function validate_form(){
-	return validate_related_product_selection();
-}
+/**
+	// Image is not reuploaded  
+    // Drop area is not automatic upload image 
+    // No click event on image product captured so image is not reuploaded 
+ */
 
-function validate_related_product_selection(){
-	if (jQuery.isEmptyObject( $('#form-field-select-4') ) ) {
-		var values = $('#form-field-select-4').val();
-		if (values.length > parseInt(<?=  relatedProduct::$maximum_number?>)){
-			alert("maximum related product allowed is <?=  relatedProduct::$maximum_number?>");
-			return false;
-		} 		
+/**
+ * [ module for validate form before send request
+ * 	 Note: This function is not built completely
+ * ]
+ * @return {[type]} [description]
+ */
+ 	// Validate form before send request
+	function validate_form(){
+		
+		// validate form
+		// 
+		// if( !IsNumeric($("#price").val()) ) return false;
+		//
+		if( !validate_related_product_selection() ) return false;
+
+		// Preprocess before submit form
+		if (  dropArea.css("display") === "none" ) 
+			//
+			$("#image-input").removeAttr("name");
+
+		return true;
 	}
 
-	return true;
-}
-// rating product
-/**var setRatingColors = function() {
-					$(this).find('.star-on-png,.star-half-png').addClass('orange2').removeClass('grey');
-					$(this).find('.star-off-png').removeClass('orange2').addClass('grey');
-				}*/
-				$('.rating').raty({
-					'cancel' : true,
-					'half': false,
-					'starType' : 'i'
-					/**,
-					
-					'click': function() {
-						setRatingColors.call(this);
-					},
-					'mouseover': function() {
-						setRatingColors.call(this);
-					},
-					'mouseout': function() {
-						setRatingColors.call(this);
-					}*/
-				})//.find('i:not(.star-raty)').addClass('grey');
+	// Validate related product field
+	// Note: This function is not test
+	function validate_related_product_selection(){
+		// 
+		if ( jQuery.isEmptyObject( $('#select-related') ) ) {
+			var values = $('#select-related').val();
+			if (values.length > parseInt(5)){
+				alert("maximum related product allowed is 5");
+				return false;
+			} 		
+		}
+		return true;
+	}
 
+	// Validate numeric field
+	// Note: This function is not test
+	function IsNumeric(numstr)
+	{
+	    if (! numstr.match(/^\d+$/ ) ) {
+	        alert("Only numeric values are allowed");
+	        return false;
+	    }
+
+	    return true;
+	}
+
+	// get data in form 
+	function getDatafromForm(){
+		var dataArray = [];
+		// preprocess for initial of form
+		$("input").each(function(index, field){
+			// array contains elements of form as objects
+			var name  = $(field).attr('name');
+			var value = $(field).val();
+			var element = new Object();
+			element[name] = value;
+			// element = {name:value}; do not allow to pass a variable value to name of variable
+			dataArray.push(element);
+
+			// dataArray[name] = value; // it is not an array, just object
+			
+			
+		});
+
+		// return dataArray
+		return dataArray;
+	}
 </script>
 <style>
-
 	.tooltip-inner {
-    max-width: 150px;
-    /* If max-width does not work, try using width instead */
-    width: 150px; 
-}
-	#form_field_select_4_chosen{
-		width: 250px !important; 
+	    max-width: 150px;
+	    /* If max-width does not work, try using width instead */
+	    width: 150px; 
+	}
+
+	/* Resize width of field of select generated by chosen plugin */
+	#select_manufacturer_chosen, #select_category_chosen, #select_related_chosen{
+		width: 250px !important;
+	}
+	 
+	.product-price {
+	  color: #D10024;
+	  font-size: 14px;
+	}
+
+	.product-price .product-old-price {
+	  font-size: 90%;
+	  font-weight: 400;
+	  color: #8D99AE;
 	}
 </style>

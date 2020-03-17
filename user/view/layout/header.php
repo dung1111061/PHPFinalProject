@@ -2,12 +2,14 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +84936651747</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> trunghieu95ins@gmail.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 440 Nguyễn Kiệm - Tp.HCM</a></li>
+						<li><a href="#"><i class="fa fa-phone"></i> 0362687355 </a></li>
+						<li><a href="#"><i class="fa fa-envelope-o"></i> dung1111061@gmail.com </a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i> 11/8/28 Nguyễn Văn Quá, P ĐHT, Q12 </a> </li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-user-o"></i> Tài khoản</a></li>
+						<li>
+							<!-- account partion is move to MAIN HEADER -->
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -20,7 +22,7 @@
 					<!-- row -->
 					<div class="row">
 						<!-- LOGO -->
-						<div class="col-md-3">
+						<div class="col-md-1">
 							<div class="header-logo">
 								<a href="#" class="logo">
 									<img src="./img/LOGO2.png" alt="">
@@ -28,12 +30,12 @@
 							</div>
 						</div>
 						<!-- /LOGO -->
-
+						
 						<!-- SEARCH BAR -->
-						<div class="col-md-6">
-							<div class="header-search">
-								<form>
-									<input class="input" placeholder="Nhập tên sản phẩm, từ khóa cần tìm kiếm">
+						<div class="col-md-6 ">
+							<div class="header-search ">
+								<form action="index.php" method="GET">
+									<input id="searching-field" class="input" placeholder="Nhập tên sản phẩm, từ khóa cần tìm kiếm" name="searching" value="<?=$keyword?>">
 									<button class="search-btn">Search</button>
 								</form>
 							</div>
@@ -41,8 +43,11 @@
 						<!-- /SEARCH BAR -->
 
 						<!-- ACCOUNT -->
-						<div class="col-md-3 clearfix">
+						<div class="col-md-5 clearfix">
 							<div class="header-ctn">
+								<div>
+									<?php require_once LAYOUT_PATH.'account.php'; ?>
+								</div>
 								<!-- Wishlist -->
 								<div>
 									<a href="#">

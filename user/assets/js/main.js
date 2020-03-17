@@ -1,3 +1,27 @@
+/**
+ * [saveQueryString2Form Add pseudo field to form ]
+ * @param  {[type]} form       [reference form]
+ * @param  {[type]} queryParams[array contains some parameter format 
+ *                             	as javascript object]
+ * queryParams = [
+	{key: 'name of parameter'  , value: 'value of param'}, // parammeter
+	...
+	];
+ * @return {[type]}            [description]
+ */
+function saveQueryString2Form(form,queryParams){
+	queryParams.forEach(param => {
+		if(param.value){
+			pseudoField = "<input class='hidden' type=text name="+param.key+" value='"+param.value+"'/>";
+			$(form).append(pseudoField);
+		}
+	});
+
+	// 	$.each(queryParams, function(param) {
+	// 	... do same
+// });
+}
+
 (function($) {
 	"use strict"
 
@@ -100,69 +124,64 @@
 		$('#product-main-img .product-preview').zoom();
 	}
 
-	/////////////////////////////////////////
+ 	// Get query string params
+ 	const urlParams = new URLSearchParams(window.location.search);
+ 	var controller 	= urlParams.get('controller');
+ 	var category = urlParams.get('category');
+ 	var hotDeal = urlParams.get('hot_deal');
+ 	var searching = urlParams.get('searching');
 
-	// Input number
-	$('.input-number').each(function() {
-		var $this = $(this),
-		$input = $this.find('input[type="number"]'),
-		up = $this.find('.qty-up'),
-		down = $this.find('.qty-down');
+/**
+ * Add pseudo field to form for purpose
+ * submit a GET form with query string params and hidden params disappear
+ * ex save query string of controller
+ */
+ 	var queryObjs = [
+ 		{key: 'hot_deal'  , value: hotDeal}, 
+ 		{key: 'category'  , value: category}, 
+ 		{key: 'controller', value: controller?controller:"store"},
+ 	];
 
-		down.on('click', function () {
-			var value = parseInt($input.val()) - 1;
-			value = value < 1 ? 1 : value;
-			$input.val(value);
-			$input.change();
-			updatePriceSlider($this , value)
-		})
+ 	//
+ 	var searchingForm = $("#searching-field").parent();
+ 	saveQueryString2Form(searchingForm,queryObjs);
 
-		up.on('click', function () {
-			var value = parseInt($input.val()) + 1;
-			$input.val(value);
-			$input.change();
-			updatePriceSlider($this , value)
-		})
+ 	//
+ 	var submitButton = $("#searching-field").next();
+	submitButton.on('click', function (e) {
+		keywork = $("#searching-field").val();
+		if(keywork === "") e.preventDefault();
+		// User guide:
+	 	// need to delete filter if no keeping searching filter, 
+	 	// not allow searching with empty input.
+		// searching feature only available on store page.
 	});
 
-	var priceInputMax = document.getElementById('price-max'),
-			priceInputMin = document.getElementById('price-min');
+	// Mark active page which request coming.
+	var list_link = $("#responsive-nav  li");
+	length = list_link.length;
 
-	priceInputMax.addEventListener('change', function(){
-		updatePriceSlider($(this).parent() , this.value)
-	});
-
-	priceInputMin.addEventListener('change', function(){
-		updatePriceSlider($(this).parent() , this.value)
-	});
-
-	function updatePriceSlider(elem , value) {
-		if ( elem.hasClass('price-min') ) {
-			console.log('min')
-			priceSlider.noUiSlider.set([value, null]);
-		} else if ( elem.hasClass('price-max')) {
-			console.log('max')
-			priceSlider.noUiSlider.set([null, value]);
+	// Marking diagram
+	breakme: if(controller === "store") {
+		if(hotDeal) {
+			$(list_link[length-2]).addClass('active');
+			break breakme;
 		}
-	}
 
-	// Price Slider
-	var priceSlider = document.getElementById('price-slider');
-	if (priceSlider) {
-		noUiSlider.create(priceSlider, {
-			start: [1, 999],
-			connect: true,
-			step: 1,
-			range: {
-				'min': 1,
-				'max': 999
-			}
-		});
+		if(category)
+			for (var i = 1; i < length-2; i++) {
+				var href = $(list_link[i]).find("a").attr("href");
+				if( href.search("category="+category)!==-1 ){
+					$(list_link[i]).addClass('active');
+					break breakme;
+				}
+			}			 
 
-		priceSlider.noUiSlider.on('update', function( values, handle ) {
-			var value = values[handle];
-			handle ? priceInputMax.value = value : priceInputMin.value = value
-		});
+		$(list_link[length-1]).addClass('active');
+
+	} else { // trang chu
+		$(list_link[0]).addClass('active'); 
 	}
 
 })(jQuery);
+

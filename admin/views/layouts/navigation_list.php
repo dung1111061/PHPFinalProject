@@ -1,5 +1,5 @@
 					<li class="">
-						<a href="index.php">
+						<a href="trang-chu.html">
 							<i class="menu-icon fa fa-tachometer"></i>
 							<span class="menu-text"> Dashboard </span>
 						</a>
@@ -19,7 +19,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a href="product.php">
+								<a href="san-pham.html">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Products
 								</a>
@@ -27,13 +27,22 @@
 								<b class="arrow"></b>
 							</li>
 							<li class="">
-								<a href="manufacturer.php">
+								<a href="nha-san-xuat.html">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Manufacturers
 								</a>
 
 								<b class="arrow"></b>
-							</li>	
+							</li>
+							<li class="">
+								<a href="category.php">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Categories
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
 							<li class="">
 								<a href="review.php">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -57,7 +66,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a href="product.php">
+								<a href="san-pham.html">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Customers
 								</a>
@@ -65,7 +74,7 @@
 								<b class="arrow"></b>
 							</li>
 							<li class="">
-								<a href="product.php">
+								<a href="san-pham.html">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Customer Field
 								</a>
@@ -91,7 +100,7 @@
 									<i class="menu-icon fa fa-caret-right"></i>
 									Order
 								</a>
-								<a href="product.php">
+								<a href="san-pham.html">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Recurring Orders
 								</a>
