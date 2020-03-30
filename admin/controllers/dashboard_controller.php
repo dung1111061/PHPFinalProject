@@ -3,11 +3,8 @@
 class DashboardController extends BaseController
 {
   function __construct() {
-    $this->page_location = $this->page_location."/"."Dashboard";
-    $this->folder = "dashboard";
-     
-    
 
+    $this->folder = "dashboard";
     $this->setScript("dashboard");    
   }
   function show() {

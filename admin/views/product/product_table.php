@@ -1,15 +1,16 @@
 <!-- PAGE CONTENT BEGINS -->
 <div class="row">
 	<div class="col-xs-10"> 
-		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
-
-			<!--  -->
-			<?php include_once "views/layouts/breadcrump.php"; ?>
-			
-		</div>
-		
+<div class="breadcrumbs " id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
+	<ul class="breadcrumb" style="margin-left: 0px">
+		<i class="ace-icon fa fa-home home-icon"></i>
+			<li > <a href="index.php"> Home </a> </li>
+			<li class="active" > <a href="product.php"> Product </a> </li> 
+	</ul><!-- /.breadcrumb -->
+</div>
 	</div>
 </div>
+
 <div class="row">
 	<div class="col-xs-10">
 
@@ -24,13 +25,13 @@
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th><?= tb_product_image_column ?></th>
-						<th><?= tb_product_name_column ?></th>
-						<th><?= "Category" ?></th>
-						<th><?= tb_product_price_column ?></th>
-						<th><?= tb_product_manufacturer_column ?></th>
-						<th><?= tb_product_quantity_column ?></th>
-						<th><?= tb_product_action_column ?></th>
+						<th>Ảnh đại diện</th>
+						<th>Tên </th>
+						<th>Loại </th>
+						<th>Giá tiền</th>
+						<th>Nhà sản xuất</th>
+						<th>Số lượng</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,13 +43,10 @@ foreach ($data as $key=> $row) {
 	$img = $row[db_product_image];
 	$price = $row[db_product_price];
 	$old_price = $row["old_price"];
-		
 	$category = category::find($row[db_product_category])[db_category_name];
 	$quantity = $row[db_product_quantity];
 	$product_name = $row[db_product_name];
-	$manufacturer_id = $row[db_product_manufacturer];
-	$m_record = array_search($manufacturer_id, array_column($m_data, 'manufacturer_id'));
-	$manufacturer = ($m_record !== false) ? $m_data[$m_record][db_manufacturer_name]: NULL;
+	$manufacturer = manufacturer::find($row[db_product_manufacturer])[db_manufacturer_name];
 ?>
 <tr> 									
 	<td>
@@ -66,11 +64,11 @@ foreach ($data as $key=> $row) {
 
 	<td>
 		<div class="hidden-sm hidden-xs action-buttons">
-			<a class="green" href="chi-tiet-san-pham-<?=formatString2URL($product_name) ?>_id=<?=$product_id?>.html" data-toggle="tooltip" title="<?= DETAILS_TOOLTIP_MESSAGE?>">
+			<a class="green" href="chi-tiet-san-pham-<?=formatString2URL($product_name) ?>_id=<?=$product_id?>.html" data-toggle="tooltip" title="Xóa">
 				<i class="ace-icon fa fa-pencil bigger-130" ></i>
 			</a>
 
-			<a class="red" href="product.php?action=delete&id=<?php echo $product_id ?>" onclick="return confirm('<?= DELETE_CONFIRM_MESSAGE ?>');" data-toggle="tooltip" title="<?= DELETE_TOOLTIP_MESSAGE?>">
+			<a class="red" href="product.php?action=delete&id=<?php echo $product_id ?>" onclick="return confirm('Xóa');" data-toggle="tooltip" title="Xóa">
 				<i class="ace-icon fa fa-trash-o bigger-130"></i>
 			</a>
 		</div>
@@ -114,7 +112,7 @@ foreach ($data as $key=> $row) {
 
 	</div>
 	<div class="col-xs-2"> 
-		<a href="them-san-pham-moi.html" data-toggle="tooltip" title="<?= INSERT_TOOLTIP_MESSAGE?>"/>
+		<a href="them-san-pham-moi.html" data-toggle="tooltip" title="Thêm "/>
 		<div class="btn btn-app btn-primary no-radius" > 
 			<i class="ace-icon fa fa-plus-square-o bigger-230"></i>
 		</div>

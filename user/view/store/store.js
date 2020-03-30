@@ -1,6 +1,6 @@
-<script>	
+<script type="application/javascript">	
 	//-- Filter funtion --//
-	
+
  	/**
  	 * [deleteFilter description]
  	 * @param  {[type]} filtered_yet_flag [description]
@@ -197,8 +197,4 @@
 	$('.filter-infomation > button').on('click', function (e) {
 		document.location.replace(url);
 	})
-
-	// Note: Backup code onclick
-	// onclick="deleteFilter(<?=$filtered_yet_flag?>,'<?=$customize_url?>')"
-
 </script>

@@ -1,6 +1,6 @@
 <?php
 /**
- *  Table on Database and API for query database
+ *  abstract table for table on database
  *  Example: admin
  *  id | user | password | name
  *  1  | admin| admin    | Joe
@@ -8,13 +8,13 @@
  *  Parent class
  *  SQL command interface for control data in tables.
  *  DB interface (extends through SQL command) for connect database
+ *  
+ *  method:  API for query database
+ *  
  */
 abstract class Table extends SQLCommand
 {
-  // protected $tablename;
-  protected static $tablename = "not defined";
-  protected static $primary_key = "not defined";
-  protected static $stored_stm;
+
   protected static $timestamp = FALSE;
 
   /**
@@ -25,7 +25,7 @@ abstract class Table extends SQLCommand
    */
   static function getAll(){
     $sql = "select * from ".static::$tablename;
-    return self::fetchAll($sql); 
+    return self::fetchAll($sql);
   }
 
   /**
@@ -35,12 +35,13 @@ abstract class Table extends SQLCommand
    */
   static function find1record($condition_arr){
     // Build SQL command
-    $parameter_arr = implode(array_map(function($a, $b) { return $a . ' = ' . $b; }, array_keys($condition_arr), array_fill(0, count($condition_arr), '?')),' and ');
+    $place_holders = implode(array_map(function($a, $b) { return $a . ' = ' . $b; }, array_keys($condition_arr), array_fill(0, count($condition_arr), '?')),' and ');
 
-    $sql = "select * from ".static::$tablename." WHERE ".$parameter_arr;
+    $sql = "select * from ".static::$tablename." WHERE ".$place_holders;
 
     //Execute
-    return self::fetch($sql,array_values($condition_arr));
+    $result = self::fetchAll($sql,array_values($condition_arr));
+    if($result) return $result[0];
   }
 
   /**
@@ -48,7 +49,7 @@ abstract class Table extends SQLCommand
    * @param  [type] $condition_arr [key = field, value = record]
    * @return [2d table]                [description]
    */
-  function findtablerecord($condition_arr){
+  static function findtablerecord($condition_arr){
     // Build SQL command
     $parameter_arr = implode(array_map(function($a, $b) { return $a . ' = ' . $b; }, array_keys($condition_arr), array_fill(0, count($condition_arr), '?')),' and ');
 
@@ -62,19 +63,19 @@ abstract class Table extends SQLCommand
    * @param  [type] $condition_arr [key = field, value = record]
    * @return [type]                [stm statement]
    */
-  function delete($condition_arr) {
+  static function delete($condition_arr) {
     $parameter_arr = implode(array_map(function($a, $b) { return $a . ' = ' . $b; }, array_keys($condition_arr), array_fill(0, count($condition_arr), '?')),' and '); 
 
     $sql = "DELETE FROM ".static::$tablename." WHERE ".$parameter_arr;
     
     /* Debug Infomation of execute PDOstm */
-    echo "<b>SQL query string</b><br>&nbsp&nbsp&nbsp&nbsp" . $sql; echo "<br>"; 
-    echo "<pre><b>Parameter</b><br>&nbsp&nbsp&nbsp&nbsp";
-    print_r( $condition_arr); echo "<br>";
+    // echo "<b>SQL query string</b><br>&nbsp&nbsp&nbsp&nbsp" . $sql; echo "<br>"; 
+    // echo "<pre><b>Parameter</b><br>&nbsp&nbsp&nbsp&nbsp";
+    // print_r( $condition_arr); echo "<br>";
     /* Debug Infomation of execute PDOstm */
 
-    self::$stored_stm = self::execute($sql,array_values($condition_arr));
-    return self::$stored_stm;
+    self::$stm = self::execute($sql,array_values($condition_arr));
+    return self::$stm;
   }
 
   /**
@@ -82,7 +83,7 @@ abstract class Table extends SQLCommand
    * @param  [1d array] $arr [data array: key = field, value = record]
    * @return [type]      [description]
    */
-  function insert($arr){
+  static function insert($arr){
 
     // 2020-3-2 Put time stamp flag
     if(static::$timestamp) self::addTimeStamp($arr);
@@ -96,14 +97,14 @@ abstract class Table extends SQLCommand
     $sql = "INSERT INTO ".static::$tablename." ($key) VALUES ($place_holders);";
     
     /* Debug Infomation of execute PDOstm */
-    echo "<b>SQL query string</b><br>&nbsp&nbsp&nbsp&nbsp" . $sql; echo "<br>"; 
-    echo "<pre><b>Parameter</b><br>&nbsp&nbsp&nbsp&nbsp";
-    var_dump($arr); echo "<br>";
+    // echo "<b>SQL query string</b><br>&nbsp&nbsp&nbsp&nbsp" . $sql; echo "<br>"; 
+    // echo "<pre><b>Parameter</b><br>&nbsp&nbsp&nbsp&nbsp";
+    // var_dump($arr); echo "<br>";
     /* Debug Infomation of execute PDOstm */
 
     //
-    self::$stored_stm = self::execute($sql,$values);
-    return self::$stored_stm;
+    self::$stm = self::execute($sql,$values);
+    return self::$stm;
 
   }
 
@@ -113,7 +114,7 @@ abstract class Table extends SQLCommand
    * @param  [1d array] $update_arr    [data array: key = field, value = record]
    * @return [type]                [stm statement]
    */
-  function update($condition_arr,$update_arr){
+  static function update($condition_arr,$update_arr){
 
     // 2020-3-2 Put time stamp flag
     if(static::$timestamp) self::updateTimeStamp($update_arr);
@@ -131,16 +132,17 @@ abstract class Table extends SQLCommand
     $sql = "UPDATE ".static::$tablename." SET $parameter_update_arr WHERE $parameter_condition_arr";
     
     /* Debug Infomation of execute PDOstm */
-    echo "<b>SQL query string</b><br>&nbsp&nbsp&nbsp&nbsp" . $sql; echo "<br>"; 
-    echo "<pre><b>Parameter</b><br>&nbsp&nbsp&nbsp&nbsp";
-    print_r( array_merge($update_arr,$condition_arr)); echo "<br>";
+    // echo "<b>SQL query string</b><br>&nbsp&nbsp&nbsp&nbsp" . $sql; echo "<br>"; 
+    // echo "<pre><b>Parameter</b><br>&nbsp&nbsp&nbsp&nbsp";
+    // print_r( array_merge($update_arr,$condition_arr)); echo "<br>";
     /* Debug Infomation of execute PDOstm */
     
     // execute
-    self::$stored_stm = self::execute($sql,$values);
-    return self::$stored_stm;
+    self::$stm = self::execute($sql,$values);
+    return self::$stm;
   }
 
+//=========================================================================
   /**
    * [selectInnerJoin for select field additional inner join other table ]
    * WARNING: class not available yet
@@ -159,13 +161,19 @@ abstract class Table extends SQLCommand
     $sql = self::selectSQL($field_list,$primary_table,$primary_field_list ).self::innerJoin($foreign_key,$primary_key,$primary_table);
     return self::fetchAll($sql);
   }
-  function getStoredStatement(){
-      return self::$stored_stm;
+
+#=================================
+  static function getStoredStatement(){
+      return self::$stm;
   }
   
+#==================================
   /**
    * 2020-3-1 Update timestamp features
+   * Update column "timestamp" for table
+   * Table must be define "created_at", "updated_at" column
    * Add timestamp to data array used for executing sql command
+   * Usage: Turn on property "static $timestamp"
   */
   static function updateTimeStamp(&$data_array)
   {

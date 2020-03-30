@@ -6,14 +6,14 @@
  */
 class DB
 {
-
+  public static $stm = NULL;
   private static $instance = NULL;
   public static function getInstance() {
     if (!isset(self::$instance)) {
       try {
         self::$instance = new PDO('mysql:host=localhost;dbname='.dbname, username, password);
         self::$instance->exec("SET NAMES 'utf8'");
-        // if (ERRMODE['debug']) self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       
       } catch (PDOException $ex) {
         die($ex->getMessage());
       }
@@ -31,14 +31,14 @@ class DB
    * @param  array  $parameter [description]
    * @return [PDOstatement]   [ statement or result of execute TRUE on success or FALSE on failure. ]
    */
-   static function execute($sql,$parameter=array(),$returned_flag=""){
+   static function execute($sql,$parameter=array()){
     $stm  = self::getInstance()->prepare($sql);
     $stm->execute($parameter);
     
     return $stm; 
   }
 
-/** [Execute sql command and fetchAll data ]
+/** [Execute sql command and fetchAll data ( table ) ]
  * @param  $sql command as argument for PDO->prepare()
  * @param  $parameter parameter array for PDO->execute()
  * @return PDO->fetchAll()
@@ -47,21 +47,13 @@ class DB
     return self::execute($sql,$parameter)->fetchAll(PDO::FETCH_ASSOC);
   }
 
-/** [Execute sql command and fetch data ]
+/** [Execute sql command and fetch data ( record ) ]
  * @param  $sql command as argument for PDO->prepare()
  * @param  $parameter parameter array for PDO->execute()
  * @return PDO->fetch()
  */
    static function fetch($sql,$parameter=array()){
     return self::execute($sql,$parameter)->fetch();
-  }
-/** [Execute sql command and fetch data ]
- * @param  $sql command as argument for PDO->prepare()
- * @param  $parameter parameter array for PDO->execute()
- * @return PDO->rowCount()
- */
-   static function getRowCount($sql,$parameter=array()){
-    return self::execute($sql,$parameter)->rowCount();
   }
   
 }

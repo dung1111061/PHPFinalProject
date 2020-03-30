@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Login Page - Ace Admin</title>
+		<title>Login Page - Administrator </title>
 
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -45,10 +45,10 @@
 							<div class="center">
 								<h1>
 									<i class="ace-icon fa fa-leaf green"></i>
-									<span class="red">Ace</span>
+									<span class="red">Administrator </span>
 									<span class="white" id="id-text2">Application</span>
 								</h1>
-								<h4 class="blue" id="id-company-text">&copy; Company Name</h4>
+
 							</div>
 
 							<div class="space-6"></div>
@@ -64,7 +64,7 @@
 
 											<div class="space-6"></div>
 
-											<form action="index.php?action=verify_login" method="post">
+											<form action="index.php?action=login" method="post">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -189,7 +189,7 @@
 											<div class="space-6"></div>
 											<p> Enter your details to begin: </p>
 
-											<form action="index.php?action=register" method="post" onsubmit="return Validate();">
+											<form action="index.php?action=register" method="post" onsubmit="return verification();">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -333,9 +333,10 @@
 			$('#id-company-text').attr('class', 'blue');
 		</script>
 
-<!-- Validate new account -->
+<!-- Verification new account -->
   <script type="text/javascript">
-	function Validate() {
+
+	function verification() {
 		var user = $('input[name="user"]')[1].value;
 		var passwd = $('input[name="passwd"]')[1].value;
 		var repeat_passwd = $('input[name="repeat_passwd"]')[0].value;
@@ -367,8 +368,8 @@
         // Ajax thread to verify: 
         // 1. user exits already or not. server return 1
         // 2. email exits already or not. server return 2
-        verify_new_account('ajax_function/verify_new_account.php?user='+user+'&email='+email); 
-        problems += $('input[name="pseudo-element"]')[0].value; 
+        ajax_verify_new_account('index.php?action=verify&user='+user+'&email='+email); 
+        problems += $('input[name="pseudo-element"]')[0].value;
 
         if(problems !="") {
 			alert(problems);
@@ -378,18 +379,18 @@
 		return true;
 	}
 
-function verify_new_account(url) {
-  var xhttp;
-  xhttp=new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) { // action after response ready
-      $('input[name="pseudo-element"]')[0].value=this.responseText;
-    }
-  };
-  xhttp.open("GET", url, false); // Need to synchonize thread xhttp request and main thread
-                                 // to prepare data used by javascript handle
-  xhttp.send(); 
-}
+	function ajax_verify_new_account(url) {
+	  var xhttp;
+	  xhttp=new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) { // action after response ready
+	      $('input[name="pseudo-element"]')[0].value=this.responseText;
+	    }
+	  };
+	  xhttp.open("GET", url, false); // Need to synchonize thread xhttp request and main thread
+	                                 // to prepare data used by javascript handle
+	  xhttp.send(); 
+	}
 
 </script>
 

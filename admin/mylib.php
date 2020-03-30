@@ -18,48 +18,18 @@ function verify_privilege($required_privilege) {
 }
 
 // Designed by Nguyen Dung 12/23/2019
-function send_html_mail($email_source,$email_destination,$data_arr = array(),$content_html_file) {
-
-// The message
-//------- Comment Code
-	// $data = array('link' => $link);
-	// $opts = array(
-	// 'http' => array(
-	// 	    'method'  => 'POST',
-	// 	    'content' => http_build_query($data)
-	// 	)
-	// );
-	// $context  = stream_context_create($opts);
-	// $content = file_get_contents("restore_email_testing.php", false, $context);
-//-------
-
-	$content = file_get_contents("$content_html_file"); // get content
-	$message = $content;
-	// passing variables
-	foreach ($data_arr as $key => $value) {
-		$message = str_replace("<?=\$$key?>", $value, $content);
-	}
-
-//------- Test passing variable
-	// $message = $content;
-	// $message = sprintf($content, $link);
-	// $message = "pseudo message";
-//------- Comment Code
-
-//------- Debug HTML content by load page
-	// echo "$message";
-//------- Comment Code
-
-// Additional headers
+// send an html mail 
+function send_html_mail($email_destination,$message) {
 	$headers[] = 'MIME-Version: 1.0';
 	$headers[] = 'Content-type: text/html; charset=iso-8859-1'; // Sending HTML mail, the Content-type header must be set
 	$headers[] = "To: <$email_destination>";
-	$headers[] = "From: $email_source";
+	$headers[] = "From: ".SERVER_MAIL;
 	// $headers[] = 'Cc: birthdayarchive@example.com';
 	// $headers[] = 'Bcc: birthdaycheck@example.com';
 
 // Sending mail
-	return mail($email_destination, 'Restore Password Administrator', $message,implode("\r\n", $headers));
+	return mail($email_destination, 'Restore Password Administrator', 
+				$message,implode("\r\n", $headers));
 
 }
 
@@ -85,7 +55,6 @@ function delete_image($filename){
  * @return [type]       [upload status code ]
  */
 function verify_uploadFile($name){
-
 	if ($_FILES[$name]['error'] === UPLOAD_ERR_NO_FILE) {
 	  // no file attached to <input[file]> tag
 	  echo "File not found on server"; echo "<br>";
@@ -111,8 +80,6 @@ function verify_uploadFile($name){
 		return UploadFileCode::ValidImage;
 
 	}
-
-	
 }
 
 	/**
@@ -227,9 +194,18 @@ function redirect($url, $permanent = false)
  * [getTimeStamp get current timestamp]
  * @return [type] [description]
  */
-function getTimeStamp()
+function getTimeStamp($format='Y-m-d H:i:s')
 {
 	$timestamp = new Datetime();
 	$timestamp->setTimezone(new DateTimeZone('Asia/Ho_Chi_Minh'));
-	return $timestamp->format('Y-m-d H:i:s');	
+	return $timestamp->format($format);	
+}
+
+/**
+ * 
+ */
+function limit_words($string, $word_limit)
+{
+    $words = explode(" ",$string);
+    return implode(" ", array_splice($words, 0, $word_limit));
 }

@@ -2,8 +2,6 @@
 // Imported Data list
 // route, m_data, p_data
 
-$language=language::english; 
-
 $form_action = "category.php?action=insert"; // insert page
 if ($route === "edit") { // edit product
 	$form_action = "category.php?action=edit&id=".$id;
@@ -14,14 +12,13 @@ if ($route === "edit") { // edit product
 <div class="row">
 	<div class="col-xs-8"> 
 		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
-
-			<!--  -->
-			<?php include_once "views/layouts/breadcrump.php"; ?>
-
+			<ul class="breadcrumb" style="margin-left: 0px">
+				<i class="ace-icon fa fa-home home-icon"></i>
+					<li> <a href="index.php">Home</a> </li>
+					<li> <a href="category.php">Nhà sản xuất</a> </li>
+			</ul><!-- /.breadcrumb -->
 		</div>
-		
 	</div>
-		
 </div>
 
 <!-- Widget -->
@@ -112,12 +109,12 @@ if($route === "edit"){
 ?>
 
 <div class="col-xs-2" style="text-align: right">
-	<button id="save-button" class="btn btn-app btn-grey btn-xs radius-4 " data-toggle="tooltip" title="<?= SAVE_TOOLTIP_MESSAGE?>" style="display: <?=$save_display?>" >
+	<button id="save-button" class="btn btn-app btn-grey btn-xs radius-4 " data-toggle="tooltip" title="Thêm" style="display: <?=$save_display?>" >
 		<i class="ace-icon fa fa-floppy-o bigger-160"></i>
 		Save
 	</button>
 
-	<div id = "edit-button" class="btn btn-app btn-primary no-radius" data-toggle="tooltip" title="<?= EDIT_TOOLTIP_MESSAGE?>" style="display: <?=$edit_display?>"> 
+	<div id = "edit-button" class="btn btn-app btn-primary no-radius" data-toggle="tooltip" title="Sửa" style="display: <?=$edit_display?>"> 
 		<i class="ace-icon fa fa-pencil-square-o bigger-230"></i>
 	</div>
 	

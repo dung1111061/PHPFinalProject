@@ -4,10 +4,7 @@
 class CategoryController extends BaseController
 {
   function __construct() {
-    $this->page_location = $this->page_location."/"."Category";
     $this->folder = "category";
-     
-    
     $this->setScript("category");    
   }
 

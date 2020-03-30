@@ -1,8 +1,9 @@
-<?php 
-// Imported Data list
-// route, m_data, p_data
+<!-- 
 
-$language=language::english; 
+parameters:
+
+ -->
+<?php 
 
 $form_action = "manufacturer.php?action=insert"; // insert page
 if ($route === "edit") { // edit 
@@ -13,41 +14,32 @@ if ($route === "edit") { // edit
 
 <div class="row">
 	<div class="col-xs-8"> 
-		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
-
-			<!--  -->
-			<?php include_once "views/layouts/breadcrump.php"; ?>
-
+		<div class="breadcrumbs" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
+			<ul class="breadcrumb" style="margin-left: 0px">
+				<i class="ace-icon fa fa-home home-icon"></i>
+					<li> <a href="index.php">Home</a> </li>
+					<li> <a href="manufacturer.php">Nhà sản xuất</a> </li>
+			</ul><!-- /.breadcrumb -->
 		</div>
-		
 	</div>
 		
 </div>
-<?php
-$wg_title[$language] = "Insert Manufacturer";
-if($route === "edit"){
-	$wg_title[$language] = "Edit Manufacturer";
-}
-$tags[1] = wg_manufacturer_tags[0];
-$tag_name[1] = wg_manufacturer_tag_name[wg_manufacturer_tags[0]];
 
-$tags[2] = wg_manufacturer_tags[1];
-$tag_name[2] = wg_manufacturer_tag_name[wg_manufacturer_tags[1]];
-?>
+
 
 <div class="col-sm-10 widget-container-col" id="widget-container-col-10">
 	<div class="widget-box" id="widget-box-10">
 		<div class="widget-header widget-header-small">
-			<h5 class="widget-title smaller"><?= $wg_title[$language]?></h5>
+			<h5 class="widget-title smaller">Nhà sản xuất</h5>
 
 			<div class="widget-toolbar no-border">
 				<ul class="nav nav-tabs" id="myTab">
 					<li class="active">
-						<a data-toggle="tab" href="#<?= $tags[1] ?>"> <?= $tag_name[1] ?></a>
+						<a data-toggle="tab" href="#1"> Loại</a>
 					</li>
 
 					<li>
-						<a data-toggle="tab" href="#<?= $tags[2] ?>"><?= $tag_name[2] ?></a>
+						<a data-toggle="tab" href="#2">Chi tiết</a>
 					</li>
 				</ul>
 			</div>
@@ -57,21 +49,21 @@ $tag_name[2] = wg_manufacturer_tag_name[wg_manufacturer_tags[1]];
 		<div class="widget-body">
 			<div class="widget-main padding-6">
 				<div class="tab-content">
-					<div id="<?= $tags[1] ?>" class="tab-pane in active">
+					<div id="1" class="tab-pane in active">
 						<!-- Field of general -->
 						
 						<div class="form-group">
 							
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <?=wg_manufacturer_name?> </label>
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên  </label>
 
 							<div class="col-sm-9">
-								<input type="text" id="form-field-1" placeholder="<?= wg_manufacturer_name?>" class="col-xs-10 col-sm-5" name="name" required value="<?= $p_record[db_manufacturer_name]?>"/>
+								<input type="text" id="form-field-1" placeholder="Tên" class="col-xs-10 col-sm-5" name="name" required value="<?= $p_record[db_manufacturer_name]?>"/>
 							</div>
 
 						</div>
 
 						<div class="form-group"  >
-						<label class="col-sm-3 no-padding-right control-label"  for="id-date-picker-1"><?= wg_manufacturer_image?></label>
+						<label class="col-sm-3 no-padding-right control-label"  for="id-date-picker-1">Ảnh</label>
 <?php
 	// insert feature
 	$image = "none";
@@ -96,14 +88,13 @@ if ($route === "edit") {
 
 					</div>
 
-					<div id="<?= $tags[2] ?>" class="tab-pane">	
+					<div id="2" class="tab-pane">	
 
 					</div>
 
 					</div>
 				</div>
 			</div>
-
 		</form>
 		</div>
 </div>
@@ -117,12 +108,12 @@ if ($route === "edit") {
 ?>
 
 <div class="col-xs-2" style="text-align: right">
-	<button id="save-button" class="btn btn-app btn-grey btn-xs radius-4 " data-toggle="tooltip" title="<?= SAVE_TOOLTIP_MESSAGE?>" style="display: <?=$save_display?>" >
+	<button id="save-button" class="btn btn-app btn-grey btn-xs radius-4 " data-toggle="tooltip" title="Save Change" style="display: <?=$save_display?>" >
 		<i class="ace-icon fa fa-floppy-o bigger-160"></i>
 		Save
 	</button>
 
-	<div id = "edit-button" class="btn btn-app btn-primary no-radius" data-toggle="tooltip" title="<?= EDIT_TOOLTIP_MESSAGE?>" style="display: <?=$edit_display?>"> 
+	<div id = "edit-button" class="btn btn-app btn-primary no-radius" data-toggle="tooltip" title="Sửa" style="display: <?=$edit_display?>"> 
 		<i class="ace-icon fa fa-pencil-square-o bigger-230"></i>
 	</div>
 	

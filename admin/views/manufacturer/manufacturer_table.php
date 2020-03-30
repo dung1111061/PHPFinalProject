@@ -1,13 +1,13 @@
 <!-- PAGE CONTENT BEGINS -->
 <div class="row">
 	<div class="col-xs-10"> 
-		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
-
-			<!--  -->
-			<?php include_once "views/layouts/breadcrump.php"; ?>
-
+		<div class="breadcrumbs" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
+			<ul class="breadcrumb" style="margin-left: 0px">
+				<i class="ace-icon fa fa-home home-icon"></i>
+					<li><a href="index.php">Home</a></li>
+					<li><a href="category.php">Nhà sản xuất</a></li>
+			</ul><!-- /.breadcrumb -->
 		</div>
-		
 	</div>
 </div>
 <div class="row">
@@ -24,9 +24,9 @@
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th><?= tb_manufacturer_name_column ?></th>
-						<th><?= tb_manufacturer_image_column ?></th>
-						<th><?= tb_manufacturer_action_column ?></th>
+						<th>name</th>
+						<th>image</th>
+						<th>action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,15 +45,13 @@ foreach ($data as $key=> $row) {
 	</td>
 	<td> <?= $manufacturer_name ?> </td>								
 
-	
-
 	<td>
 		<div class="hidden-sm hidden-xs action-buttons">
-			<a class="green" href="manufacturer.php?route=edit&id=<?php echo $manufacturer_id ?>" data-toggle="tooltip" title="<?= DETAILS_TOOLTIP_MESSAGE?>">
+			<a class="green" href="manufacturer.php?action=display_edit&id=<?php echo $manufacturer_id ?>" data-toggle="tooltip" title="chi tiết">
 				<i class="ace-icon fa fa-pencil bigger-130" ></i>
 			</a>
 
-			<a class="red" href="manufacturer.php?route=details&action=delete&id=<?php echo $manufacturer_id ?>" onclick="return confirm('<?= DELETE_CONFIRM_MESSAGE ?>');" data-toggle="tooltip" title="<?= DELETE_TOOLTIP_MESSAGE?>">
+			<a class="red" href="manufacturer.php?action=delete&id=<?php echo $manufacturer_id ?>" onclick="return confirm('Xóa');" data-toggle="tooltip" title="Xóa">
 				<i class="ace-icon fa fa-trash-o bigger-130"></i>
 			</a>
 		</div>
@@ -67,7 +65,7 @@ foreach ($data as $key=> $row) {
 				<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
 					<li>
-						<a href="manufacturer.php?route=edit&id=<?php echo $manufacturer_id ?>" class="tooltip-success" data-rel="tooltip" title="Edit">
+						<a href="manufacturer.php?action=display_edit&id=<?php echo $manufacturer_id ?>" class="tooltip-success" data-rel="tooltip" title="Edit">
 							<span class="green">
 								<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 							</span>
@@ -75,7 +73,7 @@ foreach ($data as $key=> $row) {
 					</li>
 
 					<li>
-						<a href="manufacturer.php?route=details&action=delete&id=<?php echo $manufacturer_id ?>" class="tooltip-error" data-rel="tooltip" title="Delete" onclick="return confirm('<=? DELETE_CONFIRM_MESSAGE?>');">
+						<a href="manufacturer.php?action=delete&id=<?php echo $manufacturer_id ?>" class="tooltip-error" data-rel="tooltip" title="Delete" onclick="return confirm('<=? DELETE_CONFIRM_MESSAGE?>');">
 							<span class="red">
 								<i class="ace-icon fa fa-trash-o bigger-120"></i>
 							</span>
@@ -97,7 +95,7 @@ foreach ($data as $key=> $row) {
 
 	</div>
 	<div class="col-xs-2"> 
-		<a href="manufacturer.php?route=insert" data-toggle="tooltip" title="<?= INSERT_TOOLTIP_MESSAGE?>"/>
+		<a href="manufacturer.php?action=display_insert" data-toggle="tooltip" title="THêm"/>
 		<div class="btn btn-app btn-primary no-radius" > 
 			<i class="ace-icon fa fa-plus-square-o bigger-230"></i>
 		</div>

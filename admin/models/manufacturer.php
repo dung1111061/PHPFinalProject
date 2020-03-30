@@ -3,12 +3,12 @@ class manufacturer extends Table
 {
   protected static $tablename = "manufacturer";
 
-  function find($id)
+  static function find($id)
   {
     return self::find1record(array(db_manufacturer_id => $id));
   }
 
-  function insert($arr=array()){
+  static function insert($arr=array()){
      
       $arr[db_manufacturer_name] = $_POST['name'];
       // 
@@ -24,13 +24,13 @@ class manufacturer extends Table
     parent::insert($arr);
   }
   
-  function delete($id){
+  static function delete($id){
     //
     parent::delete(array(db_manufacturer_id => $id));
     
   }
 
-  function edit($id) {
+  static function edit($id) {
 
     // get data from form 
     $arr=array(); 

@@ -1,17 +1,23 @@
 <?php
 // Product Table
 // Define method to query product table
-class product extends Table
+class product extends Table implements ProductInterface
 {
   protected static $tablename = "product";
   protected static $timestamp = TRUE;
-  private static $formImageParameter = "img";
-  
-  // Fetch data in form of product widget via method POST to imported database for case audit and insert case.
-  // Validate data on server side to match database (not implement yet)
-  // 2020/03/06 fields is not send consider as default value if used form for insert case, as no changed if used form for audit case.
+  private static $formImageParameter = "img"; 
 
-  protected function getDataArray(&$arr) {
+  // private _construct(){}
+
+  /**
+   * [getDataArray Fetch data in form of product widget via method POST to imported database for case audit and insert case.]
+    Note: Validate data on server side to match database (not implement yet)
+    Change history:
+      2020/03/06 fields is not send consider as default value if used form for insert case, as no changed if used form for audit case.
+   * @param  [type] &$arr [description]
+   * @return [type]       [description]
+   */
+  static protected function getDataArray(&$arr) {
     
     if ( isset($_POST['model']) )          
       $arr[db_product_model] = $_POST['model'];
@@ -31,9 +37,9 @@ class product extends Table
     
     if ( isset($_POST['description']) )    
       $arr[db_product_description] = $_POST['description'];
-    
-    //
-    // $arr[db_product_rank] = $_POST['score'];
+
+    if ( isset($_POST['quantity']) )    
+      $arr[db_product_quantity] = $_POST['quantity'];
     
     // 
     if ( isset($_POST['price']) )          
@@ -61,39 +67,40 @@ class product extends Table
       $arr[db_product_weight] = $_POST['weight'];
 
     //
-    if ( isset($_POST['size']) ){
-      $size_regex = "/(.*) x (.*) x (.*)/";
-      preg_match($size_regex, $_POST['size'], $result);
-      // preg_match($size_regex, "12 x 34 x 23", $result);
-      [$size_plholder, $length, $width, $height] = $result;
-      $arr[db_product_height] = $height;
-      $arr[db_product_length] = $length;
-      $arr[db_product_width] = $width;
-    }
+    if ( isset($_POST['length']) ) 
+      $arr[db_product_length] = $_POST['length'];
+
+    //
+    if ( isset($_POST['height']) ) 
+      $arr[db_product_height] = $_POST['height'];
+
+    //
+    if ( isset($_POST['width']) ) 
+      $arr[db_product_width] = $_POST['width'];
+
+    // size
+    // if ( isset($_POST['size']) ){
+    //   $size_regex = "/(.*) x (.*) x (.*)/";
+    //   preg_match($size_regex, $_POST['size'], $result);
+    //   // preg_match($size_regex, "12 x 34 x 23", $result);
+    //   if($result){
+    //     [$size_plholder, $length, $width, $height] = $result;
+    //     $arr[db_product_height] = $height;
+    //     $arr[db_product_length] = $length;
+    //     $arr[db_product_width] = $width;
+    //   } else {
+    //     $arr[db_product_height] = "";
+    //     $arr[db_product_length] = "";
+    //     $arr[db_product_width] = "";
+    //   }
+
+    // }
+
+    // echo "<pre>";print_r($arr);exit();
   }
 
-  /**
-   * [getProduct2Form Find product by id key and format it to displayt on form ]
-   * @param  [type] $id [description]
-   * @return [type]     [description]
-   */
-  function getProduct2Form($id){
-    $p_record = product::find($id);
-    
-    // format data to form
-    $p_record['size'] = $p_record[db_product_length]." + ".
-                      $p_record[db_product_width]." + ".
-                      $p_record[db_product_height];
-    format_price_in_table($p_record,db_product_price);
-    
-    // data for <image> tag
-    if($p_record[db_product_image]){
-      $p_record["src"] = PRODUCT_IMAGE_PATH.$p_record[db_product_image];
-    }
-    return $p_record;
-  }
-
-  function find($id)
+//============================================
+  static function find($id)
   {
     return self::find1record(array(db_product_id => $id));
   }
@@ -103,7 +110,7 @@ class product extends Table
    * @param  [type] $id [description]
    * @return [type]     [description]
    */
-  function edit($id) {
+  static function edit($id) {
 
     // get data from form of product widget  
     $arr=array(); 
@@ -123,7 +130,7 @@ class product extends Table
    * )
    * @return [type] [description]
    */
-  function insert($arr=array()){
+  static function insert($arr=array()){
 
     // get data from form
     // arr with key is field in product table and correspond value is in product table.
@@ -142,7 +149,7 @@ class product extends Table
    * @param  [type] $id [product id]
    * @return [type]     [description]
    */
-  function delete($id){
+  static function delete($id){
     //
     $stm = parent::delete(array(db_product_id => $id));
 
@@ -150,11 +157,12 @@ class product extends Table
 
   }
 
+//============================================
   /**
    * Get all product available  to sale
    * @return [type]              [description]
    */
-  function getAllAvailable(){
+  static function getAllAvailable(){
 
       $product = self::getAll();
       // check available condition;
@@ -165,7 +173,7 @@ class product extends Table
    * [Get all new product available  to sale]
    * @return [type] [description]
    */
-  function getAvaiNewProduct(){
+  static function getAvaiNewProduct(){
       $product_table = self::getAllAvailable();
 
       // filter new
@@ -176,7 +184,7 @@ class product extends Table
       return $new_table;
   }
 
-  function getAvaiTopProduct(){
+  static function getAvaiTopProduct(){
       $product_table = self::getAllAvailable();
 
       // filter top selling
@@ -186,13 +194,13 @@ class product extends Table
       });
   }
  
-
+//============================================
   /**
-   * Get all available product same category
+   * get all available product same category
    * @param  [type] $category_id [description]
    * @return [type]              [description]
    */
-  function filterCategory($category_id,$product_table){
+  static function filterCategory($category_id,$product_table){
 
       // filter category
       $category_ids = category::getChildCategories($category_id);
@@ -205,14 +213,14 @@ class product extends Table
 
   }
 
-  function filterPrice($min_price,$max_price,$product_table){
+  static function filterPrice($min_price,$max_price,$product_table){
 
     return array_filter($product_table, function ($record) use ($min_price,$max_price){
           return ( $record[db_product_price] >= $min_price & $record[db_product_price] <= $max_price  );
       });
   }
 
-  function filterManufacturer($manufacturer_ids = array(),$product_table){
+  static function filterManufacturer($manufacturer_ids = array(),$product_table){
     
     $filterBy = $manufacturer_ids;
     return array_filter($product_table, function ($record) use ($filterBy){
@@ -220,7 +228,7 @@ class product extends Table
       });
   }
 
-  function filterHotDeal($product_table){
+  static function filterHotDeal($product_table){
 
       // filter category
       $filterBy = 1;
@@ -236,7 +244,7 @@ class product extends Table
    * @param  [type] $product_table [description]
    * @return [type]                [description]
    */
-  function filterKeyword($keyword,$product_table){
+  static function filterKeyword($keyword,$product_table){
 
       // filter category
       $filterBy = $keyword; // demo for one keyword
@@ -251,7 +259,7 @@ class product extends Table
       });
   }
 
-
+//============================================
   /**
    * [Objective: Pass file name to data array and stored image file assets]
    * Designed used for typical image of product in widget in case upload and reupload
@@ -263,7 +271,7 @@ class product extends Table
    * @param  string $oldfilename [default "" meaning as not update image]
    * @return [type]              [description]
    */
-  function controlImageUploaded2DataArray(&$arr,$id=""){
+  static function controlImageUploaded2DataArray(&$arr,$id=""){
 
     // image parameter has no on request
     if( !isset($_FILES[self::$formImageParameter]) ) return;
@@ -287,7 +295,7 @@ class product extends Table
 
   // Pass file name to data array and stored image file assets, 
   // no pass if upload failed or no attach image on request
-  protected function hanleUploadImage(&$arr,$fileKye){
+  static protected function hanleUploadImage(&$arr,$fileKye){
     //
     $uploadStatus = verify_uploadFile($fileKye);
     $fileName = $_FILES[$fileKye]['name'];
@@ -317,7 +325,7 @@ class product extends Table
 
   // Pass file name to data array and stored image file assets and delete old image, 
   // set to null if upload failed or audit image to null
-  protected function hanleReuploadImage(&$arr,$fileKye,$oldfilename) {
+  static protected function hanleReuploadImage(&$arr,$fileKye,$oldfilename) {
     //
     $uploadStatus = verify_uploadFile($fileKye);
     $fileName = $_FILES[$fileKye]['name'];
@@ -352,6 +360,7 @@ class product extends Table
     } 
   }
 
+//=================================================================
   /**
    * [recalculatePrice calculate old and new price based on discount]
    * @param  [type] &$table [description]
@@ -390,5 +399,26 @@ class product extends Table
       });
     
   }
+  /**
+   * [formatProduct2Form 
+   *   Format product to display on form 
+   * ]
+   * @param  [type] $id [description]
+   * @return [type]     [description]
+   */
+  static function formatProduct2Form(&$p_record){
 
+    // size
+    // $p_record['size'] = $p_record[db_product_length]." + ".
+    //                     $p_record[db_product_width]." + ".
+    //                     $p_record[db_product_height];
+
+    // price
+    format_price_in_table($p_record,db_product_price);
+    
+    // source for <image> tag
+    if($p_record[db_product_image])
+      $p_record[db_product_image] = PRODUCT_IMAGE_PATH.$p_record[db_product_image];
+  }
+  
 }

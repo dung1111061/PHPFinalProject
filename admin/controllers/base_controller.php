@@ -5,16 +5,13 @@
 // meta tag 
 abstract class BaseController
 {
-  // layouts Option
-  public $page_location  = "Home"; // Home icon
-
   // Folder contains every specific part of page (view, css, javascript)
   public $folder; 
   
-  // Javascript file user-defined handle some behaviour on client side
+  // user-defined javascript file  handle some behaviour on client side
   public $script_file; // ".js"
 
-  // Css file user-defined decorate page. 
+  // user-defined css file to decorate page. 
   public $css_file; // ".css"
 
   // Content of page
@@ -22,7 +19,7 @@ abstract class BaseController
 
   // 
   function setScript($script_file) {
-    $this->script_file= 'views/' . $this->folder . '/'. $script_file . '.js';
+    $this->script_file= 'views/' . $this->folder . '/'. $script_file . '.js.php';
   }
 
   //
@@ -65,8 +62,9 @@ abstract class BaseController
       }
 
       // Sau khi có kết quả đã được lưu vào biến $content, gọi ra template chung của hệ thống đế hiển thị ra cho người dùng
-      $name = $_SESSION['name'];
-      $avatar = AVATAR_IMAGE_PATH.admin::simple_fetch(db_admin_username,$_SESSION['username'])[db_admin_avatar];
+      $name = !empty( $_SESSION['name'] ) ? $_SESSION['name']: "ẩn danh" ;
+      $avatar = admin::simple_fetch(db_admin_username,$_SESSION['username'])[db_admin_avatar];
+      $avatar = !empty($avatar) ? AVATAR_IMAGE_PATH.$avatar :AVATAR_IMAGE_PATH."default.png";
       require_once('views/layouts/layout_main.php');
 
     } else {

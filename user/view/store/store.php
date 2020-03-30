@@ -2,13 +2,12 @@
 HTML sturture
 
 Parameter:
-	c_filter,m_filter:
-	price_min,price_max:
-	filter_info:
-	record_number:
+	price_min,price_max: save filtered before
+	filter_info: save filtered before
+	record_number: number of product in store
 	
-	table:
-	m_table:
+	table: product table is formated
+	m_table: manufacturer table formated(add column "check" save filtered before and "number" of record)
  -->
 		<div class="section">
 			<!-- container -->
@@ -59,19 +58,13 @@ Parameter:
 			<div id= "manufacturer-filter" class="checkbox-filter">
 				<?php 
 				foreach ($m_table as $manufacturer) {
-					$id = $manufacturer[db_manufacturer_id];
-					$name = $manufacturer[db_manufacturer_name];
-					// $manufacturer["number_record"] number of product in each manufacturer
-					$number = 500; 
-					// save filter previous
-					$checked = in_array($id, $m_filter)?"checked": NULL;
 				?>
 				<div class="input-checkbox">
-					<input type="checkbox" id="brand-<?= $id ?>" name=manufacturer[] value="<?= $id ?>" <?=$checked ?> >
-					<label for="brand-<?= $id ?>">
+					<input type="checkbox" id="brand-<?= $manufacturer[db_manufacturer_id] ?>" name=manufacturer[] value="<?= $manufacturer[db_manufacturer_id] ?>" <?= $manufacturer["checked"] ?> >
+					<label for="brand-<?= $manufacturer[db_manufacturer_id] ?>">
 						<span></span>
-						<?= $name ?>
-						<small>(<?= $number ?>)</small>
+						<?= $manufacturer[db_manufacturer_name] ?>
+						<small>(<?= $manufacturer["number"] ?>)</small>
 					</label>
 				</div>
 				<?php } ?>
@@ -95,8 +88,8 @@ Parameter:
 	<!-- End Filter Form -->
 
 	<!-- Control filter tool -->
-	<div class="filter-box">
-		<button onclick="submitFilter()">
+	<div class="filter-box wrapper">
+		<button class="sticky fixed-filter-apply" onclick="submitFilter()">
 		 	Ap Dung
 		</button>
 	</div>
@@ -149,18 +142,22 @@ Parameter:
 						<div class="row"><!-- product -->
 <?php
 	foreach ($table as $record) {
-		$id    = $record[db_product_id];
-		$name  = $record[db_product_name];
-		$price = $record[db_product_price];		
-		$old_price = $record["old_price"];
-		$img   = $record[db_product_image]; 
-		$discount   = $record[db_product_discount];
-		$rank = $record[db_product_rank];
-		$new = $record[db_product_new];
-
+		$productData = [
+			"id"    => $record[db_product_id], 
+			"name"  => $record[db_product_name],
+			"price" => $record[db_product_price],		
+			"old_price" => $record["old_price"],
+			"img"   => $record[db_product_image], 
+			"discount"   => $record[db_product_discount],
+			"rank" => $record[db_product_rank],
+			"new" => $record[db_product_new]
+		];
 ?>
 							<div class="col-md-4 col-xs-6">
-								<?php require MODULE_PATH.'product_representation.php'; ?>
+<?php
+	$productTemplate = new Template("module/product", $productData );
+	$productTemplate->render();
+ ?>
 							</div>
 							<!-- /product -->
 <?php } ?>

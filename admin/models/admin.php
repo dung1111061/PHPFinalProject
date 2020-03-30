@@ -37,7 +37,8 @@ class admin
 
      // // execute SQL command
     $stm = $conn->prepare($sql);
-    return $stm->execute(array_values($arr));
+    $stm->execute(array_values($arr));
+    return $stm;
   }
 
   static function update($condition_arr,$update_arr) {
@@ -49,12 +50,13 @@ class admin
     $parameter_condition_arr = implode(array_map(function($a, $b) { return $a . ' = ' . $b; }, array_keys($condition_arr), array_fill(0, count($condition_arr), '?')),' and ');
 
     $sql = "UPDATE `admin` SET $parameter_update_arr WHERE ".$parameter_condition_arr;
-    echo $sql;
-    print_r(array_values(array_merge($update_arr,$condition_arr))) ;
+    // echo $sql;
+    // print_r(array_values(array_merge($update_arr,$condition_arr))) ;
     
     // execute SQL command
     $stm = $conn->prepare($sql);
-    return $stm->execute(array_values(array_merge($update_arr,$condition_arr)));
+    $stm->execute(array_values(array_merge($update_arr,$condition_arr)));
+    return $stm;
 
   }
 

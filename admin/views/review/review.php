@@ -2,10 +2,13 @@
 <!-- PAGE CONTENT BEGINS -->
 <div class="row">
 	<div class="col-xs-10"> 
-		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
-			<?php include_once "views/layouts/breadcrump.php"; ?>
+		<div class="breadcrumbs" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
+			<ul class="breadcrumb" style="margin-left: 0px">
+				<i class="ace-icon fa fa-home home-icon"></i>
+					<li> <a href="index.php">Home</a> </li>
+					<li> <a href="review.php">Review từ khách hàng</a> </li>
+			</ul><!-- /.breadcrumb -->
 		</div>
-		
 	</div>
 </div>
 
@@ -15,7 +18,7 @@
 		$product = $record[db_product_name];
 		$name = $record[db_review_name];
 		$email = $record[db_review_email];
-		$date_added = $record[db_create_at];
+		$date_added = null; //$record[db_created_at];
 		$rating = $record[db_review_rating];
 		$description = $record[db_review_description];
 		$status = $record[db_review_status];

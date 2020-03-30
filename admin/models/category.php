@@ -13,7 +13,7 @@ class category extends Table
    * 5  |       => 5
    * @return [type] [description]
    */
-  function getFormatTable(){
+  static function getFormatTable(){
   	$table = self::getAll();
   	$backup_table = $table;
   	foreach ($table as &$record) {
@@ -41,7 +41,7 @@ class category extends Table
    * [getParentCategoryTable table contains only highest level catefory filter by parent_id is NULL]
    * @return [type] [description]
    */
-  function getParentCategoryTable(){
+    static function getParentCategoryTable(){
   	$table = self::getAll();
   	$filter_field = db_category_parent_id;
   	$filterBy = NULL;
@@ -56,7 +56,7 @@ class category extends Table
    * $id: this category
    * @return [type] [description]
    */
-  function getChildCategories($id){
+  static function getChildCategories($id){
     $table = self::getAll();
     $filter_field = db_category_parent_id; $filterBy = $id;
     $filtered_table = array_filter($table, function ($record) use ($filter_field,$filterBy) {
@@ -67,7 +67,7 @@ class category extends Table
     return $category_ids;
   }
 
-  function edit($id) {
+  static function edit($id) {
 
     // get data from form 
     $arr=array(); 
@@ -81,7 +81,7 @@ class category extends Table
 
   }
 
-  function insert($arr=array()){
+  static function insert($arr=array()){
 
     // get data from form 
     // arr with key is field in product table and correspond value is in product table .

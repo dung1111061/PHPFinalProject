@@ -6,18 +6,21 @@
  */
 class ProductController extends BaseController
 {
+  protected $product;
   // Define
-  function __construct() {
-    $this->page_location = $this->page_location."/"."Products";
+  function __construct(ProductInterface $product) {
+    
     $this->folder = "product";
-    $this->setScript("product");  
-    $this->setCss("product");  
+    $this->setScript("product");
+    $this->setCss("product");
+    $this->product = $product;
   }
 
+//===========================================
   function display_product_table(){
     // Query product from database  
-    $m_data = manufacturer::getAll();
-    $p_data = product::getAll();
+    // $p_data = product::getAll();
+    $p_data = $this->product::getAll();
 
     // Preprocessing data
     product::recalculatePrice($p_data);
@@ -25,17 +28,17 @@ class ProductController extends BaseController
 
     $this->view_file = "product_table";
     $this->setScript("product_table"); 
-    $this->render(array("data" => $p_data,"m_data" => $m_data));
+    $this->render(array("data" => $p_data));
   }
 
   function display_details_product_insert_widget(){
     
     // default record 
-      $p_record = product::getDefaultObject();
-      
+    $p_record = product::getDefaultObject();  
+    $p_record["size"] = "";
+
     // 
     $p_table = product::getAll();
-    $this->view_file = "details_product_widget";
 
     //
     $m_data = manufacturer::getAll();
@@ -44,16 +47,25 @@ class ProductController extends BaseController
     $c_data = category::getAll();
 
     // Reused view module of edit widget, keep in mind if no pass selected product meaning record related variable is null
-    $this->render(array("action" => $_GET["action"],"p_data"=>$p_table,"p_record"=>$p_record,"m_data"=>$m_data,"c_data"=>$c_data));
+    $this->view_file = "insert_details_product_widget";
+    $this->render(
+      array(
+          "p_record"=>$p_record,
+          "p_data"=>$p_table,
+          "m_data"=>$m_data,
+          "c_data"=>$c_data
+      )
+    );
 
   }
 
   function display_details_product_edit_widget(){
     
-    // pass Data to fomr
-    $p_record = product::getProduct2Form($_GET["id"]);
+    // 
+    $p_record = product::find($_GET["id"]);
+    product::formatProduct2Form($p_record);
 
-    //
+    // 
     $p_table = product::getAll();
     //
     $related_products = relatedProduct::get($_GET["id"]);
@@ -64,10 +76,19 @@ class ProductController extends BaseController
     $c_data = category::getAll();
 
     //
-    $this->view_file = "details_product_widget"; 
-    $this->render(array("action" => $_GET["action"],"p_record" => $p_record,"id"=>$_GET["id"],"related_products"=>$related_products,"p_data"=>$p_table,"m_data"=>$m_data,"c_data"=>$c_data));
+    $this->view_file = "edit_details_product_widget"; 
+    $this->render(
+      array(
+          "p_record" => $p_record,
+          "related_products"=>$related_products,
+          "p_data"=>$p_table,
+          "m_data"=>$m_data,
+          "c_data"=>$c_data
+      )
+    );
 
   }
+//===========================================
   function edit(){
     // Update product
     $stm = product::edit($_GET["id"]);
@@ -77,29 +98,34 @@ class ProductController extends BaseController
     }
 
     // Update relation
-    relatedProduct::edit($_GET["id"],$_POST["related"]);
+    if(isset($_POST["related"]))
+      relatedProduct::edit($_GET["id"],$_POST["related"]);
     
     // redirect to 
     redirect("san-pham.html");
   }
 
   function insert(){
-    $stm = product::insert();
-
+    // insert product
+    $stm = $this->product::insert();
     if($stm->errorInfo()[2]) {
       $message = "<b style='color:red'>".$stm->errorInfo()[2]."</b> <br>";
       throw new MySQLQueryException($message);
     }
 
-    // Update relation
-    $id = DB::getInstance()->lastInsertId();
-    relatedProduct::insert($id,$_POST["related"]);
+    // insert relation
+    if(isset($_POST["related"])){ 
+      $id = DB::getInstance()->lastInsertId();
+      relatedProduct::insert($id,$_POST["related"]);
+    }
     
     // redirect to 
     redirect("san-pham.html");
   }
 
   function delete(){
+
+    
     verify_privilege(privilege::administrator);
     //
     $filename = PRODUCT_IMAGE_PATH.'/'.product::find($id)[db_product_image];

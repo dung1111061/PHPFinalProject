@@ -53,26 +53,396 @@
 
 		<!-- nagigation bar on top page -->
 		<div id="navbar" class="navbar navbar-default          ace-save-state"> 
-			<?php include_once "navigation_bar.php" ?> 
+
+			<div class="navbar-container ace-save-state" id="navbar-container">
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
+				<div class="navbar-header pull-left">
+					<a href="trang-chu.html" class="navbar-brand">
+						<small>
+							<i class="fa fa-leaf"></i>
+							Administrator
+						</small>
+					</a>
+				</div>
+
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+
+
+						<li class="purple dropdown-modal">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="ace-icon fa fa-bell icon-animated-bell"></i>
+								<span class="badge badge-important">8</span>
+							</a>
+
+							<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+								<li class="dropdown-header">
+									<i class="ace-icon fa fa-exclamation-triangle"></i>
+									8 Notifications
+								</li>
+
+								<li class="dropdown-content">
+									<ul class="dropdown-menu dropdown-navbar navbar-pink">
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+														New Comments
+													</span>
+													<span class="pull-right badge badge-info">+12</span>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<i class="btn btn-xs btn-primary fa fa-user"></i>
+												Bob just signed up as an editor ...
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
+														New Orders
+													</span>
+													<span class="pull-right badge badge-success">+8</span>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>
+														Followers
+													</span>
+													<span class="pull-right badge badge-info">+11</span>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="dropdown-footer">
+									<a href="#">
+										See all notifications
+										<i class="ace-icon fa fa-arrow-right"></i>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="green dropdown-modal">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
+								<span class="badge badge-success">5</span>
+							</a>
+
+							<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+								<li class="dropdown-header">
+									<i class="ace-icon fa fa-envelope-o"></i>
+									5 Messages
+								</li>
+
+								<li class="dropdown-content">
+									<ul class="dropdown-menu dropdown-navbar">
+										<li>
+											<a href="#" class="clearfix">
+												<img src="assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+												<span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Alex:</span>
+														Ciao sociis natoque penatibus et auctor ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>a moment ago</span>
+													</span>
+												</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="#" class="clearfix">
+												<img src="assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+												<span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Susan:</span>
+														Vestibulum id ligula porta felis euismod ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>20 minutes ago</span>
+													</span>
+												</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="#" class="clearfix">
+												<img src="assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+												<span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Bob:</span>
+														Nullam quis risus eget urna mollis ornare ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>3:15 pm</span>
+													</span>
+												</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="#" class="clearfix">
+												<img src="assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
+												<span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Kate:</span>
+														Ciao sociis natoque eget urna mollis ornare ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>1:33 pm</span>
+													</span>
+												</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="#" class="clearfix">
+												<img src="assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
+												<span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Fred:</span>
+														Vestibulum id penatibus et auctor  ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>10:09 am</span>
+													</span>
+												</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="dropdown-footer">
+									<a href="inbox.php">
+										See all messages
+										<i class="ace-icon fa fa-arrow-right"></i>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="light-blue dropdown-modal">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<img class="nav-user-photo" src="<?=$avatar?>" />
+								<span class="user-info">
+									<small>Welcome,</small>
+									<?=$name?>
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a href="#">
+										<i class="ace-icon fa fa-cog"></i>
+										Settings
+									</a>
+								</li>
+
+								<li>
+									<a href="profile.php">
+										<i class="ace-icon fa fa-user"></i>
+										Profile
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="logout.php">
+										<i class="ace-icon fa fa-power-off"></i>
+										Logout
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div><!-- /.navbar-container -->
+		
 		</div>
 		
 		<div class="main-container ace-save-state" id="main-container">
-			<!--  -->
-			<script type="text/javascript">
-				try{ace.settings.loadState('main-container')}catch(e){}
-			</script>
+
 			<!--  -->
 			<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
-				<script type="text/javascript">
-					try{ace.settings.loadState('sidebar')}catch(e){}
-				</script>
+
 
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-				 <?php include_once "slidebar_shortcut.php" ?> 
+
+<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+	<!-- logo instead icon -->
+	<button class="btn btn-success">
+		<i class="ace-icon fa fa-signal"></i>
+	</button>
+
+	<button class="btn btn-info">
+		<i class="ace-icon fa fa-pencil"></i>
+	</button>
+
+	<button class="btn btn-warning">
+		<i class="ace-icon fa fa-users"></i>
+	</button>
+
+	<button class="btn btn-danger">
+		<i class="ace-icon fa fa-cogs"></i>
+	</button>
+</div>
+
+<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+	<span class="btn btn-success"></span>
+
+	<span class="btn btn-info"></span>
+
+	<span class="btn btn-warning"></span>
+
+	<span class="btn btn-danger"></span>
+</div>
+
 				</div><!-- /.sidebar-shortcuts -->
 
 				<ul class="nav nav-list"> 	
-				<?php include_once "navigation_list.php" ?> <!-- /.nav-list -->
+					<li class="">
+						<a href="trang-chu.html">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> Dashboard </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text"> Catalog </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="san-pham.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Products
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="nha-san-xuat.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Manufacturers
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="category.php">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Categories
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="review.php">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Reviews
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text"> Customers </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="#">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Customers
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text"> Sale </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="orders.php">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Order
+								</a>
+								<a href="san-pham.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Recurring Orders
+								</a>
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+					
+				
 				</ul>	
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -96,7 +466,21 @@
 			</div><!-- /.main-content -->
 
 			<!-- footer of layout -->
-			<?php include_once "footer.php" ?> 
+			<div class="footer">
+				<div class="footer-inner">
+					<div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder">Technology Ecommerce</span>
+							Application &copy; 2019-2020 <span class="small"> <?="version ".VERSION?> </span>
+						</span>
+						<span> 
+						
+					</div>
+				</div>
+			</div>
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
 			
 		</div><!-- /.main-container -->
 

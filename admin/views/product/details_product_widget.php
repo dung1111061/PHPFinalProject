@@ -1,40 +1,29 @@
-<?php
-/*
-	View module for display product details widget to edit
-	Note: Reused view module for dislay widget used to insert new product, keep in mind if no pass checked product meaning that product record variable is null
- */
+<!-- 
+	Template for display product details widget. 
+	
+PHP data:
+	p_record: product need to add size attribute and link path to image
+	related_products: list related product
+	p_data
+	m_data
+	c_data
+	
+Note: This template should be migrate to module.
+	In case insert product, recommended to define a default product.
+	This is used to edit and insert product.
+	Constants with prefix wg_... is used for language optional feature
+	<form> tag marked id "form-product" and has no submit button and action for form. 
+	So need to build external button to submit form as well as form action.	
 
-// Controler to edit and insert view
-$language=language::english; 
-$form_action = "product.php?action=insert"; // insert page
-if ($action === "display_edit") { // edit product
-	$form_action = "product.php?action=edit&id=".$id;
-}
+Names:
+	...
+-->
 
-$wg_product_title[$language] = "Insert Product";
-if($action === "display_edit"){
-	$wg_product_title[$language] = "Edit Product";
-}
 
-?>
-
-<div class="row">
-	<div class="col-xs-8"> 
-		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
-
-			<!--  -->
-			<?php include_once "views/layouts/breadcrump.php"; ?>
-
-		</div>
-		
-	</div>
-		
-</div>
-
-<div class="col-sm-10 widget-container-col" id="widget-container-col-10">
-	<div class="widget-box" id="widget-box-10">
+<div class="widget-container-col">
+	<div class="widget-box">
 		<div class="widget-header widget-header-small">
-			<h5 class="widget-title smaller"><?= $wg_product_title[$language]?></h5>
+			<h5 class="widget-title smaller"> Product </h5>
 
 			<div class="widget-toolbar no-border">
 				<ul class="nav nav-tabs" id="myTab">
@@ -53,7 +42,7 @@ if($action === "display_edit"){
 			</div>
 		</div>
 
-<form id="form_product" class="form-horizontal" role="form" action="<?= $form_action?>" method="POST" enctype="multipart/form-data" onsubmit="return validate_form()">
+<form id="form_product" class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data">
 		<div class="widget-body">
 			<div class="widget-main padding-6">
 				<div class="tab-content">
@@ -64,10 +53,10 @@ if($action === "display_edit"){
 						
 							<div class="form-group">
 								
-								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <?=wg_product_name[0]?> </label>
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên sản phẩm </label>
 
 								<div class="col-sm-4">
-									<input type="text" id="form-field-1" placeholder="<?= wg_product_name[0]?>" class="col-xs-10 col-sm-12" name="name" required value="<?= $p_record[db_product_name]?>"/>
+									<input type="text" id="form-field-1" placeholder="Tên sản phâm" class="col-xs-10 col-sm-12" name="name" required value="<?= $p_record[db_product_name]?>"/>
 								</div>
 
 							</div>
@@ -75,17 +64,17 @@ if($action === "display_edit"){
 								<div class="hr hr-24"></div>
 								
 							<div class="form-group">	
-								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <?=wg_product_model[0]?> </label>
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Model </label>
 
 								<div class="col-sm-4">
-									<input type="text"  placeholder="<?= wg_product_model[0]?>" class="col-xs-10 col-sm-12" name="model" value="<?= $p_record[db_product_model]?>"/>
+									<input type="text"  placeholder="Model" class="col-xs-10 col-sm-12" name="model" value="<?= $p_record[db_product_model]?>"/>
 								</div>
 							</div>
 
 								<div class="hr hr-24"></div>
 
 								<div class="form-group">
-										<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="select-manufacturer"><?= wg_product_manufacturer[0]?></label>
+										<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="select-manufacturer">Nhà sản xuất</label>
 
 										<div class="col-xs-12 col-sm-6">
 											<select class="chosen-select form-control" id="select-manufacturer" data-placeholder="Choose  manufacturer" name="manufacturer">
@@ -139,7 +128,7 @@ if($action === "display_edit"){
 <div class="hr hr-24"></div>
 
 <div class="form-group">
-		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="select-category"><?= wg_product_category?></label>
+		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="select-category">Loại sản phẩm</label>
 
 		<div class="col-xs-4 col-sm-3">
 			<select class="chosen-select form-control "  id="select-category" data-placeholder="Choose a category..." name="category" >
@@ -165,7 +154,7 @@ if($action === "display_edit"){
 <!--  -->
 <div class="hr hr-24"></div>
 <div id="related-product-selection" class="form-group">
-		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="select-related"><?= wg_product_related?></label>
+		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="select-related">Những sản phẩm liên quan</label>
 
 		<div class="col-xs-12 col-sm-4"> 	
 			<select multiple="" class="chosen-select form-control" id="select-related" data-placeholder="Choose product..." name="related[]">
@@ -199,15 +188,38 @@ if($action === "display_edit"){
 	</div>
 <!--  -->
 	<div class="hr hr-24"></div>
-	<div class="form-group">	
-		<label class="col-sm-3 control-label no-padding-right"> Kích Thước </label>
+	<!-- <div class="form-group">	
+		<label class="col-sm-3 control-label no-padding-right"> Kích Thước </label> 
 		
 		<div class="col-sm-4">
-			<input type="text" class="col-xs-10 col-sm-12 form-control input-mask-size" name="size" value="$p_record['size']" />
+			<input type="text" class="col-xs-10 col-sm-12 form-control input-mask-size" name="size" value="<?=$p_record["size"]?>" />
+		</div>
+
+	</div>  -->
+<!--  -->
+	<div class="hr hr-24"></div>
+	<div class="form-group">	
+		<label class="col-sm-3 control-label no-padding-right"> length </label>
+		<div class="col-sm-4">
+			<input type="text" class="col-xs-10 col-sm-12 form-control input-mask-size" name="length" value="<?=$p_record["length"]?>" placeholder='(cm)' />
 		</div>
 	</div>
-<!--  -->
+	
+	<div class="hr hr-24"></div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label no-padding-right"> height </label>
+		<div class="col-sm-4">
+			<input type="text" class="col-xs-10 col-sm-12 form-control input-mask-size" name="height" value="<?=$p_record["height"]?>" placeholder='(cm)' />
+		</div>
+	</div>
 
+	<div class="hr hr-24"></div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label no-padding-right"> width </label>
+		<div class="col-sm-4">
+			<input type="text" class="col-xs-10 col-sm-12 form-control input-mask-size" name="width" value="<?=$p_record["width"]?>" placeholder='(cm)' />
+		</div>
+	</div>
 
 </div>
 <!--  Tab specifications -->
@@ -229,7 +241,7 @@ if($action === "display_edit"){
 <div class="hr hr-24"></div>
 
 <div class="form-group">
-	<label class="col-sm-3 no-padding-right control-label"  for="id-date-picker-1"><?= wg_product_available_date[$language]?></label>
+	<label class="col-sm-3 no-padding-right control-label"  for="id-date-picker-1">Ngày mở bán</label>
 
 	<div class="row">
 		<div class="col-sm-8">
@@ -245,7 +257,7 @@ if($action === "display_edit"){
 <!--  -->
 <div class="hr hr-24"></div>
 <div class="form-group">
-	<label class="col-sm-3 no-padding-right control-label"  for="description"><?= wg_product_description[$language]?></label>
+	<label class="col-sm-3 no-padding-right control-label"  for="description">Mô Tả</label>
 	
 	<div class="row">
 		<div class="col-sm-8">
@@ -258,24 +270,13 @@ if($action === "display_edit"){
 </div>
 </div>
 									
-<?php
-// control view of submit button
-	$save_button_display = "inline";
-	$edit_button_display = "none";
-if ($action === "display_edit") {
-	$save_button_display = "none";
-	$edit_button_display = "inline-block";
-}
-
-
-?>
 <!--  -->
 <div class="hr hr-24" ></div>
 <div class="form-group"  >
-	<label class="col-sm-3 no-padding-right control-label"  for="image-product"><?= wg_product_image[$language]?></label>
+	<label class="col-sm-3 no-padding-right control-label"  for="image-product"> Image </label>
 
 	<div class="col-sm-5" >
-		<img id="image-product" style="width:100px; max-height: 150px;" src="<?=$p_record["src"]?>" />
+		<img id="image-product" style="width:100px; max-height: 150px;" src="<?=$p_record[db_product_image]?>" />
 		<input  multiple="" type="file" id="image-input" name="img" />
 	</div>
 </div>	
@@ -337,16 +338,4 @@ if ($action === "display_edit") {
 
 		</form>
 		</div>
-</div>
-<!--  -->
-<div class="col-xs-2" style="text-align: right">
-	<button id="save-button" class="btn btn-app btn-grey btn-xs radius-4 " data-toggle="tooltip" title="<?= SAVE_TOOLTIP_MESSAGE?>" style="display: <?=$save_button_display?>" >
-		<i class="ace-icon fa fa-floppy-o bigger-160"></i>
-		Save
-	</button>
-
-	<div id = "edit-button" class="btn btn-app btn-primary no-radius" data-toggle="tooltip" title="<?= EDIT_TOOLTIP_MESSAGE?>" style="display: <?=$edit_button_display?>"> 
-		<i class="ace-icon fa fa-pencil-square-o bigger-230"></i>
 	</div>
-	
-</div>

@@ -8,7 +8,7 @@
 include_once "bootstraping.php";
 
 //------------------------------------
-$product_page = new ProductController();
+$product_page = new ProductController(new Product());
 
 try {
 	if ($action === "insert") {

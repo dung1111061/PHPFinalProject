@@ -1,4 +1,7 @@
 <?php
+// bootstraping configuration for request to base URL.
+
+
 define('VERSION', '3.1.0.0_b');
 
 // Configuration
@@ -9,8 +12,10 @@ require_once "config.php"; //  configuration specific for admin application
 // auto load class
 spl_autoload_register(function ($name) {
     $name = strtolower($name);
-    include_once "../admin/models/$name.php";
-    include_once "controllers/$name.php";
+    if(is_file("../admin/models/$name.php")) include_once "../admin/models/$name.php";
+    if(is_file("../admin/models/libraries/$name.php")) include_once "../admin/models/libraries/$name.php";
+    if(is_file("controllers/$name.php")) include_once "controllers/$name.php";
+    include_once "view/template/template.class.php";
 });
 include_once "../admin/mylib.php";
 

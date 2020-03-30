@@ -15,10 +15,3 @@ if ($action === "sendmsg") {
 	$dashboard_page->show();
 
 }
-
-
-
-
-
-
-

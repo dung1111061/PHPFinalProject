@@ -4,9 +4,8 @@
 class ReviewController extends BaseController
 {
   function __construct() {
-    $this->page_location = $this->page_location."/"."Reviews";
+
     $this->folder = "review";
-     
     $this->setScript("review");    
   }
 
@@ -16,22 +15,17 @@ class ReviewController extends BaseController
    */
   function show(){
     
-    // Query manufacturer from database  
-    // $r_data = review::getAll();
-    // array_walk($r_data, function(&$record){
-    //   $record['product'] = product::find($record[db_review_product])[db_product_name]; 
-    // });
-
-    $r_data = review::mapProductNameColumn();
-     // echo"<pre>";print_r($r_data); exit();
+    $r_data = review::get();
     
     $this->view_file = "review";
     $this->render(array("reviews" => $r_data));
   }
 
   function updateStatus(){
+    //
+    $id =  $_GET["id"];
     
-    review::update();
+    review::audit($id);
 
     //
     header("Location: review.php");

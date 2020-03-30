@@ -767,7 +767,19 @@ textarea.input {
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
 }
-
+/* 28/3/2020 add decoration for button checkout*/
+.cart-dropdown .cart-btns>button {
+  display: inline-block;
+  width: calc(100% - 0px);
+  padding: 12px;
+  background-color: #D10024;
+  color: #FFF;
+  text-align: center;
+  font-weight: 700;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+/**/
 .cart-dropdown .cart-btns>a:first-child {
   margin-right: -4px;
   background-color: #1e1f29;
@@ -1555,6 +1567,22 @@ textarea.input {
 .filter-infomation.vertical-align {
     display: flex;
     align-items: center;
+}
+
+/* Stick filter apply button at bottom*/
+.wrapper {
+            margin: 0 auto;
+            max-width: 1170px;
+            padding: 0px;
+            box-sizing: border-box;
+}
+.sticky {
+    position: sticky;
+    position: -webkit-sticky;
+    bottom: 0px;
+    color: #000;
+    text-align: left;
+    box-sizing: border-box;
 }
 
 /*=========================================================

@@ -1,13 +1,12 @@
 <?php
 /**
- * Build Atomic SQL command
- * Object of DB table should execute SQL command via class table
+ * build struture of SQL commands, support for advanced SQL command like selectInnerJoin
  * Instead of multiple inheritance for table class, SQLCommand extends DB class
  * All method must be static method as no $this pointer (record) is used in there
  */
 abstract class SQLCommand extends DB
 {
-  // protected $tablename;
+
   protected static $tablename = "not defined";
   protected static $primary_key = "not defined";
   

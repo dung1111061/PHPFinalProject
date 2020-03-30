@@ -4,10 +4,7 @@
 class ManufacturerController extends BaseController
 {
   function __construct() {
-    $this->page_location = $this->page_location."/"."Manufacturers";
     $this->folder = "manufacturer";
-     
-    
     $this->setScript("manufacturer");    
   }
 
@@ -22,10 +19,17 @@ class ManufacturerController extends BaseController
 
   function display_details_manufacturer_insert_widget(){
 
+    //
+    $p_record = [
+        db_manufacturer_name => "",
+        db_manufacturer_image => ""
+    ];
+
     // 
     $m_data = manufacturer::getAll();
+
     $this->view_file = "details_manufacturer_widget";
-    $this->render(array("m_data" => $m_data,"route" => $_GET["route"]));
+    $this->render( array("m_data" => $m_data,"route" => $_GET["route"],"p_record" => $p_record) );
 
   }
 
@@ -40,6 +44,7 @@ class ManufacturerController extends BaseController
     $this->render(array("m_data" => $m_data,"route" => $_GET["route"],"p_record" => $p_record,"id"=>$_GET["id"]));
 
   }
+
   function edit(){
     //
     manufacturer::edit($_GET["id"]);

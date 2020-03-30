@@ -23,15 +23,15 @@ class relatedProduct extends Table
    * @param  [array 1d ] $related_product [description]
    * @return [type]                  [description]
    */
-  function insert($id,$related_product_ids = array()){
+  static function insert($id,$related_product_ids = array()){
     foreach ($related_product_ids as $related_id) {
          $stm = parent::insert(array(db_relatedproduct_product_id => $id, 
                                       db_relatedproduct_related_id => $related_id));
         // verify insert successful
         if($stm->errorInfo()[2]) {
-          echo "<b style='color:red'>SQL Error: ";print_r($stm->errorInfo()[2]);echo "</b >"; echo "<br>";
-          exit();
-        };
+          $message = "<b style='color:red'>".$stm->errorInfo()[2]."</b> <br>";
+          throw new MySQLQueryException($message);
+        }
     }
     return true;
   }
@@ -48,7 +48,7 @@ class relatedProduct extends Table
    * @return [type]                      [description]
    */
   
-  function edit($id,$related_product_ids = array()){
+  static function edit($id,$related_product_ids = array()){
     // table present products related to $id before edit database
     $previous_table = self::get($id);
 
