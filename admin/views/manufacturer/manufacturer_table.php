@@ -4,7 +4,7 @@
 		<div class="breadcrumbs" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
 			<ul class="breadcrumb" style="margin-left: 0px">
 				<i class="ace-icon fa fa-home home-icon"></i>
-					<li><a href="index.php">Home</a></li>
+					<li><a href="index.php">Trang chủ</a></li>
 					<li><a href="category.php">Nhà sản xuất</a></li>
 			</ul><!-- /.breadcrumb -->
 		</div>
@@ -36,7 +36,7 @@
 foreach ($data as $key=> $row) {
 	$manufacturer_id = $row[db_manufacturer_id];
 	$manufacturer_name = $row[db_manufacturer_name];
-	$img = MANUFACTURER_IMAGE_PATH.$row[db_manufacturer_image];
+	$img = MANUFACTURER_IMAGE_URL.$row[db_manufacturer_image];
 	$alt = $row[db_manufacturer_image];
 ?>
 <tr> 	

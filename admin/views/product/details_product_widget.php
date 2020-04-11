@@ -261,11 +261,27 @@ Names:
 	
 	<div class="row">
 		<div class="col-sm-8">
-		<script src="../system/ckeditor/ckeditor.js"></script>	
+		<script src="<?= COMPONENT_URL ?>ckeditor/ckeditor.js"></script>	
+		<script src="<?= COMPONENT_URL ?>ckfinder_php_3.5.1/ckfinder/ckfinder.js"></script>
 			<textarea id="description" name="description" class="form-control limited" minlength="10" name="description">
 				<?= $p_record[db_product_description]?>	
 			</textarea>
-		<script>CKEDITOR.replace('description');</script>	
+		<script>
+			var editor = CKEDITOR.replace('description');
+			CKFinder.setupCKEditor( editor, null, {
+			    skin: 'jquery-mobile',
+			    swatch: 'b',
+			    onInit: function( finder ) {
+			        finder.on( 'files:choose', function( evt ) {
+			            var file = evt.data.files.first();
+			            console.log( 'Selected: ' + file.get( 'name' ) );
+			        } );
+			    },
+			    type: 'Files',
+			    // currentFolder: '<?= COMPONENT_PATH ?>ckfinder_php_3.5.1/ckfinder/userfiles/images'
+			} );
+		</script>	
+
 	</div>
 </div>
 </div>
@@ -273,7 +289,7 @@ Names:
 <!--  -->
 <div class="hr hr-24" ></div>
 <div class="form-group"  >
-	<label class="col-sm-3 no-padding-right control-label"  for="image-product"> Image </label>
+	<label class="col-sm-3 no-padding-right control-label"  for="image-product"> Ảnh đại diện </label>
 
 	<div class="col-sm-5" >
 		<img id="image-product" style="width:100px; max-height: 150px;" src="<?=$p_record[db_product_image]?>" />

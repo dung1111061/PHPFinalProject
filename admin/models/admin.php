@@ -1,5 +1,5 @@
 <?php
-class admin
+class Admin
 {
 
   static function getAll()

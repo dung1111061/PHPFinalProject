@@ -1,1 +1,0 @@
-<a href="trang-chu.html">back to login</a>

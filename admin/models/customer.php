@@ -1,11 +1,52 @@
 <?php
 // Product Table
 // Define method to query product table
-class customer extends Table 
+class Customer extends Table 
 {
   protected static $tablename = "customer";
   protected static $timestamp = TRUE;
  
+
+
+  //
+  static public function updateProfile(){
+    $condition = [
+      db_customer_id => $_SESSION['customer']['id']
+    ]; 
+
+    $data = array();
+    if( isset($_POST['fName']) )
+      $data[db_customer_firstName] = $_POST['fName'];
+    
+    if( isset($_POST['lName']) )
+      $data[db_customer_lastName]  = $_POST['lName'];
+    
+    if( isset($_POST['tel']) )
+      $data[db_customer_telephone] = $_POST['tel'];
+
+    return self::update( $condition,$data );
+  }
+
+  //
+  static public function register($email,$name){
+    
+    $data = [
+      db_customer_email => $email,
+      
+    ]; 
+    if( isset($name) )  $data[db_customer_lastName] = $name;
+    
+    return self::insert( $data );
+  }
+
+  //
+  static public function findByEmail($email){
+    $condition = [
+      db_customer_email => $email,
+    ]; 
+    return self::find1record( $condition );
+  }
+
   /**
    *
    * return record about customer regitered before, no data if authenticate failed 
@@ -37,7 +78,7 @@ class customer extends Table
 
   static public function addWishlist($product){
 
-    $wishlist = customer::getWishlist();
+    $wishlist = Customer::getWishlist();
     $isProductIn = strpos($wishlist, "$product;") !== false; 
 
     if(! $isProductIn){
@@ -56,7 +97,7 @@ class customer extends Table
   }
   static public function removeWishlist($product){
 
-    $wishlist = customer::getWishlist();
+    $wishlist = Customer::getWishlist();
     $isProductIn = strpos($wishlist, "$product;") !== false; 
 
     if($isProductIn){ 

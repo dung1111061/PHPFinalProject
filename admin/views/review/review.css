@@ -1,0 +1,28 @@
+<style>
+  .container{
+    padding-left: 20px;
+  }
+  .review-title {
+    padding: 5px;
+
+    font-weight: bold;
+  }
+  .review-body {
+    padding: 5px;
+  }
+  .review-body h6{
+    font-weight: bold;
+  }
+  .review-body .description{
+    font-style: italic;
+  }
+
+  .review-body:not(:last-child), .review-title {
+    border-bottom: 1px solid #ccc;
+
+  }
+  .review-body i {
+    color: red;
+  }
+  
+</style>

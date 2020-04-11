@@ -17,7 +17,7 @@ if ($route === "edit") { // edit
 		<div class="breadcrumbs" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
 			<ul class="breadcrumb" style="margin-left: 0px">
 				<i class="ace-icon fa fa-home home-icon"></i>
-					<li> <a href="index.php">Home</a> </li>
+					<li> <a href="index.php">Trang chủ</a> </li>
 					<li> <a href="manufacturer.php">Nhà sản xuất</a> </li>
 			</ul><!-- /.breadcrumb -->
 		</div>
@@ -66,21 +66,23 @@ if ($route === "edit") { // edit
 						<label class="col-sm-3 no-padding-right control-label"  for="id-date-picker-1">Ảnh</label>
 <?php
 	// insert feature
-	$image = "none";
-	$upload_image = "inline";
+	$imageDisplay = "none";
+	$uploadImgDisplay = "inline";
+	$src = "";
+	$alt = "";
 if ($route === "edit") {
 	if($p_record[db_manufacturer_image]){
-		$src = MANUFACTURER_IMAGE_PATH.$p_record[db_manufacturer_image];
+		$src = MANUFACTURER_IMAGE_URL.$p_record[db_manufacturer_image];
 		$alt = $p_record[db_manufacturer_image];
-		$image = "inline";
-		$upload_image = "none";		
+		$imageDisplay = "inline";
+		$uploadImgDisplay = "none";		
 	}
 
 }
 ?>
 <div class="col-sm-5" >
-	<img id="upload_new_image" style="width:100px; max-height: 150px;display : <?= $image ?>" src="<?= $src?>" alt="<?= $alt?>" >
-	<div class="form-group"  style="display : <?= $upload_image ?>" >
+	<img id="upload_new_image" style="width:100px; max-height: 150px;display : <?= $imageDisplay ?>" src="<?= $src?>" alt="<?= $alt?>" >
+	<div class="form-group"  style="display : <?= $uploadImgDisplay ?>" >
 	<input multiple="" type="file" id="area-drop-image" name="img"  />
 	</div>
 </div>

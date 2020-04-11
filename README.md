@@ -1,2 +1,0 @@
-# PHPFinalProject
-Demo version

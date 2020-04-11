@@ -4,8 +4,8 @@
 <div class="breadcrumbs " id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
 	<ul class="breadcrumb" style="margin-left: 0px">
 		<i class="ace-icon fa fa-home home-icon"></i>
-			<li > <a href="index.php"> Home </a> </li>
-			<li class="active" > <a href="product.php"> Product </a> </li> 
+			<li > <a href="index.php"> Trang chủ </a> </li>
+			<li class="active" > <a href="product.php"> Sản phẩm </a> </li> 
 	</ul><!-- /.breadcrumb -->
 </div>
 	</div>
@@ -19,7 +19,7 @@
 		</div>
 		<!-- Product Table Content-->
 		<div class="table-header">
-			Results for " Products"
+			Sản phẩm
 		</div>
 		<div>
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -43,10 +43,10 @@ foreach ($data as $key=> $row) {
 	$img = $row[db_product_image];
 	$price = $row[db_product_price];
 	$old_price = $row["old_price"];
-	$category = category::find($row[db_product_category])[db_category_name];
+	$category = Category::find($row[db_product_category])[db_category_name];
 	$quantity = $row[db_product_quantity];
 	$product_name = $row[db_product_name];
-	$manufacturer = manufacturer::find($row[db_product_manufacturer])[db_manufacturer_name];
+	$manufacturer = Manufacturer::find($row[db_product_manufacturer])[db_manufacturer_name];
 ?>
 <tr> 									
 	<td>
@@ -64,7 +64,7 @@ foreach ($data as $key=> $row) {
 
 	<td>
 		<div class="hidden-sm hidden-xs action-buttons">
-			<a class="green" href="chi-tiet-san-pham-<?=formatString2URL($product_name) ?>_id=<?=$product_id?>.html" data-toggle="tooltip" title="Xóa">
+			<a class="green" href="chi-tiet-san-pham-<?=formatString2URL($product_name) ?>_id=<?=$product_id?>.html" data-toggle="tooltip" title="Sửa">
 				<i class="ace-icon fa fa-pencil bigger-130" ></i>
 			</a>
 
@@ -82,7 +82,7 @@ foreach ($data as $key=> $row) {
 				<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
 					<li>
-						<a href="chi-tiet-san-pham-<?php echo $product_name ?>_id=<?php echo $product_id ?>.html" class="tooltip-success" data-rel="tooltip" title="Edit">
+						<a href="chi-tiet-san-pham-<?php echo $product_name ?>_id=<?php echo $product_id ?>.html" class="tooltip-success" data-rel="tooltip" title="Sửa">
 							<span class="green">
 								<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 							</span>
@@ -90,7 +90,7 @@ foreach ($data as $key=> $row) {
 					</li>
 
 					<li>
-						<a href="product.php?action=delete&id=<?php echo $product_id ?>" class="tooltip-error" data-rel="tooltip" title="Delete" onclick="return confirm('<=? DELETE_CONFIRM_MESSAGE?>');">
+						<a href="product.php?action=delete&id=<?php echo $product_id ?>" class="tooltip-error" data-rel="tooltip" title="Xóa" onclick="return confirm('delete product');">
 							<span class="red">
 								<i class="ace-icon fa fa-trash-o bigger-120"></i>
 							</span>

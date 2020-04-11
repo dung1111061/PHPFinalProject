@@ -7,8 +7,7 @@
 
 // Path of Directory
 define('VERSION',"1.0.0.0_a");
-define('ADMIN_PATH',PROJECT_PATH."admin/");
-define('BASE_URL',"http://localhost/Project/EcomerceWebsite/admin/");
+
 
 // Language of web 
 abstract class language

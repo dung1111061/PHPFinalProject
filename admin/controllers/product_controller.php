@@ -19,12 +19,12 @@ class ProductController extends BaseController
 //===========================================
   function display_product_table(){
     // Query product from database  
-    // $p_data = product::getAll();
+    // $p_data = Product::getAll();
     $p_data = $this->product::getAll();
 
     // Preprocessing data
-    product::recalculatePrice($p_data);
-    product::formatProduct2UserApp($p_data);
+    Product::recalculatePrice($p_data);
+    Product::formatProduct2UserApp($p_data);
 
     $this->view_file = "product_table";
     $this->setScript("product_table"); 
@@ -34,17 +34,17 @@ class ProductController extends BaseController
   function display_details_product_insert_widget(){
     
     // default record 
-    $p_record = product::getDefaultObject();  
+    $p_record = Product::getDefaultObject();  
     $p_record["size"] = "";
 
     // 
-    $p_table = product::getAll();
+    $p_table = Product::getAll();
 
     //
-    $m_data = manufacturer::getAll();
+    $m_data = Manufacturer::getAll();
 
     //
-    $c_data = category::getAll();
+    $c_data = Category::getAll();
 
     // Reused view module of edit widget, keep in mind if no pass selected product meaning record related variable is null
     $this->view_file = "insert_details_product_widget";
@@ -62,18 +62,18 @@ class ProductController extends BaseController
   function display_details_product_edit_widget(){
     
     // 
-    $p_record = product::find($_GET["id"]);
-    product::formatProduct2Form($p_record);
+    $p_record = Product::find($_GET["id"]);
+    Product::formatProduct2Form($p_record);
 
     // 
-    $p_table = product::getAll();
+    $p_table = Product::getAll();
     //
-    $related_products = relatedProduct::get($_GET["id"]);
+    $related_products = RelatedProduct::get($_GET["id"]);
     
     //
-    $m_data = manufacturer::getAll();
+    $m_data = Manufacturer::getAll();
     //
-    $c_data = category::getAll();
+    $c_data = Category::getAll();
 
     //
     $this->view_file = "edit_details_product_widget"; 
@@ -91,7 +91,7 @@ class ProductController extends BaseController
 //===========================================
   function edit(){
     // Update product
-    $stm = product::edit($_GET["id"]);
+    $stm = Product::edit($_GET["id"]);
     if($stm->errorInfo()[2]) {
       echo "<b style='color:red'>SQL Error: ";print_r($stm->errorInfo()[2]);echo "</b >"; echo "<br>";
       exit();
@@ -99,7 +99,7 @@ class ProductController extends BaseController
 
     // Update relation
     if(isset($_POST["related"]))
-      relatedProduct::edit($_GET["id"],$_POST["related"]);
+      RelatedProduct::edit($_GET["id"],$_POST["related"]);
     
     // redirect to 
     redirect("san-pham.html");
@@ -116,7 +116,7 @@ class ProductController extends BaseController
     // insert relation
     if(isset($_POST["related"])){ 
       $id = DB::getInstance()->lastInsertId();
-      relatedProduct::insert($id,$_POST["related"]);
+      RelatedProduct::insert($id,$_POST["related"]);
     }
     
     // redirect to 
@@ -128,10 +128,10 @@ class ProductController extends BaseController
     
     verify_privilege(privilege::administrator);
     //
-    $filename = PRODUCT_IMAGE_PATH.'/'.product::find($id)[db_product_image];
+    $filename = PRODUCT_IMAGE_PATH.'/'.Product::find($id)[db_product_image];
 
     // Query product from database  
-    $stm = product::delete($_GET["id"]);
+    $stm = Product::delete($_GET["id"]);
     if($stm->errorInfo()[2]) {
       $message = "<b style='color:red'>".$stm->errorInfo()[2]."</b> <br>";
       throw new MySQLQueryException($message);

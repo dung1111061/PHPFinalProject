@@ -1,0 +1,206 @@
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">Thanh toán</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="index.php">Trang chủ</a></li>
+						
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+				<form action="index.php?controller=checkout&action=placeOrder" method="post">
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">Địa chỉ trả tiền</h3>
+							</div>
+						
+							
+						
+							<div class="form-group">
+								<input class="input" type="text" name="payment_firstName" placeholder="First Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="payment_lastName" placeholder="Last Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="email" name="payment_email" placeholder="Email">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="payment_address" placeholder="Address">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="payment_city" placeholder="City">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="payment_country" placeholder="Country">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="payment_postcode" placeholder="ZIP Code">
+							</div>
+							<div class="form-group">
+								<input class="input" type="tel" name="payment_tel" placeholder="Telephone">
+							</div>
+							<!-- <div class="form-group">
+								<div class="input-checkbox">
+									<input type="checkbox" id="create-account">
+									<label for="create-account">
+										<span></span>
+										Create Account?
+									</label>
+									<div class="caption">
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+										<input class="input" type="password" name="password" placeholder="Enter Your Password">
+									</div>
+								</div>
+							</div> -->
+						</div>
+						<!-- /Billing Details -->
+
+						<!-- Shiping Details -->
+						<div class="shiping-details">
+							<div class="section-title">
+								<h3 class="title">Địa chỉ người nhận</h3>
+							</div>
+							<div class="input-checkbox">
+								<input type="checkbox" id="shiping-address">
+								<label for="shiping-address">
+									<span></span>
+									Bạn muốn ship đến địa chỉ khác?
+								</label>
+								<div class="caption">
+									<div class="form-group">
+										<input class="input" type="text" name="shipping_firstName" placeholder="First Name">
+									</div>
+									<div class="form-group">
+										<input class="input" type="text" name="shipping_lastName" placeholder="Last Name">
+									</div>
+									<div class="form-group">
+										<input class="input" type="email" name="shipping_email" placeholder="Email">
+									</div>
+									<div class="form-group">
+										<input class="input" type="text" name="shipping_address" placeholder="Address">
+									</div>
+									<div class="form-group">
+										<input class="input" type="text" name="shipping_city" placeholder="City">
+									</div>
+									<div class="form-group">
+										<input class="input" type="text" name="shipping_country" placeholder="Country">
+									</div>
+									<div class="form-group">
+										<input class="input" type="text" name="shipping_postcode" placeholder="ZIP Code">
+									</div>
+									<div class="form-group">
+										<input class="input" type="tel" name="shipping_tel" placeholder="Telephone">
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Shiping Details -->
+
+						<!-- Order notes -->
+						<div class="order-notes">
+							<textarea class="input" placeholder="Order Notes" name="note"></textarea>
+						</div>
+						<!-- /Order notes -->
+					
+					</div>
+
+					<!-- Order Details -->
+					<div class="col-md-5 order-details">
+						<div class="section-title text-center">
+							<h3 class="title">Đơn hàng</h3>
+						</div>
+						<div class="order-summary">
+							<div class="order-col">
+								<div><strong>Sản phẩm</strong></div>
+
+								<div><strong>Tổng</strong></div>
+							</div>
+							<div class="order-products">
+						<?php
+							foreach ($order["products"] as $product) {
+						?>
+
+<input type="hidden" name="product[]"  value="<?= $product[db_product_id] ?>" >
+<input type="hidden" name="quantity[]" value="<?= $product[db_product_quantity] ?>" >
+
+								<div class="order-col">
+									<div><?= $product[db_product_name] ?> x <?= $product[db_product_quantity] ?></div>
+									<div>$<?= $product["totalPrice"]?></div>
+								</div>
+						<?php
+							}
+						?>
+
+							</div>
+							<!-- <div class="order-col">
+								<div>Shiping</div>
+								<div><strong>FREE</strong></div>
+							</div> -->
+							<div class="order-col">
+								<div><strong>Thành tiền</strong></div>
+								<div><strong class="order-total">$<?= $order["totalPrice"]  ?></strong></div>
+<input type="hidden" name="totalPrice" value="<?= $order["totalPrice"] ?>" >
+							</div>
+						</div>
+
+						<div class="payment-method">
+							<div class="input-radio">
+								<input type="radio" name="payment" id="payment-1">
+								<label for="payment-1">
+									<span></span>
+									Thanh toán qua internet banking
+								</label>
+								<div class="caption">
+									<p>Đảm bảo kiểm tra sản phẩm trước khi nhận hàng</p>
+								</div>
+							</div>
+				
+							<div class="input-radio">
+								<input type="radio" name="payment" id="payment-2">
+								<label for="payment-2">
+									<span></span>
+									Trả tiền khi nhận hàng
+								</label>
+								<div class="caption">
+									<p>Đảm bảo kiểm tra sản phẩm trước khi nhận hàng</p>
+								</div>
+							</div>
+	
+						</div>
+						<div class="input-checkbox">
+							<input type="checkbox" id="terms">
+							<label for="terms">
+								<span></span>
+								Tôi đã đọc và đồng ý <a href="index?controller=new_controller"> điều khoản và dịch vụ </a>
+							</label>
+						</div>
+						<button oclick="submit" class="primary-btn order-submit">Đặt hàng</button>
+					</div>
+					<!-- /Order Details -->
+				</form>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+

@@ -3,7 +3,7 @@
  * Entity Class
  * Class set constraint to relate id and product id is unique
  */
-class relatedProduct extends Table
+class RelatedProduct extends Table
 {
   protected static $tablename = "related_product";
   public static $maximum_number = 5;
@@ -14,7 +14,7 @@ class relatedProduct extends Table
    */
   static function get($id){
 
-    return self::findtablerecord(array(db_relatedproduct_product_id => $id)); 
+    return self::findTableRecord(array(db_relatedproduct_product_id => $id)); 
 
   }
   /**

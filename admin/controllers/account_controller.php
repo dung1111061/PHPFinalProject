@@ -1,4 +1,3 @@
-
 <?php
 /**
  *  AccountController is a controller at bootstraping which always called in any request, used for authenticate user.
@@ -6,9 +5,9 @@
  */
 class AccountController 
 {
-
+  // public $mailI;
   function __construct() {
-
+    // $this->mailI = $mailI;
   }
 
   /**
@@ -20,14 +19,18 @@ class AccountController
     // Whether authenticate data of user has been save or not
     // return true if has authenticate data other return false
   public function authenticate($action) {
-      //
-      if(!isset($_SESSION)) session_start();
+
+      if ($action === "logout"){
+        self::logOut();
+        redirect("trang-chu.html");
+      }
 
       // read cookie of authentication firstly
       if( isset($_COOKIE["privilege_user"]) ){ 
         $_SESSION['privilege_user'] = $_COOKIE["privilege_user"];
         $_SESSION['name']           = $_COOKIE["name"];
         $_SESSION['username']       = $_COOKIE["username"];
+        $_SESSION['IsAuthorized']   = $_COOKIE["IsAuthorized"];
       } 
 
       if( isset($_SESSION['privilege_user']) ){ // User is authenticated.
@@ -76,6 +79,8 @@ class AccountController
         return false;
       }
 
+      
+
       self::display_login();
       return false;
   }
@@ -87,11 +92,15 @@ class AccountController
 
   }
   
+  function google_login(){
+
+  }
+
   function login() {
 
     if($_POST["user"] && $_POST["passwd"]) {  
        // verify login data
-      $record = admin::fetch(array(db_admin_username => $_POST["user"], db_admin_password => sha1($_POST["passwd"]) ) );
+      $record = Admin::fetch(array(db_admin_username => $_POST["user"], db_admin_password => sha1($_POST["passwd"]) ) );
 
       if(!empty($record) ){
 
@@ -99,12 +108,14 @@ class AccountController
         $_SESSION['privilege_user'] = $record[db_admin_privilege];
         $_SESSION['name'] = $record[db_admin_firstname];
         $_SESSION['username'] = $record[db_admin_username];
+        $_SESSION['IsAuthorized'] = true; // cap quyen upload file len server,tool ckfinder
 
         // save cookie authencation for 1 hour 
         if( isset($_POST["login_remember"])) {
           setcookie('privilege_user', $record[db_admin_privilege], time() + 3600,"/"); 
           setcookie('name', $record[db_admin_firstname], time() + 3600,"/"); 
           setcookie('username', $record[db_admin_username], time() + 3600,"/"); 
+          setcookie('IsAuthorized', true, time() + 3600,"/"); 
         }
         return true;
 
@@ -122,10 +133,10 @@ class AccountController
     $email_destination = $_POST["restore_email"];
 
     //
-    // admin::simple_fetch( db_admin_email, $email_destination);
+    // Admin::simple_fetch( db_admin_email, $email_destination);
 
     // link to form to restore password
-    $data = array("link" => BASE_URL."index.php?action=restoreForm&email=$email_destination");
+    $data = array("link" => ADMIN_URL."index.php?action=restoreForm&email=$email_destination");
 
     // content html
     $html_message = file_get_contents("views/account/restore_password_email.php"); 
@@ -135,11 +146,11 @@ class AccountController
     }
 
     // Sending mail
-    if (send_html_mail( $email_destination, $html_message)) 
+    if ( send_html_mail( $email_destination, $html_message) ) 
       echo "Sending mail successfully <br>";
     
     else 
-      echo "Sending mail failed";
+      echo "Sending mail failed <br>";
 
     //
     
@@ -157,7 +168,7 @@ class AccountController
   function restorePassword(){
     
     //
-    $stm = admin::update( array(db_admin_email => $_POST["email"]),
+    $stm = Admin::update( array(db_admin_email => $_POST["email"]),
       array(db_admin_password => sha1($_POST["passwd"]) ) );
     if($stm->errorInfo()[2]) {
       echo "<b style='color:red'>SQL Error: ";print_r($stm->errorInfo()[2]);echo "</b >"; echo "<br>";
@@ -179,7 +190,7 @@ class AccountController
     $arr[db_admin_password] = sha1($_POST['passwd']);
     $arr[db_admin_email] = $_POST['email'];
     $arr[db_admin_privilege] = privilege::no_actived;
-    $stm = admin::insert($arr);
+    $stm = Admin::insert($arr);
     if($stm->errorInfo()[2]) {
       echo "<b style='color:red'>SQL Error: ";print_r($stm->errorInfo()[2]);echo "</b >"; echo "<br>";
       exit();
@@ -189,7 +200,7 @@ class AccountController
     $email_destination = $_POST['email'];
 
     // link to form active email
-    $data = array("link" => BASE_URL."index.php?action=doActive&email=$email_destination");
+    $data = array("link" => ADMIN_URL."index.php?action=doActive&email=$email_destination");
     // content html
     $html_message = file_get_contents("views/account/active_email.php"); // get content
 
@@ -211,10 +222,10 @@ class AccountController
     $result = 0;
     $message = "";
     // Verify username registered already
-    if( !empty( admin::simple_fetch( db_admin_username, $_GET['user'])) ) $result+=1;
+    if( !empty( Admin::simple_fetch( db_admin_username, $_GET['user'])) ) $result+=1;
 
     // Verify email registered already
-    if( !empty( admin::simple_fetch( db_admin_email, $_GET['email'])) ) $result+=2;
+    if( !empty( Admin::simple_fetch( db_admin_email, $_GET['email'])) ) $result+=2;
 
     switch ($result) {
      case 1:
@@ -232,10 +243,25 @@ class AccountController
   }
 
   public function doActive(){
-    admin::update(array(db_admin_email => $_GET["email"]),
+    Admin::update(array(db_admin_email => $_GET["email"]),
                   array(db_admin_privilege => privilege::demonstration) );
 
     require_once('views/account/activeSuccess.php');
+  }
+
+  public function logOut(){
+    //
+    unset($_SESSION['privilege_user']);
+    unset($_SESSION['username']);
+    unset($_SESSION['name']);
+    unset($_SESSION['IsAuthorized']);
+
+    // delete cookie
+    setcookie('privilege_user', "", time() - 3600,"/");
+    setcookie('username', "", time() - 3600,"/");
+    setcookie('name', "", time() - 3600,"/");
+    setcookie('IsAuthorized', "", time() - 3600,"/"); 
+
   }
 
 }

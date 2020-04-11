@@ -1,7 +1,7 @@
 <?php
 // Product Table
 // Define method to query product table
-class cart extends Table 
+class Cart extends Table 
 {
   protected static $tablename = "cart";
   protected static $timestamp = TRUE;
@@ -12,7 +12,7 @@ class cart extends Table
         db_cart_customer => $customer,
     ];
 
-    return self::findtablerecord($data);
+    return self::findTableRecord($data);
   }
 
   /**

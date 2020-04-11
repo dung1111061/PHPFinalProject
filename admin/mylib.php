@@ -1,4 +1,12 @@
 <?php
+include COMPONENT_PATH."PHPmailer/PHPMailer-master/src/PHPMailer.php";
+include COMPONENT_PATH."PHPmailer/PHPMailer-master/src/Exception.php";
+include COMPONENT_PATH."PHPmailer/PHPMailer-master/src/OAuth.php";
+include COMPONENT_PATH."PHPmailer/PHPMailer-master/src/POP3.php";
+include COMPONENT_PATH."PHPmailer/PHPMailer-master/src/SMTP.php";
+ 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 function formatString2URL($string){
 	$string = str_replace(" ", "-", $string);
@@ -20,17 +28,59 @@ function verify_privilege($required_privilege) {
 // Designed by Nguyen Dung 12/23/2019
 // send an html mail 
 function send_html_mail($email_destination,$message) {
+	if(isPHPmailer){
+		$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+		try {
+		    //Server settings
+		    $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+		    $mail->isSMTP();                                      // Set mailer to use SMTP
+		    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+		    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+		    $mail->Username = ADMIN_MAIL;                 // SMTP username
+		    $mail->Password = ADMIN_MAIL_APP_PASSWORD;                           // SMTP password
+		    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+		    $mail->Port = 587;                                    // TCP port to connect to
+		 
+		    //Recipients
+		    $mail->setFrom(ADMIN_MAIL, 'Mailer');
+		    // $mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
+		    $mail->addAddress($email_destination);               // Name is optional
+		    // $mail->addReplyTo('info@example.com', 'Information');
+		    // $mail->addCC('cc@example.com');
+		    // $mail->addBCC('bcc@example.com');
+		 
+		    //Attachments
+		    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+		 
+		    //Content
+		    $mail->isHTML(true);                                  // Set email format to HTML
+		    $mail->Subject = 'mail he thong tu cua hang do dien tu';
+		    $mail->Body    = $message;
+			
+			//		 
+			ob_start();
+		    $mail->send();
+		    ob_get_clean();
+		    return true;
+
+		} catch (Exception $e) {
+		    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+		    return false;
+		}
+
+	}
+	
 	$headers[] = 'MIME-Version: 1.0';
 	$headers[] = 'Content-type: text/html; charset=iso-8859-1'; // Sending HTML mail, the Content-type header must be set
 	$headers[] = "To: <$email_destination>";
-	$headers[] = "From: ".SERVER_MAIL;
+	$headers[] = "From: ".ADMIN_MAIL;
 	// $headers[] = 'Cc: birthdayarchive@example.com';
 	// $headers[] = 'Bcc: birthdaycheck@example.com';
 
-// Sending mail
-	return mail($email_destination, 'Restore Password Administrator', 
-				$message,implode("\r\n", $headers));
-
+	// Sending mail
+	return mail( $email_destination, 'mail he thong tu cua hang do dien tu', 
+				 $message,implode("\r\n", $headers) );
 }
 
 /**
@@ -208,4 +258,22 @@ function limit_words($string, $word_limit)
 {
     $words = explode(" ",$string);
     return implode(" ", array_splice($words, 0, $word_limit));
+}
+
+/**
+ * [ExportFile description]
+ * @param [type] $records [description]
+ */
+function ExportFile($records) {
+	$heading = false;
+		if(!empty($records))
+		  foreach($records as $row) {
+			if(!$heading) {
+			  // display field/column names as a first row
+			  echo implode("\t", array_keys($row)) . "\n";
+			  $heading = true;
+			}
+			echo implode("\t", array_values($row)) . "\n";
+		  }
+		return;
 }

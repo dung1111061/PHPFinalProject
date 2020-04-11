@@ -98,7 +98,11 @@ class product extends Table implements ProductInterface
 
     // echo "<pre>";print_r($arr);exit();
   }
-
+//============================================
+  static function getByName($name)
+  {
+    return self::find1record( array(db_product_name => $name) );
+  }
 //============================================
   static function find($id)
   {
@@ -196,14 +200,14 @@ class product extends Table implements ProductInterface
  
 //============================================
   /**
-   * get all available product same category
+   * get all available product same category at level parent
    * @param  [type] $category_id [description]
    * @return [type]              [description]
    */
   static function filterCategory($category_id,$product_table){
 
       // filter category
-      $category_ids = category::getChildCategories($category_id);
+      $category_ids = Category::getChildCategories($category_id);
       array_push($category_ids, $category_id);
       $filterBy = $category_ids;
 
@@ -244,7 +248,7 @@ class product extends Table implements ProductInterface
    * @param  [type] $product_table [description]
    * @return [type]                [description]
    */
-  static function filterKeyword($keyword,$product_table){
+  static function filterSearching($keyword,$product_table){
 
       // filter category
       $filterBy = $keyword; // demo for one keyword
@@ -254,7 +258,7 @@ class product extends Table implements ProductInterface
           //
           // $pos = strpos($record[db_product_name], $filterBy);
           // return $pos;
-          if (strpos($record[db_product_name], $filterBy) !== false) return 1;
+          if (stripos($record[db_product_name], $filterBy) !== false) return 1;
 
       });
   }
@@ -392,9 +396,9 @@ class product extends Table implements ProductInterface
       // format image field
       array_walk($table,function(&$record){
         $img   = $record[db_product_image];
-        $record[db_product_image] = $img? PRODUCT_IMAGE_PATH.$img : PRODUCT_IMAGE_PATH."image_not_found.png"; 
+        $record[db_product_image] = $img? PRODUCT_IMAGE_URL.$img : PRODUCT_IMAGE_URL."image_not_found.png"; 
         // test image same size
-        // $record[db_product_image] = PRODUCT_IMAGE_PATH."image_not_found.png"; 
+        // $record[db_product_image] = PRODUCT_IMAGE_URL."image_not_found.png"; 
         
       });
     
@@ -418,7 +422,21 @@ class product extends Table implements ProductInterface
     
     // source for <image> tag
     if($p_record[db_product_image])
-      $p_record[db_product_image] = PRODUCT_IMAGE_PATH.$p_record[db_product_image];
+      $p_record[db_product_image] = PRODUCT_IMAGE_URL.$p_record[db_product_image];
   }
-  
+
+  // 
+  static function updateRating($product,$rank){
+    $condition = [
+      db_product_id => $product
+    ];
+
+    $data = [
+      db_product_rank => $rank
+    ];
+
+    return self::update($condition,$data);
+  }  
+
+
 }

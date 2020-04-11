@@ -10,7 +10,7 @@ class CategoryController extends BaseController
 
   function display_category_table(){
 
-    $c_data = category::getFormatTable();
+    $c_data = Category::getFormatTable();
 
 
     $this->view_file = "category_table";
@@ -30,7 +30,7 @@ class CategoryController extends BaseController
   function display_details_category_edit_widget(){
     
     //
-    $c_record = category::find($_GET["id"]);
+    $c_record = Category::find($_GET["id"]);
 
     // 
     $this->view_file = "details_category_widget"; 
@@ -39,9 +39,9 @@ class CategoryController extends BaseController
   }
   function edit(){
     // Update category
-    category::edit($_GET["id"]);
+    Category::edit($_GET["id"]);
     //
-    $stm = category::getStoredStatement();
+    $stm = Category::getStoredStatement();
     if($stm->errorInfo()[2]) {
       echo "<b style='color:red'>SQL Error: ";print_r($stm->errorInfo()[2]);echo "</b >"; echo "<br>";
       exit();
@@ -52,9 +52,9 @@ class CategoryController extends BaseController
 
   function insert(){
     //
-    category::insert();
+    Category::insert();
     //
-    $stm = category::getStoredStatement();
+    $stm = Category::getStoredStatement();
     if($stm->errorInfo()[2]) {
       echo "<b style='color:red'>SQL Error: ";print_r($stm->errorInfo()[2]);echo "</b >"; echo "<br>";
       exit();
@@ -67,7 +67,7 @@ class CategoryController extends BaseController
     
     // Query category from database  
     echo "Not support yet";
-    // category::delete($_GET["id"]);
+    // Category::delete($_GET["id"]);
     // header("Location: category.php");
   }
 

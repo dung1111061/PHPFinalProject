@@ -7,46 +7,40 @@ class DashboardController extends BaseController
     $this->folder = "dashboard";
     $this->setScript("dashboard");    
   }
+
+  function writeJsonRevenuestatistics(){
+    $statistics = Order::statisticByRevenue();
+
+    //
+    $fp = fopen('json/revenue_statistics.json', 'w');
+    fwrite($fp, json_encode($statistics));
+    fclose($fp);
+  }
+
   function show() {
+
+    //
+    $this->writeJsonRevenuestatistics();
+
+    //
+    $review_number = count( Review::getAll() );
+    $customner_number = count( Customer::getAll() );
+
+    $orders = Order::getAccomplishedOrder();
+    $order_number = count( $orders );
+    $earning_money = array_sum( array_column($orders, db_order_totalPrice) );
+    $subscriber_number = count( Subscriber::getAll() );
+    
+    //
+    $data = [
+      "review_number"=>$review_number,
+      "customner_number"=>$customner_number,
+      'order_number' => $order_number,
+      'subscriber_number' => $subscriber_number,
+      'earning_money' => $earning_money
+    ];
+    //
   	$this->view_file = "dashboard";
-
-    //
-    ob_start();
-    include_once 'views/' . $this->folder . '/' . 'statistical_info.php';
-    $statistical_info = ob_get_clean();
-
-    //
-    // $conversations   = conversation::conversations();
-    $conversations = array();
-
-    //
-    $tasks           = admin::getAll();
-    ob_start();
-    include_once 'views/' . $this->folder . '/' . 'tasks_widget_tab.php';
-    $tasks = ob_get_clean();
-
-    //
-    $users           = admin::getAll();
-    ob_start();
-    include_once 'views/' . $this->folder . '/' . 'members_widget_tab.php';
-    $members = ob_get_clean();
-
-    //
-    ob_start();
-    include_once 'views/' . $this->folder . '/' . 'reviews_widget_tab.php';
-    $reviews = ob_get_clean();
-  	
-    $this->render(array("statistical_info" => $statistical_info,"conversations" => $conversations, 'tasks' => $tasks, 'reviews' => $reviews, 'members' => $members  ));
+    $this->render( $data );     
   }
-
-  /**
-   * [comment ]
-   * @return [type] [description]
-   */
-  function sendmsg(){
-    // conversation::insert();
-    $this->show();
-  }
-  
-
 }

@@ -1,6 +1,8 @@
 <?php
 /**
  *  abstract table for table on database
+ *  Dùng để định nghĩa những SQL query thông dụng,
+ *  mục tiêu mọi SQL query đều được gọi qua lớp này
  *  Example: admin
  *  id | user | password | name
  *  1  | admin| admin    | Joe
@@ -23,8 +25,30 @@ abstract class Table extends SQLCommand
    * @param  array  $arr [description]
    * @return [2d table]      [description]
    */
-  static function getAll(){
-    $sql = "select * from ".static::$tablename;
+  static function getAll(
+                    $field_list=array(),
+                    $sort_field = '', $asc = true,
+                    $upper_bound_limit = '', $lower_bound_limit = ''
+                  ){
+    //
+      if(empty($field_list)){
+        $fields="*";
+
+      } else { 
+        $fields = implode( array_map(function($field) { return static::$tablename.".$field"; }, $field_list), ',');
+
+      }
+    //  
+    // rang buoc 2 tham so nen ton tai
+    $sort_query = '';
+    if($sort_field){
+      $sort_query   = " ORDER BY $sort_field DESC";
+      if( $asc )
+        $sort_query = " ORDER BY $sort_field ASC";
+    }
+    //  
+    $sql = "select $fields from ".static::$tablename.$sort_query;
+
     return self::fetchAll($sql);
   }
 
@@ -35,7 +59,7 @@ abstract class Table extends SQLCommand
    */
   static function find1record($condition_arr){
     // Build SQL command
-    $place_holders = implode(array_map(function($a, $b) { return $a . ' = ' . $b; }, array_keys($condition_arr), array_fill(0, count($condition_arr), '?')),' and ');
+    $place_holders = implode(array_map(function($a, $b) { return $a . ' = ' . $b; }, array_keys($condition_arr), array_fill(0, count($condition_arr), '?') ),' and ');
 
     $sql = "select * from ".static::$tablename." WHERE ".$place_holders;
 
@@ -45,11 +69,11 @@ abstract class Table extends SQLCommand
   }
 
   /**
-   * [findtablerecord description]
+   * [findTableRecord description]
    * @param  [type] $condition_arr [key = field, value = record]
    * @return [2d table]                [description]
    */
-  static function findtablerecord($condition_arr){
+  static function findTableRecord($condition_arr){
     // Build SQL command
     $parameter_arr = implode(array_map(function($a, $b) { return $a . ' = ' . $b; }, array_keys($condition_arr), array_fill(0, count($condition_arr), '?')),' and ');
 
@@ -125,8 +149,13 @@ abstract class Table extends SQLCommand
     // Key and Placeholders of condition partition
     $parameter_condition_arr = implode(array_map(function($a, $b) { return $a . ' = ' . $b; }, array_keys($condition_arr), array_fill(0, count($condition_arr), '?')),' and ');
 
+    // 4/02/2020 ndung Cover case, keeping duplicating key 
     // Values of update and condition partition
-    $values = array_values(array_merge($update_arr,$condition_arr));
+    // $values = array_values(array_merge($update_arr,$condition_arr));
+    $values = array_merge(
+          array_values( $update_arr    ),
+          array_values( $condition_arr )
+    );
 
     //
     $sql = "UPDATE ".static::$tablename." SET $parameter_update_arr WHERE $parameter_condition_arr";
@@ -134,7 +163,8 @@ abstract class Table extends SQLCommand
     /* Debug Infomation of execute PDOstm */
     // echo "<b>SQL query string</b><br>&nbsp&nbsp&nbsp&nbsp" . $sql; echo "<br>"; 
     // echo "<pre><b>Parameter</b><br>&nbsp&nbsp&nbsp&nbsp";
-    // print_r( array_merge($update_arr,$condition_arr)); echo "<br>";
+    // print_r( $update_arr ); print_r( $condition_arr );
+    // echo "<br>";
     /* Debug Infomation of execute PDOstm */
     
     // execute
@@ -144,14 +174,16 @@ abstract class Table extends SQLCommand
 
 //=========================================================================
   /**
-   * [selectInnerJoin for select field additional inner join other table ]
+   * [selectInnerJoin: select field va inner join ban ghi thu 2 neu duoc chi dinh                 
+   * ]
    * WARNING: class not available yet
+   * Note: ban ghi thu 2 duoc lay tu cau truc bang map voi thong so khoa ngoai
    * @param  array  $field_list         [description]
    * @param  string $foreign_key        [description]
    * @param  array  $primary_field_list [description]
    * @param  string $primary_key        [description]
    * @param  string $primary_table      [description]
-   * @return [2d table]                     [datas]
+   * @return [2d table]                     [data]
    */
   static function selectInnerJoin($foreign_key="",$field_list=array(),$primary_field_list=array() ){
     //
@@ -186,4 +218,37 @@ abstract class Table extends SQLCommand
     $data_array[db_created_at] = $timestamp;
   }
 
+#====================================
+// Structure of table
+  /**
+   * [getInformationSchema get database stuture information of quanlibanhang_offical]
+   * @param  [type] $information_table [Table in information_schema database ]
+   * @param  [type] $condition         [condition defined as string]
+   * @return [type]                    [Table in information_schema database]
+   */
+  static function getInformationSchema($information_table,$condition=""){
+    $sql ="Select * FROM INFORMATION_SCHEMA.$information_table WHERE TABLE_NAME LIKE '".static::$tablename."' AND TABLE_SCHEMA = 'quanlibanhang_offical' $condition";
+    return self::fetchAll($sql);
+  }
+
+  /**
+   * [getConstraint description]
+   * @param  [type] $foreign_key [description]
+   * @return [type]              [description]
+   */
+  static function getConstraint($foreign_key){
+    $condition = "AND REFERENCED_TABLE_NAME IS NOT NULL";
+    $structure = self::getInformationSchema('KEY_COLUMN_USAGE',$condition);
+    $element   = $structure[array_search($foreign_key, array_column($structure, 'COLUMN_NAME'))];
+    return array($element["REFERENCED_TABLE_NAME"],$element["REFERENCED_COLUMN_NAME"]);
+  }
+
+  /**
+   * [getDefaultObject description]
+   * @return [type] [description]
+   */
+  static function getDefaultObject(){
+    $defaults = self::getInformationSchema('Columns');
+    return array_column($defaults, 'COLUMN_DEFAULT', 'COLUMN_NAME');
+  }
 }

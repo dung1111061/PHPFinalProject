@@ -1,42 +1,72 @@
-// 
-<script src="assets/js/jquery-2.1.4.min.js"></script>
-<script src="assets/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-	if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-</script>
-<script src="assets/js/bootstrap.min.js"></script>
-
-
-<!-- ace scripts -->
-<script src="assets/js/ace-elements.min.js"></script>
-<script src="assets/js/ace.min.js"></script>
-		
 <script >
 
-  function markReview(id,approved){    
-    // if(approved){
-   //    $( "#review-"+id+" .status"  ).append( "\
-   //      Approved\
-   //      " );
-  	// } else{
-   //    $( "#review-"+id+" .status" ).append( "\
-   //      Rejected\
-   //      " );
-   //  }
-   //  $("#review-"+id+" .action").remove();
-    window.location = "review.php?action=update&id=" + id + "&status=" + approved;
-  }
+  //
+  review = $(".review-body .rating");
+  rank = $(review).attr('data-rating');
 
+  //
+  for (i=0; i<rank; i++)
+    review.append('<i class="fa fa-star" aria-hidden="true"></i>');
+
+  //
+  $(".review-body .approved").on('click', function() {
+    
+    //
+    var review = $(this).closest('.review-body').attr('data-review');
+
+    console.log(`approve review ${review}`);
+    //
+    $.ajax({
+      url: `review.php?action=approve&id=${review}`,
+      type: 'GET',
+      success: function(response) {
+        //
+        if(isNaN(response)){
+          alert(`Error: \n ${response}`);
+          return;
+        } 
+        //
+        alert("Duyệt bài thành công");
+      }
+    })
+    .fail(function() {
+      alert("Duyệt bài thất bại");
+
+    })
+
+    //
+    $(this).closest('.action').html("<span class='label label-info'>approved</span>");
+
+  });
+
+  //
+  $(".review-body .rejected").on('click', function() {
+    //
+    $(this).closest('.action').html("<span class='label label-info'>rejected</span>");
+    
+    //
+    var id = $(this).closest('.review-body').attr('id');
+    $.ajax({
+      url: `review.php?action=reject&id=${id}`,
+      type: 'GET',
+    })
+    .done(function(response) {
+      if(isNaN(response)){
+        alert(`Error: \n ${response}`);
+        return;
+      } 
+      alert("Duyệt bài thành công");
+    })
+    .fail(function() {
+      alert("Duyệt bài thất bại");
+
+    })
+    
+  }); 
+
+  
+  
 </script>
 
-<style>
-  // .review > div  {
-  //   border-top: 1px solid grey;
-  // }
-  .review > div {
-  margin-bottom: 20px;
-  border-bottom: 1px solid grey;
-}
-</style>
 			
 		

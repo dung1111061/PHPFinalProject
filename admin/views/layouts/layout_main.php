@@ -4,10 +4,15 @@
 <head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Administrator Your Website</title>
+		<title>Trang quản trị</title>
 
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<meta name="description" content="Dành cho người điều hành ứng dụng cửa hàng điện tử, cung cấp giải pháp quản lí sản phẩm, các nhà cung cấp, khách hàng và các đơn hàng." />
+		<meta name="viewport" content="width=device-width, 
+		initial-scale=1.0, maximum-scale=1.0" />
+		<meta name="keywords" content="admin" />
+		<meta http-equiv="content-language" content="vi" />
+		<meta name="author" content="Dũng">
+		<meta name="revisit-after" content="1 days" />
 
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -43,7 +48,16 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
-
+		
+		<!-- Customize font-style for vietnamese -->
+		<style>
+			body{
+				font-family: sans-serif;
+			}
+			h1,h2,h3,h4,h5,h6{
+				font-family: sans-serif;
+			}
+		</style>
 		<!-- user defined decoration -->
 		<?= @$css ?>
 	</head>
@@ -69,7 +83,7 @@
 					<a href="trang-chu.html" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							Administrator
+							Quản lí
 						</small>
 					</a>
 				</div>
@@ -87,7 +101,7 @@
 							<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
 								<li class="dropdown-header">
 									<i class="ace-icon fa fa-exclamation-triangle"></i>
-									8 Notifications
+									8 Thông báo mới
 								</li>
 
 								<li class="dropdown-content">
@@ -97,7 +111,7 @@
 												<div class="clearfix">
 													<span class="pull-left">
 														<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
-														New Comments
+														Bài đánh giá mới
 													</span>
 													<span class="pull-right badge badge-info">+12</span>
 												</div>
@@ -107,7 +121,7 @@
 										<li>
 											<a href="#">
 												<i class="btn btn-xs btn-primary fa fa-user"></i>
-												Bob just signed up as an editor ...
+												Bob đã đăng nhập với vai trò người quản lí
 											</a>
 										</li>
 
@@ -116,7 +130,7 @@
 												<div class="clearfix">
 													<span class="pull-left">
 														<i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
-														New Orders
+														Đơn hàng mới
 													</span>
 													<span class="pull-right badge badge-success">+8</span>
 												</div>
@@ -128,7 +142,7 @@
 												<div class="clearfix">
 													<span class="pull-left">
 														<i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>
-														Followers
+														Người theo dõi mới
 													</span>
 													<span class="pull-right badge badge-info">+11</span>
 												</div>
@@ -139,117 +153,7 @@
 
 								<li class="dropdown-footer">
 									<a href="#">
-										See all notifications
-										<i class="ace-icon fa fa-arrow-right"></i>
-									</a>
-								</li>
-							</ul>
-						</li>
-
-						<li class="green dropdown-modal">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-								<span class="badge badge-success">5</span>
-							</a>
-
-							<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-								<li class="dropdown-header">
-									<i class="ace-icon fa fa-envelope-o"></i>
-									5 Messages
-								</li>
-
-								<li class="dropdown-content">
-									<ul class="dropdown-menu dropdown-navbar">
-										<li>
-											<a href="#" class="clearfix">
-												<img src="assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
-												<span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Alex:</span>
-														Ciao sociis natoque penatibus et auctor ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>a moment ago</span>
-													</span>
-												</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="clearfix">
-												<img src="assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
-												<span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Susan:</span>
-														Vestibulum id ligula porta felis euismod ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>20 minutes ago</span>
-													</span>
-												</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="clearfix">
-												<img src="assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
-												<span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Bob:</span>
-														Nullam quis risus eget urna mollis ornare ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>3:15 pm</span>
-													</span>
-												</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="clearfix">
-												<img src="assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
-												<span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Kate:</span>
-														Ciao sociis natoque eget urna mollis ornare ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>1:33 pm</span>
-													</span>
-												</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="clearfix">
-												<img src="assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
-												<span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Fred:</span>
-														Vestibulum id penatibus et auctor  ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>10:09 am</span>
-													</span>
-												</span>
-											</a>
-										</li>
-									</ul>
-								</li>
-
-								<li class="dropdown-footer">
-									<a href="inbox.php">
-										See all messages
+										Thấy tất cả thông báo
 										<i class="ace-icon fa fa-arrow-right"></i>
 									</a>
 								</li>
@@ -260,7 +164,7 @@
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<img class="nav-user-photo" src="<?=$avatar?>" />
 								<span class="user-info">
-									<small>Welcome,</small>
+									<small>Chào,</small>
 									<?=$name?>
 								</span>
 
@@ -268,26 +172,20 @@
 							</a>
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
-									<a href="#">
-										<i class="ace-icon fa fa-cog"></i>
-										Settings
-									</a>
-								</li>
 
 								<li>
-									<a href="profile.php">
+									<a href="#">
 										<i class="ace-icon fa fa-user"></i>
-										Profile
+										Tài khoản
 									</a>
 								</li>
 
 								<li class="divider"></li>
 
 								<li>
-									<a href="logout.php">
+									<a href="index.php?action=logout">
 										<i class="ace-icon fa fa-power-off"></i>
-										Logout
+										Thoát
 									</a>
 								</li>
 							</ul>
@@ -341,7 +239,7 @@
 					<li class="">
 						<a href="trang-chu.html">
 							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text"> Dashboard </span>
+							<span class="menu-text"> Trang chủ </span>
 						</a>
 
 						<b class="arrow"></b>
@@ -350,7 +248,7 @@
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-list"></i>
-							<span class="menu-text"> Catalog </span>
+							<span class="menu-text"> Sản phẩm </span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -361,7 +259,7 @@
 							<li class="">
 								<a href="san-pham.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Products
+									Kho sản phẩm
 								</a>
 
 								<b class="arrow"></b>
@@ -369,7 +267,7 @@
 							<li class="">
 								<a href="nha-san-xuat.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Manufacturers
+									Nhà sản xuất
 								</a>
 
 								<b class="arrow"></b>
@@ -377,7 +275,7 @@
 							<li class="">
 								<a href="category.php">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Categories
+									Loại sản phẩm
 								</a>
 
 								<b class="arrow"></b>
@@ -386,7 +284,7 @@
 							<li class="">
 								<a href="review.php">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Reviews
+									Bài đánh giá
 								</a>
 
 								<b class="arrow"></b>
@@ -395,20 +293,34 @@
 					</li>
 
 					<li class="">
-						<a href="#" class="dropdown-toggle">
+						<a id="quanlitintuc" href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-list"></i>
-							<span class="menu-text"> Customers </span>
+							<span class="menu-text"> Tin tức </span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
-
+						<!-- <script type="text/javascript">
+							document.getElementById('quanlitintuc').addEventListener('click',function(event){
+								alert(' Tính năng quản lí tin tức chưa hoàn thiện');
+								event.preventDefault();
+							});
+							
+						</script> -->
 						<b class="arrow"></b>
 
 						<ul class="submenu">
 							<li class="">
-								<a href="#">
+								<a href="new.php?action=editor">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Customers
+									Soạn tin mới
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="new.php">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Danh sách tin tức 
 								</a>
 
 								<b class="arrow"></b>
@@ -420,7 +332,7 @@
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-list"></i>
-							<span class="menu-text"> Sale </span>
+							<span class="menu-text"> Khách hàng </span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -429,13 +341,39 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a href="orders.php">
+								<a href="customer.php">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Order
+									Danh sách
 								</a>
-								<a href="san-pham.html">
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text"> Đơn hàng </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="don-hang-moi.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Recurring Orders
+									Đơn hàng mới
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="don-hang-da-hoan-thanh.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Đơn hàng đã hoàn thành
 								</a>
 								<b class="arrow"></b>
 							</li>
@@ -470,8 +408,9 @@
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">Technology Ecommerce</span>
-							Application &copy; 2019-2020 <span class="small"> <?="version ".VERSION?> </span>
+							<span class="blue bolder">Bản quyền thuộc về cá nhân</span>
+							 &copy; 2019-2020 <span class="small"> tham khảo mẫu thiết kế </span>
+							 của <a href="http://ace.jeka.by/" target="_blank">ACE</a>
 						</span>
 						<span> 
 						
@@ -503,6 +442,12 @@
 		<script src="assets/js/ace-elements.min.js"></script>
 		<script src="assets/js/ace.min.js"></script>
 		
+		<script>
+			// Tooltip: Show summary text box
+			$(document).ready(function(){
+			  $('[data-toggle="tooltip"]').tooltip();   
+			});
+		</script>
 		<!-- user defined script -->
 		<!-- page specific plugin scripts  -->
 			<?= @$script ?>

@@ -1,5 +1,5 @@
 <?php
-class category extends Table
+class Category extends Table
 {
   protected static $tablename = "category";
 
