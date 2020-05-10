@@ -19,10 +19,13 @@ Dependency templates:
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="breadcrumb-tree">
-					<li><a href="#">Trang chủ</a></li>
-					<li><a href="#">Loại sản phẩm</a></li>
-					<li><a href="#">Loại sản phẩm lớp 2</a></li>
-					<li class="active">Tên sản phẩm</li>
+					<li><a href="trang-chu.html">Trang chủ</a></li>
+					<?php foreach ((array)$breadcrumb as $category) { ?>
+						<li> <?= $category ?> </li>
+					<?php } ?>
+					
+					<li class="active"><?= $product[db_product_name] ?></li>
+					
 				</ul>
 			</div>
 		</div>

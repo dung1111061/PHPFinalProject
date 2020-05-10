@@ -1,8 +1,8 @@
 <!-- page specific plugin scripts -->
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
-<script src="assets/js/wizard.min.js"></script>
-<script src="assets/js/jquery.nestable.min.js"></script>	
+<script src="views/assets/js/jquery.dataTables.min.js"></script>
+<script src="views/assets/js/jquery.dataTables.bootstrap.min.js"></script>
+<script src="views/assets/js/wizard.min.js"></script>
+<script src="views/assets/js/jquery.nestable.min.js"></script>	
 
 <!--  -->
 <script>

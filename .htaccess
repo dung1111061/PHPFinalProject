@@ -1,13 +1,24 @@
 AddDefaultCharset UTF-8
 RewriteEngine On
-#DocumentRoot "/var/www/localhost"
-#AliasMatch "^/administrator" "/Project/EcomerceWebsite/admin"
-#<Directory "/Project/EcomerceWebsite/admin">
-	#RewriteBase /admin/
-	RewriteRule ^trang-chu.html$ index.php?controller=home [L]
-	RewriteRule ^cua-hang-may-anh.html$ index.php?controller=store&category=1 [L]
-	RewriteRule ^cua-hang-phu-kien.html$ index.php?controller=store&category=2 [L]
-	RewriteRule ^cua-hang-may-tinh.html$ index.php?controller=store&category=3 [L]
-	RewriteRule ^cua-hang-dien-thoai.html$ index.php?controller=store&category=4 [L]
-	RewriteRule ^cua-hang-san-pham-ban-chay.html$ index.php?controller=store&category=5 [L]
-#</Directory>
+
+#
+RewriteRule ^trang-chu.html$ index.php?controller=home [L]
+
+#
+RewriteRule ^cua-hang/$ index.php?controller=store [L]
+RewriteRule ^cua-hang-(.*)/c(.*)$ index.php?controller=store&category=$2 [L]
+RewriteRule ^cua-hang-(.*)/c(.*)$ index.php?controller=store&category=$2 [L]
+RewriteRule ^cua-hang-(.*)/c(.*)$ index.php?controller=store&category=$2 [L]
+RewriteRule ^cua-hang-(.*)/c(.*)$ index.php?controller=store&category=$2 [L]
+RewriteRule ^cua-hang-(.*)/c(.*)$ index.php?controller=store&category=$2 [L]
+
+#
+RewriteRule ^tin-tuc/$ index.php?controller=new_controller [L]
+RewriteRule ^lien-he/$ index.php?controller=new_controller&action=contactPage [L]
+
+#
+RewriteRule ^hang-khuyen-mai/$ index.php?controller=store&hot_deal=1 [L]	
+
+#
+RewriteRule ^san-pham-(.*)/p(.*)$ index.php?controller=product_controller&id=$2 [L]
+

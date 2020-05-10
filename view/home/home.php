@@ -16,11 +16,11 @@
 			<div class="col-md-4 col-xs-6">
 				<div class="shop">
 					<div class="shop-img">
-						<img src="./assets/img/shop01.png" alt="">
+						<img src="<?=BASE_URL?>view/assets/img/shop01.png" alt="">
 					</div>
 					<div class="shop-body">
 						<h3>Bộ sưu tập<br>laptop</h3>
-						<a href="index.php?controller=store" class="cta-btn">Mua ngay <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="<?= BASE_URL ?>cua-hang/" class="cta-btn">Mua ngay <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 			</div>
@@ -30,11 +30,11 @@
 			<div class="col-md-4 col-xs-6">
 				<div class="shop">
 					<div class="shop-img">
-						<img src="./assets/img/shop03.png" alt="">
+						<img src="<?=BASE_URL?>view/assets/img/shop03.png" alt="">
 					</div>
 					<div class="shop-body">
 						<h3>bộ sưu tập <br> phụ kiện </h3>
-						<a href="index.php?controller=store" class="cta-btn">Mua ngay <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="<?= BASE_URL ?>cua-hang/" class="cta-btn">Mua ngay <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 			</div>
@@ -44,11 +44,11 @@
 			<div class="col-md-4 col-xs-6">
 				<div class="shop">
 					<div class="shop-img">
-						<img src="./assets/img/shop02.png" alt="">
+						<img src="<?=BASE_URL?>view/assets/img/shop02.png" alt="">
 					</div>
 					<div class="shop-body">
-						<h3>Bộ sưu tập<br>camera</h3>
-						<a href="index.php?controller=store" class="cta-btn">Mua ngay <i class="fa fa-arrow-circle-right"></i></a>
+						<h3>Bộ sưu tập<br>máy quay phim</h3>
+						<a href="<?= BASE_URL ?>cua-hang/" class="cta-btn">Mua ngay <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 			</div>

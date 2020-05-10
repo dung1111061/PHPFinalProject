@@ -4,7 +4,7 @@
 		<div class="breadcrumbs" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
 			<ul class="breadcrumb" style="margin-left: 0px">
 				<i class="ace-icon fa fa-home home-icon"></i>
-					<li><a href="index.php">Trang chủ</a></li>
+					<li><a href="index.php">Home</a></li>
 					<li><a href="category.php">Nhà sản xuất</a></li>
 			</ul><!-- /.breadcrumb -->
 		</div>

@@ -1,8 +1,8 @@
 <!-- page specific plugin scripts -->
-<script src="assets/js/jquery.flot.min.js"></script>
-<script src="assets/js/jquery.flot.pie.min.js"></script>
-<script src="assets/js/jquery.flot.resize.min.js"></script>
-<script src="assets/js/jquery.sparkline.index.min.js"></script>
+<script src="views/assets/js/jquery.flot.min.js"></script>
+<script src="views/assets/js/jquery.flot.pie.min.js"></script>
+<script src="views/assets/js/jquery.flot.resize.min.js"></script>
+<script src="views/assets/js/jquery.sparkline.index.min.js"></script>
 
 <script>
 	function drawPieChart(placeholder, data, position) {

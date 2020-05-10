@@ -35,7 +35,7 @@ class OrderProduct extends Table
 				"quantity" => ""
 			];
 			
-			$product["name"] 	= Product::find($record[db_orderProduct_product])[db_product_name];
+			$product["name"] 	= product::find($record[db_orderProduct_product])[db_product_name];
 			$product["quantity"] = $record[db_orderProduct_quantity];
 			//
 			$productList[] = $product;

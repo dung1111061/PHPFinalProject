@@ -7,7 +7,35 @@ class product extends Table implements ProductInterface
   protected static $timestamp = TRUE;
   private static $formImageParameter = "img"; 
 
-  // private _construct(){}
+
+  //
+  static function selectAll() {
+    // get product
+    if( 1 ){ // caching
+        //
+        if( !is_file( ADMIN_PATH."json/caching_product_all.json" ) ){
+            //
+            $table = Product::getAll(); 
+
+            // 
+            $fp = fopen(ADMIN_PATH.'json/caching_product_all.json', 'w');
+            fwrite($fp, json_encode($table) );
+            fclose($fp);
+        }
+        
+
+        $table = json_decode(
+            file_get_contents(ADMIN_PATH."json/caching_product_all.json"),true
+        );
+        
+
+    } else {
+        $table = Product::getAll();    
+    }
+    
+    return $table; 
+  } 
+
 
   /**
    * [getDataArray Fetch data in form of product widget via method POST to imported database for case audit and insert case.]
@@ -437,6 +465,8 @@ class product extends Table implements ProductInterface
 
     return self::update($condition,$data);
   }  
+
+  //
 
 
 }

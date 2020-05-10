@@ -23,6 +23,7 @@ class Review extends Table
 
   //
   static function getPending(){
+    
     $reviews = self::selectInnerJoin(db_review_product,array("*"),array(db_product_name));
     
     // 

@@ -4,7 +4,7 @@
 <div class="breadcrumbs " id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
 	<ul class="breadcrumb" style="margin-left: 0px">
 		<i class="ace-icon fa fa-home home-icon"></i>
-			<li > <a href="index.php"> Trang chủ </a> </li>
+			<li > <a href="index.php"> Home </a> </li>
 			<li class="active" > <a href="product.php"> Sản phẩm </a> </li> 
 	</ul><!-- /.breadcrumb -->
 </div>
@@ -43,10 +43,10 @@ foreach ($data as $key=> $row) {
 	$img = $row[db_product_image];
 	$price = $row[db_product_price];
 	$old_price = $row["old_price"];
-	$category = Category::find($row[db_product_category])[db_category_name];
+	$category = category::find($row[db_product_category])[db_category_name];
 	$quantity = $row[db_product_quantity];
 	$product_name = $row[db_product_name];
-	$manufacturer = Manufacturer::find($row[db_product_manufacturer])[db_manufacturer_name];
+	$manufacturer = manufacturer::find($row[db_product_manufacturer])[db_manufacturer_name];
 ?>
 <tr> 									
 	<td>

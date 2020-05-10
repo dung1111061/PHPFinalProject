@@ -1,6 +1,5 @@
 <?php
 /**
- * Lớp hỗ trợ build SQL query
  * build struture of SQL commands, support for advanced SQL command like selectInnerJoin
  * Instead of multiple inheritance for table class, SQLCommand extends DB class
  * All method must be static method as no $this pointer (record) is used in there

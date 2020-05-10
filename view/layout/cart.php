@@ -31,8 +31,9 @@
 				</div>
 				<div class="product-body">
 					<h3 class="product-name">
-						<a href="index.php?controller=product_controller&id=<?= $product[db_product_id] ?>
-						"> <?= $product[db_product_name] ?> </a>
+						<a href="<?= BASE_URL ?>san-pham-<?= formatURL($product[db_product_name]) ?>/p<?= $product[db_product_id] ?> "> 
+							<?= $product[db_product_name] ?> 
+						</a>
 					</h3>
 					<h4 class="product-price">
 						<span class="qty"><?=$product["quantity_cart"]?></span>
@@ -53,7 +54,7 @@
 		</div>
 		<div class="cart-btns">
 			<button >  Thanh toán<i class="fa fa-arrow-circle-right"></i> </button>
-			<form action="index.php?controller=checkout" class="hidden" method="post">
+			<form action="<?= BASE_URL ?>thanh-toan/" class="hidden" method="post">
 			</form>
 		</div>
 	</div>

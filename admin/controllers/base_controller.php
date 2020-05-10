@@ -63,7 +63,7 @@ abstract class BaseController
 
       // Sau khi có kết quả đã được lưu vào biến $content, gọi ra template chung của hệ thống đế hiển thị ra cho người dùng
       $name = !empty( $_SESSION['name'] ) ? $_SESSION['name']: "ẩn danh" ;
-      $avatar = Admin::simple_fetch(db_admin_username,$_SESSION['username'])[db_admin_avatar];
+      $avatar = admin::simple_fetch(db_admin_username,$_SESSION['username'])[db_admin_avatar];
       $avatar = !empty($avatar) ? AVATAR_IMAGE_URL.$avatar :AVATAR_IMAGE_URL."default.png";
       require_once('views/layouts/layout_main.php');
 

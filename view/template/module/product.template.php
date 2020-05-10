@@ -76,7 +76,10 @@ Parameter:
 			<button class="quick-view" onclick="$(this).next()[0].click()">
 				<i class="fa fa-eye" ></i><span class="tooltipp">Chi tiết</span>
 			</button>
-			<a href="index.php?controller=product_controller&id=<?=$id?>"> </a>
+
+			<a href="<?= BASE_URL ?>san-pham-<?= formatURL($name) ?>/p<?= $id ?> "> 
+				
+			</a>
 		</div>
 
 	</div>

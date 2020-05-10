@@ -1,22 +1,29 @@
 AddDefaultCharset UTF-8
 RewriteEngine On
-#DocumentRoot "/var/www/localhost"
-#AliasMatch "^/administrator" "/Project/EcomerceWebsite/admin"
-#<Directory "/Project/EcomerceWebsite/admin">
-	#RewriteBase /admin/
+
+#
+
+
 	#
 	RewriteRule ^trang-chu.html$ index.php [L]
+
 	#
+
 	RewriteRule ^san-pham.html$ product.php [L]
+
 	RewriteRule ^chi-tiet-san-pham(.+)_id=(.+).html$ product.php?action=display_edit&id=$2 [L]
+
 	RewriteRule ^them-san-pham-moi.html$ product.php?action=display_insert [L]
+
 	#
+
 	RewriteRule ^nha-san-xuat.html$ manufacturer.php [L]
+
 	#
+
 	RewriteRule ^don-hang-moi.html$ order.php?action=display_new_orders [L]
+
 	RewriteRule ^don-hang-da-hoan-thanh.html$  order.php?action=display_accomplished_orders [L]
+
 	RewriteRule ^quan-li-don-hang_id=(.+).html$ order.php?action=display_details_order&id=$1 [L]
 
-
-
-#</Directory>

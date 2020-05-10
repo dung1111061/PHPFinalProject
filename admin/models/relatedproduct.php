@@ -3,7 +3,7 @@
  * Entity Class
  * Class set constraint to relate id and product id is unique
  */
-class RelatedProduct extends Table
+class relatedProduct extends Table
 {
   protected static $tablename = "related_product";
   public static $maximum_number = 5;

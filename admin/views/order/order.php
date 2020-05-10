@@ -42,7 +42,7 @@
 							<br />
 						</div>
 						<div class="center">
-							<img  src="assets/images/gallery/shipper.jpg">	
+							<img  src="views/assets/images/gallery/shipper.jpg">	
 						</div>
 					</div>
 				</div>

@@ -113,7 +113,7 @@
 			<div class="widget-header widget-header-flat widget-header-small">
 				<h5 class="widget-title">
 					<i class="ace-icon fa fa-signal"></i>
-					Cơ cấu doanh số bán hàng
+					Thống kê doanh số bán hàng
 				</h5>
 
 			</div>

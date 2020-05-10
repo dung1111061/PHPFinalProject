@@ -1,22 +1,22 @@
  <!-- page specific plugin scripts  -->
- 	<script src="assets/js/jquery.bootstrap-duallistbox.min.js"></script>
-	<script src="assets/js/jquery.raty.min.js"></script>
-	<script src="assets/js/bootstrap-multiselect.min.js"></script>
-	<script src="assets/js/select2.min.js"></script>
-	<script src="assets/js/jquery-typeahead.js"></script>
-	<script src="assets/js/bootstrap-datepicker.min.js"></script>
-	<script src="assets/js/bootstrap-timepicker.min.js"></script>
-	<script src="assets/js/moment.min.js"></script>
-	<script src="assets/js/daterangepicker.min.js"></script>
-	<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-	<script src="assets/js/jquery.inputlimiter.min.js"></script>
-	<script src="assets/js/chosen.jquery.min.js"></script>
-	<script src="assets/js/jquery-ui.custom.min.js"></script>
-	<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
-	<script src="assets/js/spinbox.min.js"></script>
-	<script src="assets/js/jquery.maskMoney.js"></script>
-	// <script src="assets/js/jquery.maskedinput.min.js"></script>
-	<script src="assets/js/jquery.mask.min.js"></script>
+ 	<script src="views/assets/js/jquery.bootstrap-duallistbox.min.js"></script>
+	<script src="views/assets/js/jquery.raty.min.js"></script>
+	<script src="views/assets/js/bootstrap-multiselect.min.js"></script>
+	<script src="views/assets/js/select2.min.js"></script>
+	<script src="views/assets/js/jquery-typeahead.js"></script>
+	<script src="views/assets/js/bootstrap-datepicker.min.js"></script>
+	<script src="views/assets/js/bootstrap-timepicker.min.js"></script>
+	<script src="views/assets/js/moment.min.js"></script>
+	<script src="views/assets/js/daterangepicker.min.js"></script>
+	<script src="views/assets/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="views/assets/js/jquery.inputlimiter.min.js"></script>
+	<script src="views/assets/js/chosen.jquery.min.js"></script>
+	<script src="views/assets/js/jquery-ui.custom.min.js"></script>
+	<script src="views/assets/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="views/assets/js/spinbox.min.js"></script>
+	<script src="views/assets/js/jquery.maskMoney.js"></script>
+	// <script src="views/assets/js/jquery.maskedinput.min.js"></script>
+	<script src="views/assets/js/jquery.mask.min.js"></script>
 
 <!-- inline scripts related to this page  --> 
 <script>

@@ -1,6 +1,6 @@
 <!-- page specific plugin scripts -->
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
+<script src="views/assets/js/jquery.dataTables.min.js"></script>
+<script src="views/assets/js/jquery.dataTables.bootstrap.min.js"></script>
 
 <script >
 

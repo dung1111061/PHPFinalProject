@@ -28,7 +28,7 @@ class NewController extends BaseController
       $email_destination = $subscriber["email"];
 
       //
-      // Admin::simple_fetch( db_admin_email, $email_destination);
+      // admin::simple_fetch( db_admin_email, $email_destination);
 
       // link to form to restore password
       $html_message = $new[db_new_content];

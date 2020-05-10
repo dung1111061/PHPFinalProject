@@ -41,11 +41,9 @@
 
   //
   $(".review-body .rejected").on('click', function() {
-    //
-    $(this).closest('.action').html("<span class='label label-info'>rejected</span>");
     
     //
-    var id = $(this).closest('.review-body').attr('id');
+    var id = $(this).closest('.review-body').attr('data-review');
     $.ajax({
       url: `review.php?action=reject&id=${id}`,
       type: 'GET',
@@ -62,6 +60,9 @@
 
     })
     
+    //
+    $(this).closest('.action').html("<span class='label label-info'>rejected</span>");
+
   }); 
 
   

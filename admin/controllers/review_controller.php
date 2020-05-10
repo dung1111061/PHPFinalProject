@@ -60,7 +60,7 @@ class ReviewController extends BaseController
     $reviews = Review::getApprovedByProduct($product);
     $rank = array_sum( array_column($reviews, db_review_rank) )/count($reviews);
     //
-    $stm = Product::updateRating($product,$rank);
+    $stm = product::updateRating($product,$rank);
     if($stm->errorInfo()[2]) {
       $message = "<b style='color:red'>".$stm->errorInfo()[2]."</b> <br>";
       throw new MySQLQueryException($message);
@@ -72,6 +72,7 @@ class ReviewController extends BaseController
   function reject(){
     //
     $stm = Review::reject($_GET["id"]);
+    //
     if($stm->errorInfo()[2]) {
       $message = "<b style='color:red'>".$stm->errorInfo()[2]."</b> <br>";
       throw new MySQLQueryException($message);

@@ -14,7 +14,7 @@ if ($route === "edit") { // edit product
 		<div class="breadcrumbs ace-save-state" id="breadcrumbs" style="background-color: #FFFFFF; border-bottom: none"> 
 			<ul class="breadcrumb" style="margin-left: 0px">
 				<i class="ace-icon fa fa-home home-icon"></i>
-					<li> <a href="index.php">Trang chủ</a> </li>
+					<li> <a href="index.php">Home</a> </li>
 					<li> <a href="category.php">Nhà sản xuất</a> </li>
 			</ul><!-- /.breadcrumb -->
 		</div>
@@ -69,7 +69,7 @@ if($route === "edit"){
 											<select class="chosen-select form-control" id="select-manufacturer" data-placeholder="" name="parent">
 												<option value="">  </option>
 										  	<?php
-										  		$c_table = Category::getAll();
+										  		$c_table = category::getAll();
 										  		foreach ($c_table as $key => $row) {
 										  			$name = $row[db_category_name];
 										  			$c_id = $row[db_category_id];

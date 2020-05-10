@@ -1,8 +1,6 @@
 <?php
 /**
  *  abstract table for table on database
- *  Dùng để định nghĩa những SQL query thông dụng,
- *  mục tiêu mọi SQL query đều được gọi qua lớp này
  *  Example: admin
  *  id | user | password | name
  *  1  | admin| admin    | Joe
@@ -25,30 +23,8 @@ abstract class Table extends SQLCommand
    * @param  array  $arr [description]
    * @return [2d table]      [description]
    */
-  static function getAll(
-                    $field_list=array(),
-                    $sort_field = '', $asc = true,
-                    $upper_bound_limit = '', $lower_bound_limit = ''
-                  ){
-    //
-      if(empty($field_list)){
-        $fields="*";
-
-      } else { 
-        $fields = implode( array_map(function($field) { return static::$tablename.".$field"; }, $field_list), ',');
-
-      }
-    //  
-    // rang buoc 2 tham so nen ton tai
-    $sort_query = '';
-    if($sort_field){
-      $sort_query   = " ORDER BY $sort_field DESC";
-      if( $asc )
-        $sort_query = " ORDER BY $sort_field ASC";
-    }
-    //  
-    $sql = "select $fields from ".static::$tablename.$sort_query;
-
+  static function getAll(){
+    $sql = "select * from ".static::$tablename;
     return self::fetchAll($sql);
   }
 
@@ -186,11 +162,13 @@ abstract class Table extends SQLCommand
    * @return [2d table]                     [data]
    */
   static function selectInnerJoin($foreign_key="",$field_list=array(),$primary_field_list=array() ){
+
     //
     list($primary_table,$primary_key) = self::getConstraint($foreign_key);
     
     //
     $sql = self::selectSQL($field_list,$primary_table,$primary_field_list ).self::innerJoin($foreign_key,$primary_key,$primary_table);
+
     return self::fetchAll($sql);
   }
 
@@ -227,7 +205,8 @@ abstract class Table extends SQLCommand
    * @return [type]                    [Table in information_schema database]
    */
   static function getInformationSchema($information_table,$condition=""){
-    $sql ="Select * FROM INFORMATION_SCHEMA.$information_table WHERE TABLE_NAME LIKE '".static::$tablename."' AND TABLE_SCHEMA = 'quanlibanhang_offical' $condition";
+    $sql ="Select * FROM INFORMATION_SCHEMA.$information_table WHERE TABLE_NAME LIKE '".static::$tablename."' AND TABLE_SCHEMA = '".dbname."' $condition";
+
     return self::fetchAll($sql);
   }
 
@@ -240,6 +219,7 @@ abstract class Table extends SQLCommand
     $condition = "AND REFERENCED_TABLE_NAME IS NOT NULL";
     $structure = self::getInformationSchema('KEY_COLUMN_USAGE',$condition);
     $element   = $structure[array_search($foreign_key, array_column($structure, 'COLUMN_NAME'))];
+
     return array($element["REFERENCED_TABLE_NAME"],$element["REFERENCED_COLUMN_NAME"]);
   }
 

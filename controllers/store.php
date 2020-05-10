@@ -30,12 +30,32 @@ class store extends \controller
             case "buildProductContent":
                 $this->action_implement = "buildProductContent";
                 break;    
+            case "typeHintKeyword":
+                $this->action_implement = "typeHintKeyword";
+                break;     
         	default:
         		$message = "store page do not support action $action";
 				throw new RouteException($message);
         		break;
         }
     }
+
+/**
+     * 
+     */
+    protected function typeHintKeyword(){
+        //
+        $keyword = $_POST['keyword'];
+        $nameTable = array_column( product::selectAll(), db_product_name );
+
+        //
+        $keywordList = array_filter($nameTable, function ($name) use ($keyword){
+              if ( stripos($record[db_product_name], $keyword) !== false ) return 1;
+        });
+        echo $keywordList; 
+    }
+
+
 
     /**
      * 
@@ -74,7 +94,7 @@ class store extends \controller
         $m_table = Manufacturer::getAll();
 
         // get product
-        $table = Product::getAll();
+        $table = Product::selectAll();
         
         // get URL, URL of sub store page is stored and combined with filter tool.
         // 
@@ -162,7 +182,7 @@ class store extends \controller
         }
 
         //=== Phan trang
-        echo ADMIN_PATH.'json/productTablesInStore.json'; exit();
+
         $max_product_in_page = 10;
         $pageNumber = 1;
         if( $record_number > $max_product_in_page) {

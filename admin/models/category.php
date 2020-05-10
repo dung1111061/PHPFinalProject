@@ -4,7 +4,7 @@ class Category extends Table
   protected static $tablename = "category";
 
   /**
-   * Category data is formated parent/child/child.
+   * Dữ liệu phân cấp của bảng loại sản phẩm, theo định dạng parent/child .
    * id | parent_id
    * 1  | NULL  => 1
    * 2  | 1     => 1 > 2
@@ -65,6 +65,25 @@ class Category extends Table
 
     $category_ids = array_column($filtered_table, db_category_id);
     return $category_ids;
+  }
+
+  /**
+   * [getChildCategories all categories inside this category]
+   * $id: this category
+   * @return [type] [description]
+   */
+  static function getBreadcrumb($id){
+    $breadcrumb = array();
+
+    $record = self::find($id);
+    if( $record[db_category_parent_id] ){
+      $parent = self::find( $record[db_category_parent_id] );
+      $breadcrumb[] =  $parent[db_category_name];
+    }
+
+    $breadcrumb[] =  $record[db_category_name] ;
+
+    return $breadcrumb;
   }
 
   static function edit($id) {

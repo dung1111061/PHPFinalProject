@@ -1,7 +1,7 @@
 <?php
 // Product Table
 // Define method to query product table
-class Customer extends Table 
+class customer extends Table 
 {
   protected static $tablename = "customer";
   protected static $timestamp = TRUE;

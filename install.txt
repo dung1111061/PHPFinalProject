@@ -1,0 +1,17 @@
+#
+cấu hình host và database trong file config
+	host
+	database
+	name
+	pass
+
+#
+kiểm tra cấu hình host trong file htaccess
+
+#
+cấu hình các api trong component
+
+#
+cấu hình api google SSO trên server google
+	đăng kí host
+	đăng kí Redirect URI

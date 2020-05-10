@@ -4,45 +4,36 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Đăng nhập - Người quản lí </title>
+		<title>Login Page - Administrator </title>
 
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
 		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="views/assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="views/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
 		<!-- text fonts -->
-		<link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
+		<link rel="stylesheet" href="views/assets/css/fonts.googleapis.com.css" />
 
 		<!-- ace styles -->
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
+		<link rel="stylesheet" href="views/assets/css/ace.min.css" />
 
 		<!--[if lte IE 9]>
-			<link rel="stylesheet" href="assets/css/ace-part2.min.css" />
+			<link rel="stylesheet" href="views/assets/css/ace-part2.min.css" />
 		<![endif]-->
-		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="views/assets/css/ace-rtl.min.css" />
 
 		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="views/assets/css/ace-ie.min.css" />
 		<![endif]-->
 
 		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
 		<!--[if lte IE 8]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
+		<script src="views/assets/js/html5shiv.min.js"></script>
+		<script src="views/assets/js/respond.min.js"></script>
 		<![endif]-->
-		<!-- Customize font-style for vietnamese -->
-		<style>
-			body{
-				font-family: sans-serif;
-			}
-			h1,h2,h3,h4,h5,h6{
-				font-family: sans-serif;
-			}
-		</style>
 	</head>
 
 	<body class="login-layout">
@@ -54,8 +45,8 @@
 							<div class="center">
 								<h1>
 									<i class="ace-icon fa fa-leaf green"></i>
-									<span class="red">Người quản lí </span>
-									<!-- <span class="white" id="id-text2">Application</span> -->
+									<span class="red">Administrator </span>
+									<span class="white" id="id-text2">Application</span>
 								</h1>
 
 							</div>
@@ -68,7 +59,7 @@
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
 												<i class="ace-icon fa fa-coffee green"></i>
-												Nhập thông tin ở đây
+												Please Enter Your Information
 											</h4>
 
 											<div class="space-6"></div>
@@ -77,14 +68,14 @@
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Tên đăng nhập" name="user" required="" />
+															<input type="text" class="form-control" placeholder="Username" name="user" required="" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Mật khẩu" name="passwd" required="" />
+															<input type="password" class="form-control" placeholder="Password" name="passwd" required="" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
@@ -94,12 +85,12 @@
 													<div class="clearfix">
 														<label class="inline">
 															<input type="checkbox" class="ace" name="login_remember"/>
-															<span class="lbl"> Nhớ tôi</span>
+															<span class="lbl"> Remember Me</span>
 														</label>
 
 														<button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
 															<i class="ace-icon fa fa-key"></i>
-															<span class="bigger-110">Đăng nhập</span>
+															<span class="bigger-110">Login</span>
 														</button>
 													</div>
 
@@ -108,7 +99,7 @@
 											</form>
 
 											<div class="social-or-login center">
-												<span class="bigger-110">hoặc</span>
+												<span class="bigger-110">Or Login Using</span>
 											</div>
 
 											<div class="space-6"></div>
@@ -132,13 +123,13 @@
 											<div>
 												<a href="#" data-target="#forgot-box" class="forgot-password-link">
 													<i class="ace-icon fa fa-arrow-left"></i>
-													tôi quên mật khẩu
+													I forgot my password
 												</a>
 											</div>
 
 											<div>
 												<a href="#" data-target="#signup-box" class="user-signup-link">
-													Tôi muốn đăng kí
+													I want to register
 													<i class="ace-icon fa fa-arrow-right"></i>
 												</a>
 											</div>
@@ -151,12 +142,12 @@
 										<div class="widget-main">
 											<h4 class="header red lighter bigger">
 												<i class="ace-icon fa fa-key"></i>
-												Nhận lại mật khẩu
+												Retrieve Password
 											</h4>
 
 											<div class="space-6"></div>
 											<p>
-												Nhập email của bạn và để hướng dẫn
+												Enter your email and to receive instructions
 											</p>
 
 											<form action="index.php?action=restore_mail"  method="post">
@@ -171,7 +162,7 @@
 													<div class="clearfix">
 														<button type="submit" class="width-35 pull-right btn btn-sm btn-danger">
 															<i class="ace-icon fa fa-lightbulb-o"></i>
-															<span class="bigger-110">Gửi cho tôi!</span>
+															<span class="bigger-110">Send Me!</span>
 														</button>
 													</div>
 												</fieldset>
@@ -180,7 +171,7 @@
 
 										<div class="toolbar center">
 											<a href="#" data-target="#login-box" class="back-to-login-link">
-												Trở về trang đăng nhập
+												Back to login
 												<i class="ace-icon fa fa-arrow-right"></i>
 											</a>
 										</div>
@@ -192,11 +183,11 @@
 										<div class="widget-main">
 											<h4 class="header green lighter bigger">
 												<i class="ace-icon fa fa-users blue"></i>
-												Đăng kí tài khoản mới
+												New User Registration
 											</h4>
 
 											<div class="space-6"></div>
-											<p> Nhập thông tin chi tiết ở đây: </p>
+											<p> Enter your details to begin: </p>
 
 											<form action="index.php?action=register" method="post" onsubmit="return verification();">
 												<fieldset>
@@ -209,21 +200,21 @@
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Tên đăng nhập" name="user"/>
+															<input type="text" class="form-control" placeholder="Username" name="user"/>
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Mật khẩu" name="passwd"/>
+															<input type="password" class="form-control" placeholder="Password" name="passwd"/>
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="repeat_passwd"/>
+															<input type="password" class="form-control" placeholder="Repeat password" name="repeat_passwd"/>
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
 													</label>
@@ -231,8 +222,8 @@
 													<label class="block">
 														<input type="checkbox" class="ace" required/>
 														<span class="lbl">
-															Tôi chấp nhận
-															<a href="#">thỏa thuận</a>
+															I accept the
+															<a href="#">User Agreement</a>
 														</span>
 													</label>
 
@@ -241,11 +232,11 @@
 													<div class="clearfix">
 														<button type="reset" class="width-30 pull-left btn btn-sm">
 															<i class="ace-icon fa fa-refresh"></i>
-															<span class="bigger-110">Làm mới</span>
+															<span class="bigger-110">Reset</span>
 														</button>
 
 														<button type="submit" class="width-65 pull-right btn btn-sm btn-success">
-															<span class="bigger-110">Đăng kí</span>
+															<span class="bigger-110">Register</span>
 
 															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
 														</button>
@@ -258,7 +249,7 @@
 										<div class="toolbar center">
 											<a href="#" data-target="#login-box" class="back-to-login-link">
 												<i class="ace-icon fa fa-arrow-left"></i>
-												Trở về trang đăng nhập
+												Back to login
 											</a>
 										</div>
 									</div><!-- /.widget-body -->
@@ -268,15 +259,15 @@
 							<div class="navbar-fixed-top align-right">
 								<br />
 								&nbsp;
-								<a id="btn-login-dark" href="#">Tối</a>
+								<a id="btn-login-dark" href="#">Dark</a>
 								&nbsp;
 								<span class="blue">/</span>
 								&nbsp;
-								<a id="btn-login-blur" href="#">Xanh</a>
+								<a id="btn-login-blur" href="#">Blur</a>
 								&nbsp;
 								<span class="blue">/</span>
 								&nbsp;
-								<a id="btn-login-light" href="#">Sáng</a>
+								<a id="btn-login-light" href="#">Light</a>
 								&nbsp; &nbsp; &nbsp;
 							</div>
 						</div>
@@ -288,12 +279,12 @@
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
-		<script src="assets/js/jquery-2.1.4.min.js"></script>
+		<script src="views/assets/js/jquery-2.1.4.min.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="assets/js/jquery-1.11.3.min.js"></script>
+<script src="views/assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");

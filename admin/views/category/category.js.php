@@ -1,41 +1,41 @@
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
-		<script src="assets/js/jquery-2.1.4.min.js"></script>
+		<script src="views/assets/js/jquery-2.1.4.min.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="assets/js/jquery-1.11.3.min.js"></script>
+<script src="views/assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="views/assets/js/bootstrap.min.js"></script>
 
 		<!-- page specific plugin scripts -->
-		<script src="assets/js/jquery.dataTables.min.js"></script>
-		<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
-		<script src="assets/js/jquery.bootstrap-duallistbox.min.js"></script>
-		<script src="assets/js/jquery.raty.min.js"></script>
-		<script src="assets/js/bootstrap-multiselect.min.js"></script>
-		<script src="assets/js/select2.min.js"></script>
-		<script src="assets/js/jquery-typeahead.js"></script>
-		<script src="assets/js/bootstrap-datepicker.min.js"></script>
-		<script src="assets/js/bootstrap-timepicker.min.js"></script>
-		<script src="assets/js/moment.min.js"></script>
-		<script src="assets/js/daterangepicker.min.js"></script>
-		<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-		<script src="assets/js/jquery.inputlimiter.min.js"></script>
-		<script src="assets/js/dataTables.select.min.js"></script>
-		<script src="assets/js/chosen.jquery.min.js"></script>
-		<script src="assets/js/jquery-ui.custom.min.js"></script>
-		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="assets/js/jquery.maskedinput.min.js"></script>
-		<script src="assets/js/jquery.maskMoney.js" type="text/javascript"></script>
+		<script src="views/assets/js/jquery.dataTables.min.js"></script>
+		<script src="views/assets/js/jquery.dataTables.bootstrap.min.js"></script>
+		<script src="views/assets/js/jquery.bootstrap-duallistbox.min.js"></script>
+		<script src="views/assets/js/jquery.raty.min.js"></script>
+		<script src="views/assets/js/bootstrap-multiselect.min.js"></script>
+		<script src="views/assets/js/select2.min.js"></script>
+		<script src="views/assets/js/jquery-typeahead.js"></script>
+		<script src="views/assets/js/bootstrap-datepicker.min.js"></script>
+		<script src="views/assets/js/bootstrap-timepicker.min.js"></script>
+		<script src="views/assets/js/moment.min.js"></script>
+		<script src="views/assets/js/daterangepicker.min.js"></script>
+		<script src="views/assets/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="views/assets/js/jquery.inputlimiter.min.js"></script>
+		<script src="views/assets/js/dataTables.select.min.js"></script>
+		<script src="views/assets/js/chosen.jquery.min.js"></script>
+		<script src="views/assets/js/jquery-ui.custom.min.js"></script>
+		<script src="views/assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="views/assets/js/jquery.maskedinput.min.js"></script>
+		<script src="views/assets/js/jquery.maskMoney.js" type="text/javascript"></script>
 		<!-- ace scripts -->
-		<script src="assets/js/ace-elements.min.js"></script>
-		<script src="assets/js/ace.min.js"></script>
+		<script src="views/assets/js/ace-elements.min.js"></script>
+		<script src="views/assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
 <script> 

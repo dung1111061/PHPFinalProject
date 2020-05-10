@@ -100,7 +100,7 @@ class AccountController
 
     if($_POST["user"] && $_POST["passwd"]) {  
        // verify login data
-      $record = Admin::fetch(array(db_admin_username => $_POST["user"], db_admin_password => sha1($_POST["passwd"]) ) );
+      $record = admin::fetch(array(db_admin_username => $_POST["user"], db_admin_password => sha1($_POST["passwd"]) ) );
 
       if(!empty($record) ){
 
@@ -133,7 +133,7 @@ class AccountController
     $email_destination = $_POST["restore_email"];
 
     //
-    // Admin::simple_fetch( db_admin_email, $email_destination);
+    // admin::simple_fetch( db_admin_email, $email_destination);
 
     // link to form to restore password
     $data = array("link" => ADMIN_URL."index.php?action=restoreForm&email=$email_destination");
@@ -168,7 +168,7 @@ class AccountController
   function restorePassword(){
     
     //
-    $stm = Admin::update( array(db_admin_email => $_POST["email"]),
+    $stm = admin::update( array(db_admin_email => $_POST["email"]),
       array(db_admin_password => sha1($_POST["passwd"]) ) );
     if($stm->errorInfo()[2]) {
       echo "<b style='color:red'>SQL Error: ";print_r($stm->errorInfo()[2]);echo "</b >"; echo "<br>";
@@ -190,7 +190,7 @@ class AccountController
     $arr[db_admin_password] = sha1($_POST['passwd']);
     $arr[db_admin_email] = $_POST['email'];
     $arr[db_admin_privilege] = privilege::no_actived;
-    $stm = Admin::insert($arr);
+    $stm = admin::insert($arr);
     if($stm->errorInfo()[2]) {
       echo "<b style='color:red'>SQL Error: ";print_r($stm->errorInfo()[2]);echo "</b >"; echo "<br>";
       exit();
@@ -222,10 +222,10 @@ class AccountController
     $result = 0;
     $message = "";
     // Verify username registered already
-    if( !empty( Admin::simple_fetch( db_admin_username, $_GET['user'])) ) $result+=1;
+    if( !empty( admin::simple_fetch( db_admin_username, $_GET['user'])) ) $result+=1;
 
     // Verify email registered already
-    if( !empty( Admin::simple_fetch( db_admin_email, $_GET['email'])) ) $result+=2;
+    if( !empty( admin::simple_fetch( db_admin_email, $_GET['email'])) ) $result+=2;
 
     switch ($result) {
      case 1:
@@ -243,7 +243,7 @@ class AccountController
   }
 
   public function doActive(){
-    Admin::update(array(db_admin_email => $_GET["email"]),
+    admin::update(array(db_admin_email => $_GET["email"]),
                   array(db_admin_privilege => privilege::demonstration) );
 
     require_once('views/account/activeSuccess.php');
@@ -261,6 +261,7 @@ class AccountController
     setcookie('username', "", time() - 3600,"/");
     setcookie('name', "", time() - 3600,"/");
     setcookie('IsAuthorized', "", time() - 3600,"/"); 
+
 
   }
 

@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158847756-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158847756-1');
+</script>
+<script data-ad-client="ca-pub-7842549760399142" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,20 +28,20 @@
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
  		<!-- Bootstrap -->
- 		<link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+ 		<link type="text/css" rel="stylesheet" href="<?=BASE_URL?>view/assets/css/bootstrap.min.css"/>
 
  		<!-- Slick -->
- 		<link type="text/css" rel="stylesheet" href="assets/css/slick.css"/>
- 		<link type="text/css" rel="stylesheet" href="assets/css/slick-theme.css"/>
+ 		<link type="text/css" rel="stylesheet" href="<?=BASE_URL?>view/assets/css/slick.css"/>
+ 		<link type="text/css" rel="stylesheet" href="<?=BASE_URL?>view/assets/css/slick-theme.css"/>
 
  		<!-- nouislider -->
- 		<link type="text/css" rel="stylesheet" href="assets/css/nouislider.min.css"/>
+ 		<link type="text/css" rel="stylesheet" href="<?=BASE_URL?>view/assets/css/nouislider.min.css"/>
 
  		<!-- Font Awesome Icon -->
- 		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+ 		<link rel="stylesheet" href="<?=BASE_URL?>view/assets/css/font-awesome.min.css">
 
  		<!-- Custom stlylesheet -->
- 		<link type="text/css" rel="stylesheet" href="assets/css/style.css?n=5"/>
+ 		<link type="text/css" rel="stylesheet" href="<?=BASE_URL?>view/assets/css/style.css?n=5"/>
 
  		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
  		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,6 +49,12 @@
  		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
  		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
  		<![endif]-->
+ 		<link type="image/vnd.microsoft.icon" rel="shortcut icon" href="favicon.ico"/>
+<style>
+	.header-search form .input {
+	    width: calc(100% - 120px);
+	}
+</style>
 	</head>
 	<body>
 		<!-- HEADER -->
@@ -84,8 +100,8 @@ $accountTemplate->render();
 						<!-- LOGO -->
 						<div class="col-md-2">
 							<div class="header-logo">
-								<a href="index.php" class="logo">
-									<img src="assets/img/LOGO.png" alt="">
+								<a href="<?= BASE_URL ?>" class="logo">
+									<img src="<?=BASE_URL?>view/assets/img/LOGO.png" alt="">
 								</a>
 							</div>
 						</div>
@@ -143,20 +159,20 @@ $accountTemplate->render();
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li ><a href="index.php">Trang chủ</a></li>
+						<li ><a href="<?= BASE_URL ?>">Trang chủ</a></li>
 						
 						<?php
 							foreach ($category_table as $record) {
 								$id = $record[db_category_id];
 								$name = $record[db_category_name];
 								?>
-								<li ><a href="index.php?controller=store&category=<?=$id?>"> 
+								<li ><a href="<?= BASE_URL ?>cua-hang-<?= formatURL($name) ?>/c<?=$id?>"> 
 								<?=$name?>
 								</a></li>
 							<?php } ?>
-						<li><a href="index.php?controller=store&hot_deal=1"> 
+						<li><a href="<?= BASE_URL ?>hang-khuyen-mai/"> 
 						Khuyến Mãi</a></li>
-						<li ><a href="index.php?controller=store">Tất cả sản phẩm</a></li>
+						<li ><a href="<?= BASE_URL ?>cua-hang/">Tất cả sản phẩm</a></li>
 						
 					</ul>
 					<!-- /NAV -->
@@ -184,16 +200,16 @@ $accountTemplate->render();
 							</form>
 							<ul class="newsletter-follow">
 								<li>
-									<a href="index.php?controller=new_controller"><i class="fa fa-facebook"></i></a>
+									<a href="<?= BASE_URL ?>tin-tuc/"><i class="fa fa-facebook"></i></a>
 								</li>
 								<li>
-									<a href="index.php?controller=new_controller"><i class="fa fa-twitter"></i></a>
+									<a href="<?= BASE_URL ?>tin-tuc/"><i class="fa fa-twitter"></i></a>
 								</li>
 								<li>
-									<a href="index.php?controller=new_controller"><i class="fa fa-instagram"></i></a>
+									<a href="<?= BASE_URL ?>tin-tuc/"><i class="fa fa-instagram"></i></a>
 								</li>
 								<li>
-									<a href="index.php?controller=new_controller"><i class="fa fa-pinterest"></i></a>
+									<a href="<?= BASE_URL ?>tin-tuc/"><i class="fa fa-pinterest"></i></a>
 								</li>
 							</ul>
 						</div>
@@ -218,8 +234,8 @@ $accountTemplate->render();
 							<div class="footer">
 								<h3 id="about-us"class="footer-title">Về chúng tôi</h3>
 								<ul class="footer-links">
-						<li><a href="index.php?controller=new_controller&action=contactPage"><i class="fa fa-phone"></i> 0362687355 </a></li>
-						<li><a href="index.php?controller=new_controller&action=contactPage"><i class="fa fa-envelope-o"></i> dung1111061@gmail.com </a></li>
+						<li><a href="<?= BASE_URL ?>lien-he/"><i class="fa fa-phone"></i> 0362687355 </a></li>
+						<li><a href="<?= BASE_URL ?>lien-he/"><i class="fa fa-envelope-o"></i> dung1111061@gmail.com </a></li>
 
 								</ul>
 							</div>
@@ -229,10 +245,10 @@ $accountTemplate->render();
 							<div class="footer">
 								<h3 class="footer-title">Trang chủ</h3>
 								<ul class="footer-links">
-									<li><a href="index.php?controller=new_controller">Danh mục sản phẩm</a></li>
-									<li><a href="index.php?controller=new_controller">Bán chạy</a></li>
-									<li><a href="index.php?controller=new_controller">Khuyến mãi</a></li>
-									<li><a href="index.php?controller=new_controller">Sản phẩm mới</a></li>
+									<li><a href="<?= BASE_URL ?>tin-tuc/">Danh mục sản phẩm</a></li>
+									<li><a href="<?= BASE_URL ?>tin-tuc/">Bán chạy</a></li>
+									<li><a href="<?= BASE_URL ?>tin-tuc/">Khuyến mãi</a></li>
+									<li><a href="<?= BASE_URL ?>tin-tuc/">Sản phẩm mới</a></li>
 								</ul>
 							</div>
 						</div>
@@ -243,11 +259,11 @@ $accountTemplate->render();
 							<div class="footer">
 								<h3 class="footer-title">Chính sách mua hàng và bảo hành</h3>
 								<ul class="footer-links">
-									<li><a href="index.php?controller=new_controller">Quy định chung</a></li>
-									<li><a href="index.php?controller=new_controller">Chính sách bảo mật thông tin</a></li>
-									<li><a href="index.php?controller=new_controller">Chính sách vận chuyển, giao nhận</a></li>
-									<li><a href="index.php?controller=new_controller">Chính sách bảo hành</a></li>
-									<li><a href="index.php?controller=new_controller">Chính sách đổi trả và hoàn tiền/a></li>
+									<li><a href="<?= BASE_URL ?>tin-tuc/">Quy định chung</a></li>
+									<li><a href="<?= BASE_URL ?>tin-tuc/">Chính sách bảo mật thông tin</a></li>
+									<li><a href="<?= BASE_URL ?>tin-tuc/">Chính sách vận chuyển, giao nhận</a></li>
+									<li><a href="<?= BASE_URL ?>tin-tuc/">Chính sách bảo hành</a></li>
+									<li><a href="<?= BASE_URL ?>tin-tuc/">Chính sách đổi trả và hoàn tiền/a></li>
 								</ul>
 							</div>
 						</div>
@@ -277,12 +293,12 @@ $accountTemplate->render();
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<ul class="footer-payments">
-								<li><a href="index.php?controller=new_controller"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="index.php?controller=new_controller"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="index.php?controller=new_controller"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="index.php?controller=new_controller"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="index.php?controller=new_controller"><i class="fa fa-cc-discover"></i></a></li>
-								<li><a href="index.php?controller=new_controller"><i class="fa fa-cc-amex"></i></a></li>
+								<li><a href="<?= BASE_URL ?>tin-tuc/"><i class="fa fa-cc-visa"></i></a></li>
+								<li><a href="<?= BASE_URL ?>tin-tuc/"><i class="fa fa-credit-card"></i></a></li>
+								<li><a href="<?= BASE_URL ?>tin-tuc/"><i class="fa fa-cc-paypal"></i></a></li>
+								<li><a href="<?= BASE_URL ?>tin-tuc/"><i class="fa fa-cc-mastercard"></i></a></li>
+								<li><a href="<?= BASE_URL ?>tin-tuc/"><i class="fa fa-cc-discover"></i></a></li>
+								<li><a href="<?= BASE_URL ?>tin-tuc/"><i class="fa fa-cc-amex"></i></a></li>
 							</ul>
 							<span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -301,13 +317,13 @@ $accountTemplate->render();
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/bootstrap.min.js"></script>
-		<script src="assets/js/slick.min.js"></script>
-		<script src="assets/js/nouislider.min.js"></script>
-		<script src="assets/js/wnumb-1.2.0/wNumb.min.js"></script>
-		<script src="assets/js/jquery.zoom.min.js"></script>
-		<script src="assets/js/main.js?n=1"></script>  
+		<script src="<?=BASE_URL?>view/assets/js/jquery.min.js"></script>
+		<script src="<?=BASE_URL?>view/assets/js/bootstrap.min.js"></script>
+		<script src="<?=BASE_URL?>view/assets/js/slick.min.js"></script>
+		<script src="<?=BASE_URL?>view/assets/js/nouislider.min.js"></script>
+		<script src="<?=BASE_URL?>view/assets/js/wnumb-1.2.0/wNumb.min.js"></script>
+		<script src="<?=BASE_URL?>view/assets/js/jquery.zoom.min.js"></script>
+		<script src="<?=BASE_URL?>view/assets/js/main.js?n=1"></script>  
 		<!-- Add query string may be help to clear caching browser  -->
 		<!-- Should move to inline-page script  -->
 		<?= $script ?>

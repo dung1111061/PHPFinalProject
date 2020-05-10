@@ -6,10 +6,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h3 class="breadcrumb-header">Thanh toán</h3>
-						<ul class="breadcrumb-tree">
-							<li><a href="index.php">Trang chủ</a></li>
-						
-						</ul>
+
 					</div>
 				</div>
 				<!-- /row -->
@@ -190,7 +187,7 @@
 							<input type="checkbox" id="terms">
 							<label for="terms">
 								<span></span>
-								Tôi đã đọc và đồng ý <a href="index?controller=new_controller"> điều khoản và dịch vụ </a>
+								Tôi đã đọc và đồng ý <a href="<?= BASE_URL ?>tin-tuc.html"> điều khoản và dịch vụ </a>
 							</label>
 						</div>
 						<button oclick="submit" class="primary-btn order-submit">Đặt hàng</button>

@@ -69,6 +69,8 @@ class product_controller extends \controller
             'image_library' => $image_library,
             'reviews' => $reviews,
             'relatedProducts' => $relatedProducts,
+            'breadcrumb' => $breadcrumb,
+            'category' => $category,
         ];
 
         $view = PRODUCT_PATH.'product.php';

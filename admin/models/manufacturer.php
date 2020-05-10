@@ -1,5 +1,5 @@
 <?php
-class Manufacturer extends Table
+class manufacturer extends Table
 {
   protected static $tablename = "manufacturer";
   private static $formImageParameter = "img"; 
