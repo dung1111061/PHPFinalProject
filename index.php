@@ -1,4 +1,5 @@
 <?php
+//php easy and simple to uderstood human
 
 require_once "bootstraping.php";
 
